@@ -44,7 +44,7 @@ const AddToCart = () => {
         // console.log(checkCart);
         const totalOrder = cartItems[0]
         // console.log(order);
-        const tableNo = 22;
+        const tableNo = 7;
         console.log(total);
 
         const res = await fetch("/addorder", {

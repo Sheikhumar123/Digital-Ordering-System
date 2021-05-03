@@ -53,38 +53,47 @@ const Drink = () => {
     formData.append('priceForHalf', priceForHalf);
     formData.append('priceForLiter', priceForLiter);
     formData.append('foodImage', fileName);
-    // const res = await fetch("/adddrink", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
+    console.log(FormData)
+    const res = await fetch("/adddrink", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
 
-    //   body: 
-    //     formData
+      body: 
+        formData
+    })
 
     // });
-    axios
-      .post('/adddrink', formData)
-      .then((res) => {
-        console.log(res.data);
-        window.alert("registration sucessfull");
-        console.log("registration sucess");
+    // axios
+    //   .post('/adddrink', formData)
+    //   .then((res) => {
+    //     console.log(res.data);
+    //     window.alert("registration sucessfull");
+    //     console.log("registration sucess");
 
-      })
-      .catch((err) => {
-        console.log(err.response);
-        window.alert("invalid registration");
-        console.log("invalid registration");
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.response);
+    //     window.alert("invalid registration");
+    //     console.log("invalid registration");
         
 
-      });
+    //   });
 
-    // const data = await res.json();
-    // console.log(data);
-    // if (data.error) {
+    const data = await res.json();
+    console.log(data);
+    if (data.error) {
+      console.log(data.error);
+          window.alert("invalid registration");
+          console.log("invalid registration");
 
-    // } else {
-    // }
+    } else {
+      console.log(data);
+          window.alert("registration sucessfull");
+          console.log("registration sucess");
+    }
+
 
   }
 

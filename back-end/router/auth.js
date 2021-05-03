@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const validationDrink = require('../middlewares/validationDrink.js');
-const uploadMulter = require('../middlewares/upload.js')
+// const uploadMulter = require('../middlewares/upload.js')
 
 
 
@@ -105,7 +105,7 @@ router.post('/login', async (req, res) => {
 
 // add pizza to database
 router.post('/addpizza', async (req, res) => {
-
+        console.log(req.body)
     const { dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge } = req.body
 
     if (!dishName || !dishIngri || !priceForSmall || !priceForMedium || !priceForLarge) {
@@ -180,7 +180,7 @@ router.post('/addspecialpizza', async (req, res) => {
 
 });
 // add  drinks to database
-router.post('/adddrink', uploadMulter,  validationDrink );
+router.post('/adddrink',  validationDrink );
 // send order to database  
 
 router.post('/addorder', async (req, res) => {

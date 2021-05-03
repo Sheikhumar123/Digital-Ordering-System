@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios';
 
 const Pizza = () => {
 
@@ -26,32 +27,53 @@ const Pizza = () => {
     // console.log("hello");
     const { dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge } = dish;
     console.log( dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge);
-        const res = await fetch("/addpizza", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
 
-            body: JSON.stringify({
-                dishName,
-                dishIngri,
-                priceForSmall,
-                priceForMedium,
-                priceForLarge,
+    axios
+      .post('http://localhost:8080/addpizza', 
+      dish)
+      .then((res) => {
+        console.log(res.data);
+        window.alert("registration sucessfull");
+        console.log("registration sucess");
 
-            })
-        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        window.alert("invalid registration");
+        console.log("invalid registration");
+        
 
-        const data = await res.json();
-        console.log(data);
-        if (data.error) {
-            window.alert("invalid registration");
-            console.log("invalid registration");
+      });
 
-        } else {
-            window.alert("registration sucessfull");
-            console.log("registration sucess");
-        }
+
+
+
+        // const res = await fetch("/addpizza", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     },
+
+        //     body: JSON.stringify({
+        //         dishName,
+        //         dishIngri,
+        //         priceForSmall,
+        //         priceForMedium,
+        //         priceForLarge,
+
+        //     })
+        // });
+
+        // const data = await res.json();
+        // console.log(data);
+        // if (data.error) {
+        //     window.alert("invalid registration");
+        //     console.log("invalid registration");
+
+        // } else {
+        //     window.alert("registration sucessfull");
+        //     console.log("registration sucess");
+        // }
 
   }
   return (

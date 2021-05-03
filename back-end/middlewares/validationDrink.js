@@ -2,7 +2,8 @@ const {Drink} = require("../models/tableSchema")
 
 module.exports = async (req, res) => {
     // req.f
-const image = req.file 
+// const image = req.file 
+console.log("hello");
 console.log(req.body.drinkName);
     const { drinkName, priceForRegular, priceForHalf, priceForLiter } = req.body
 
@@ -11,6 +12,8 @@ console.log(req.body.drinkName);
     }
 
     Drink.findOne({ drinkName: drinkName })
+
+    
 
         .then((drinkExist) => {
             // console.log(dishExist);

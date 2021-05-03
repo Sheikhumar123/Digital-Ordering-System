@@ -1,23 +1,39 @@
 import React, { useState, useEffect } from "react";
 import "./Bills.css";
+import axios from 'axios'
 
 const Bills = () => {
 
 
   const [orders, setOrders] = useState([])
 
-  //  const getOrder = () =>{
-
-  //  console.log(orders);
+  
+  
+  async function getUser() {
+    try {
+      const response = await axios.get('/getkitchenorder');
+      console.log(response.data);
+      setOrders(response.data.data)
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(async () => {
 
-    // async function abc(params) {
 
-    const res = await fetch("/getkitchenorder")
-    const data = await res.json()
-    const orders = await data.data
-    setOrders(orders)
+    getUser()
+    
+
+
+
+    }, []);
+
+    // const res = await fetch("/getkitchenorder")
+    // const data = await res.json()
+    // const orders = await data.data
+    // setOrders(orders)
     // console.log(orders);
     // return orders;
     // orders.map((order)=>{
@@ -31,7 +47,7 @@ const Bills = () => {
     // }
 
 
-  }, []);
+
   return (
     <div className="tabeleContainer">
       <table className="adminTable">
@@ -45,7 +61,7 @@ const Bills = () => {
         </thead>
         <tbody className="adminTbody">
           {orders.map((order, index) => {
-            console.log(order);
+            // console.log(order);
             //               order.totalOrder.map((menu)=>{
             // console.log(menu.name);
             //               })
@@ -72,7 +88,7 @@ const Bills = () => {
                     // let abd = menu.itemPrice;
                     
                      efg += menu.itemPrice ;
-                    console.log(efg);
+                    // console.log(efg);
                     return (
                       efg
                     )
