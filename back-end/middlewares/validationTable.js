@@ -1,7 +1,7 @@
 const { Table } = require("../models/tableSchema")
 
 module.exports = (req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
     const { tableName, password, cpassword } = req.body
 
     if (!tableName || !password || !cpassword) {
@@ -28,6 +28,6 @@ module.exports = (req, res) => {
         })
 
 
-    console.log(req.body);
+    
    
 }

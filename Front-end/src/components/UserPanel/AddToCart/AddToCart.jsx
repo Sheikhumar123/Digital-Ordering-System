@@ -2,6 +2,7 @@ import './AddToCart.css';
 import React, { useContext } from 'react';
 import CheckCartContext from '../../Context/CheckCartContext';
 import cartContext from '../../Context/cartContext';
+import axios from 'axios'
 
 const AddToCart = () => {
 
@@ -44,34 +45,29 @@ const AddToCart = () => {
         // console.log(checkCart);
         const totalOrder = cartItems[0]
         // console.log(order);
-        const tableNo = 7;
+        const tableNo = 8;
         console.log(total);
 
-        const res = await fetch("/addorder", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
+        axios
+            .post('http://localhost:8080/addorder', {
                 tableNo,
                 total,
                 totalOrder
+            })
+            .then((res) => {
+                console.log(res.data);
+                window.alert("registration sucessfull");
+                console.log("registration sucess");
 
             })
-        });
+            .catch((err) => {
+                console.log(err.response);
+                window.alert("invalid registration");
+                console.log("invalid registration");
 
-        const data = await res.json();
-        console.log(data);
-        if (data.error) {
-            window.alert("invalid registration");
-            console.log("invalid registration");
 
-        } else {
-            window.alert("registration sucessfull");
-            console.log("registration sucess");
+            });
 
-        }
 
     }
     return (
