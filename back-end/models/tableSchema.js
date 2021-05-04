@@ -50,6 +50,10 @@ const pizzaSchema = new mongoose.Schema({
     priceForLarge: {
         type: Number,
         required: true
+    },
+    dishImage: {
+        type: String,
+        required: true
     }
 });
 

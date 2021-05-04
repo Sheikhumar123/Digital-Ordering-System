@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import axios from "axios"
 import "./AddTables.css";
 
 const AddTables = () => {
@@ -22,32 +23,31 @@ const AddTables = () => {
 
         const { tableName, password, cpassword } = table;
         console.log(tableName, password, cpassword);
-        const res = await fetch("/addtable", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
 
-            body: JSON.stringify({
-                tableName,
-                password,
-                cpassword
+    
 
-            })
-        });
 
-        const data = await res.json();
-        console.log(data);
-        if (data.error) {
-            window.alert("table not addded invalid registration");
-            console.log(`erroe ${data.error}`);
 
-        } else {
-            window.alert("registration sucessfull");
-            console.log(`erroe ${data.message}`);
+    axios
+      .post('http://localhost:8080/addtable', 
+      {
+          tableName, password, cpassword
+      })
+      .then((res) => {
+        console.log(res.data);
+        window.alert("registration sucessfull");
+        console.log("registration sucess");
 
-            console.log("registration sucess");
-        }
+      })
+      .catch((err) => {
+        console.log(err.response);
+        window.alert("invalid registration");
+        console.log("invalid registration");
+        
+
+      });
+       
+  
 
     }
 
@@ -55,7 +55,7 @@ const AddTables = () => {
 
     return (
         <div className="AddTable_box">
-            <form className="AddTable_form" onSubmit={addTable} >
+            <form className="AddTable_form" onSubmit={addTable} enctype="multipart/form-data">
                 <h1>Add New Table</h1>
                 <div className="form-control">
                     <input id="name" type="text" required value={table.tableName} name="tableName" onChange={handleInput} />

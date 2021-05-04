@@ -7,8 +7,6 @@ const Drink = () => {
   })
   const [fileName, setFilename] = useState('');
 
-  // const [dishType, setDishType] = useState('');
-
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -22,22 +20,7 @@ const Drink = () => {
 
   }
 
-  // const { drinkName, priceForRegular, priceForHalf, priceForLiter } = drink
 
-
-  // console.log(data);
-  // setFormData(data);
-  // const file = e.target.files;
-  // console.log(file[0]);
-  // setDrink({ ...drink, catogeryPic: file[0] })
-
-  // if (file) {
-  //   setDrink({ ...drink, [name]: file[0] })
-  // setDrink({ ...drink, [name]: file[0].name })
-
-  // } else {
-  // setDish({ ...dish, [name]: value })
-  // }
 
   const addDrink = async (e) => {
     e.preventDefault();
@@ -52,47 +35,26 @@ const Drink = () => {
     formData.append('priceForRegular', priceForRegular);
     formData.append('priceForHalf', priceForHalf);
     formData.append('priceForLiter', priceForLiter);
-    formData.append('foodImage', fileName);
-    console.log(FormData)
-    const res = await fetch("/adddrink", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+    formData.append('avatar', fileName);
+    // console.log(formData)
+    
 
-      body: 
-        formData
-    })
 
-    // });
-    // axios
-    //   .post('/adddrink', formData)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //     window.alert("registration sucessfull");
-    //     console.log("registration sucess");
+    axios
+      .post('http://localhost:8080/adddrink', formData)
+      .then((res) => {
+        console.log(res.data);
+        window.alert("registration sucessfull");
+        console.log("registration sucess");
 
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.response);
-    //     window.alert("invalid registration");
-    //     console.log("invalid registration");
+      })
+      .catch((err) => {
+        console.log(err.response);
+        window.alert("invalid registration");
+        console.log("invalid registration");
         
 
-    //   });
-
-    const data = await res.json();
-    console.log(data);
-    if (data.error) {
-      console.log(data.error);
-          window.alert("invalid registration");
-          console.log("invalid registration");
-
-    } else {
-      console.log(data);
-          window.alert("registration sucessfull");
-          console.log("registration sucess");
-    }
+      });
 
 
   }

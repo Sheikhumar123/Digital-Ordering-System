@@ -1,48 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const validationDrink = require('../middlewares/validationDrink.js');
-// const uploadMulter = require('../middlewares/upload.js')
+const validationPizza = require('../middlewares/validationPizza.js');
+const validationSpecialPizza = require('../middlewares/validationSpecialPizza.js');
+const validationTable = require('../middlewares/validationTable');
+const upload = require('../middlewares/upload.js')
 
 
 
 require('../db/conn');
-const { Table, Pizza, Specialpizza, KitchenOrder ,ReceptionOrder} = require('../models/tableSchema')
+const { Table, Specialpizza, KitchenOrder ,ReceptionOrder} = require('../models/tableSchema')
 
 router.get('/', (req, res) => {
     res.send('hello sheikh from server router');
 })
 // add table router
-router.post('/addtable', (req, res) => {
-    const { tableName, password, cpassword } = req.body
-
-    if (!tableName || !password || !cpassword) {
-        return res.json({ error: "please fill all fields" })
-    }
-
-    Table.findOne({ tableName: tableName })
-        .then((tableExist) => {
-            if (tableExist) {
-                return res.status(422).json({ error: "table already exist" })
-            }
-
-
-            const table = new Table({ tableName, password, cpassword });
-
-            table.save().then(() => {
-                res.status(201).json({ message: "table added" })
-            }).catch((err) => {
-                res.status(500).json({ error: "failed to registered" })
-            })
-
-        }).catch((err) => {
-            console.log(err);
-        })
-
-
-    console.log(req.body);
-    // res.json({message:req.body})
-    // res.send('hello routr');
-})
+router.post('/addtable', validationTable)
 // router.post('/loginTable', async (req, res) => {
 //     const { tableName, password } = req.body
 
@@ -103,86 +76,32 @@ router.post('/login', async (req, res) => {
     }
 })
 
+
+
+
+
 // add pizza to database
-router.post('/addpizza', async (req, res) => {
-        console.log(req.body)
-    const { dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge } = req.body
-
-    if (!dishName || !dishIngri || !priceForSmall || !priceForMedium || !priceForLarge) {
-        return res.status(404).json({ error: "please fill all fields" })
-    }
-
-    Pizza.findOne({ dishName: dishName })
-
-        .then((dishExist) => {
-            // console.log(dishExist);
-            if (dishExist) {
-                console.log("exist");
-                return res.status(421).json({ error: "Dish already exist" })
-            } else {
+router.post('/addpizza' ,upload.single('avatar'), validationPizza  )
 
 
 
 
 
-                const pizza = new Pizza({ dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge });
 
-                pizza.save().then(() => {
-                    res.status(201).json({ message: "dish added" })
-                }).catch((err) => {
-                    res.status(500).json({ error: "failed to registered" })
-                })
-            }
-
-        }).catch((err) => {
-            console.log(err);
-        })
-
-
-
-});
 // add special pizza to database
-router.post('/addspecialpizza', async (req, res) => {
-
-    const { dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge } = req.body
-
-    if (!dishName || !dishIngri || !priceForSmall || !priceForMedium || !priceForLarge) {
-        return res.status(404).json({ error: "please fill all fields" })
-    }
-
-    Specialpizza.findOne({ dishName: dishName })
-
-        .then((dishExist) => {
-            // console.log(dishExist);
-            if (dishExist) {
-                console.log("exist");
-                return res.status(421).json({ error: "Dish already exist" })
-            } else {
+router.post('/addspecialpizza',upload.single('avatar') , validationSpecialPizza )
 
 
 
 
 
-                const specialPizza = new Specialpizza({ dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge });
-
-                specialPizza.save().then(() => {
-                    res.status(201).json({ message: "dish added" })
-                }).catch((err) => {
-                    res.status(500).json({ error: "failed to registered" })
-                })
-            }
-
-        }).catch((err) => {
-            console.log(err);
-        })
-
-
-
-});
 // add  drinks to database
-router.post('/adddrink',  validationDrink );
-// send order to database  
+router.post('/adddrink', upload.single('avatar'), validationDrink );
 
+
+
+
+// send order to database  
 router.post('/addorder', async (req, res) => {
 
     //    console.log( req.body);
@@ -230,6 +149,10 @@ router.post('/addorder', async (req, res) => {
 
 
 });
+
+
+
+
 
 router.get('/getkitchenorder', async (req, res) => {
 
