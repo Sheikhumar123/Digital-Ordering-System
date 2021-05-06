@@ -1,10 +1,11 @@
 .orderContainer{
     display: flex;
+    flex-wrap: wrap;    
     align-items: center;
     justify-content: space-between;
 }
 .card-main{
-    width: 45vw;
+    width: 80%;
     color: teal;
     color: #49321c;
     padding: 15px; 

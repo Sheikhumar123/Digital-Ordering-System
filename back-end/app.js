@@ -7,10 +7,13 @@ require('./db/conn');
 
 
 app.use(cors())
-app.use(express.json({limit: "50mb"}));
-// app.use(fileUpload());
+app.use(express.json({limit: "1mb"}));
+
+
 // link the router files
 app.use(require('./router/auth'));
+
+
 
 
 
@@ -20,9 +23,6 @@ app.use(require('./router/auth'));
 env.config()
 const PORT= process.env.PORT;
 
-
-
-console.log("hello");
 
 
 app.listen(PORT , ()=>{
