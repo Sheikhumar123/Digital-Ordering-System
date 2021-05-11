@@ -2,10 +2,10 @@ const { Specialpizza } = require('../models/tableSchema')
 
 module.exports = async (req, res) => {
 
-    const { dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge } = req.body
-    const dishImage = req.file.filename
+    const { dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge,secureUrl } = req.body
+    
 
-    if (!dishName || !dishIngri || !priceForSmall || !priceForMedium || !priceForLarge || !dishImage) {
+    if (!dishName || !dishIngri || !priceForSmall || !priceForMedium || !priceForLarge || !secureUrl) {
         return res.status(404).json({ error: "please fill all fields" })
     }
 
@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
 
 
 
-                const specialPizza = new Specialpizza({ dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge, dishImage });
+                const specialPizza = new Specialpizza({ dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge, secureUrl });
 
                 specialPizza.save().then(() => {
                     res.status(201).json({ message: "dish added" })

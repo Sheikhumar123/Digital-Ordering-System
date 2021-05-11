@@ -7,9 +7,10 @@ const Pizza = () => {
     dishType: 'pizza', dishName: '', dishIngri: "", priceForSmall: null, priceForMedium: null, priceForLarge: null
   })
   const [fileName, setFilename] = useState('');
+  const [secureUrl, setSecureUrl] = useState('');
 
   // const [dishType, setDishType] = useState('');
-  const handleInput = (e) => {
+  const handleInput = async (e) => {
     const name = e.target.name;
     const value = e.target.value;
     let files = e.target.files
@@ -17,6 +18,7 @@ const Pizza = () => {
 
     if (files) {
       setFilename(files[0])
+     
     }
     setDish({ ...dish, [name]: value })
 
@@ -26,22 +28,43 @@ const Pizza = () => {
     
     e.preventDefault();
 
+    const data = new FormData();
+    data.append("file", fileName);
+    data.append("upload_preset", "x4bnkskk");
+    data.append("cloud_name", "sheikhumar");
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
+      {
+        method: "POST",
+        body: data
+      }
+    );
+    const img = await res.json();
+    console.log(img);
+    let ImageLink = img.url
+    setSecureUrl(ImageLink);
+
+    
+    console.log(secureUrl);
+
   const { dishName,dishIngri, priceForSmall, priceForMedium, priceForLarge } = dish;
     console.log(dishName,dishIngri, priceForSmall, priceForMedium, priceForLarge);
-    let formData = new FormData();
-    formData.append('dishName', dishName);
-    formData.append('dishIngri', dishIngri);
-    formData.append('priceForSmall', priceForSmall);
-    formData.append('priceForMedium', priceForMedium);
-    formData.append('priceForLarge', priceForLarge );
-    formData.append('avatar', fileName);
-    console.log(formData)
+    // let formData = new FormData();
+    // formData.append('dishName', dishName);
+    // formData.append('dishIngri', dishIngri);
+    // formData.append('priceForSmall', priceForSmall);
+    // formData.append('priceForMedium', priceForMedium);
+    // formData.append('priceForLarge', priceForLarge );
+    // formData.append('url', secureUrl);
+    // console.log(formData)
   
 
 
 
     axios
-      .post('http://localhost:8080/addpizza', formData)
+      .post('http://localhost:8080/addpizza', {
+        dishName,dishIngri, priceForSmall, priceForMedium, priceForLarge, secureUrl
+      })
       .then((res) => {
         console.log(res.data);
         window.alert("registration sucessfull");

@@ -12,7 +12,6 @@ const Bills = () => {
   async function getUser() {
     try {
       const response = await axios.get('/getkitchenorder');
-      console.log(response.data);
       setOrders(response.data.data)
       
     } catch (error) {
@@ -20,7 +19,7 @@ const Bills = () => {
     }
   };
 
-  useEffect(async () => {
+  useEffect( () => {
 
 
     getUser()
@@ -30,21 +29,7 @@ const Bills = () => {
 
     }, []);
 
-    // const res = await fetch("/getkitchenorder")
-    // const data = await res.json()
-    // const orders = await data.data
-    // setOrders(orders)
-    // console.log(orders);
-    // return orders;
-    // orders.map((order)=>{
-    //   console.log(order.tableNo);
-    //   const total =  order.totalOrder;
-    //   total.map((list)=>{
-
-    //     console.log(list);
-    //   })
-    // })
-    // }
+  
 
 
 

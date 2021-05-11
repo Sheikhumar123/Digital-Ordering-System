@@ -8,6 +8,7 @@ const SpecialPizza = () => {
   })
 
  const [fileName, setFilename] = useState('');
+ const [secureUrl, setSecureUrl] = useState('');
 
 
   const handleInput = (e) => {
@@ -27,24 +28,38 @@ const SpecialPizza = () => {
   const addSpecialPizza = async (e) => {
 
     e.preventDefault();
+
+    const data = new FormData();
+    data.append("file", fileName);
+    data.append("upload_preset", "x4bnkskk");
+    data.append("cloud_name", "sheikhumar");
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
+      {
+        method: "POST",
+        body: data
+      }
+    );
+    const img = await res.json();
+    console.log(img);
+    let ImageLink = img.url
+    setSecureUrl(ImageLink);
+
+    
+    console.log(secureUrl);
     // console.log("hello");
 
     const { dishName,dishIngri, priceForSmall, priceForMedium, priceForLarge } = dish;
-    console.log(dishName,dishIngri, priceForSmall, priceForMedium, priceForLarge);
-    let formData = new FormData();
-    formData.append('dishName', dishName);
-    formData.append('dishIngri', dishIngri);
-    formData.append('priceForSmall', priceForSmall);
-    formData.append('priceForMedium', priceForMedium);
-    formData.append('priceForLarge', priceForLarge );
-    formData.append('avatar', fileName);
-    console.log(formData)
+    console.log(dishName,dishIngri, priceForSmall, priceForMedium, priceForLarge ,secureUrl);
+    
   
 
 
 
     axios
-      .post('http://localhost:8080/addspecialpizza', formData)
+      .post('http://localhost:8080/addspecialpizza', {
+        dishName,dishIngri, priceForSmall, priceForMedium, priceForLarge , secureUrl
+    })
       .then((res) => {
         console.log(res.data);
         window.alert("registration sucessfull");
@@ -61,34 +76,7 @@ const SpecialPizza = () => {
 
 
 
-    // const { dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge } = dish;
-    // console.log( dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge);
-    //     const res = await fetch("/addspecialpizza", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-
-    //         body: JSON.stringify({
-    //             dishName,
-    //             dishIngri,
-    //             priceForSmall,
-    //             priceForMedium,
-    //             priceForLarge,
-
-    //         })
-    //     });
-
-    //     const data = await res.json();
-    //     console.log(data);
-    //     if (data.error) {
-    //         window.alert("invalid registration");
-    //         console.log("invalid registration");
-
-    //     } else {
-    //         window.alert("registration sucessfull");
-    //         console.log("registration sucess");
-    //     }
+    
 
   }
   return (

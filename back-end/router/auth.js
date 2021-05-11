@@ -5,12 +5,12 @@ const validationPizza = require('../middlewares/validationPizza.js');
 const validationSpecialPizza = require('../middlewares/validationSpecialPizza.js');
 const validationTable = require('../middlewares/validationTable');
 const validationAddOrder = require('../middlewares/validationAddOrder');
-const upload = require('../middlewares/upload.js')
+// const upload = require('../middlewares/upload.js')
 
 
 
 require('../db/conn');
-const { Table, ReceptionOrder, KitchenOrder} = require('../models/tableSchema')
+const { Table, ReceptionOrder, Pizza , Specialpizza , Drink ,  KitchenOrder} = require('../models/tableSchema')
 
 router.get('/', (req, res) => {
     res.send('hello sheikh from server router');
@@ -20,14 +20,16 @@ router.get('/', (req, res) => {
 router.post('/addtable', validationTable);
 
 // add pizza to database
-router.post('/addpizza' ,upload.single('avatar'), validationPizza  );
+router.post('/addpizza' , validationPizza  );
 
 // add special pizza to database
-router.post('/addspecialpizza',upload.single('avatar') , validationSpecialPizza );
+router.post('/addspecialpizza' , validationSpecialPizza );
 
 // add  drinks to database
-router.post('/adddrink', upload.single('avatar'), validationDrink );
+router.post('/adddrink', validationDrink );
 
+// send order to database  
+router.post('/addorder', validationAddOrder);;
 
 
 // router.post('/loginTable', async (req, res) => {
@@ -91,8 +93,6 @@ router.post('/login', async (req, res) => {
 })
 
 
-// send order to database  
-router.post('/addorder', validationAddOrder);;
 
 
 router.get('/getkitchenorder', async (req, res) => {
@@ -101,7 +101,56 @@ router.get('/getkitchenorder', async (req, res) => {
     try {
 
         const orders = await KitchenOrder.find({});
-        console.log(orders);
+        res.send({data : orders})
+
+    } catch (error) {
+
+    }
+
+
+})
+
+
+router.get('/getpizza', async (req, res) => {
+
+
+    try {
+
+        const orders = await Pizza.find({});
+        // console.log(orders);
+        res.send({data : orders})
+
+    } catch (error) {
+
+    }
+
+
+})
+
+router.get('/getspecialpizza', async (req, res) => {
+
+
+    try {
+
+        const orders = await Specialpizza.find({});
+        // console.log(orders);
+        res.send({data : orders})
+
+    } catch (error) {
+
+    }
+
+
+})
+
+
+router.get('/getdrink', async (req, res) => {
+
+
+    try {
+
+        const orders = await Drink.find({});
+        // console.log(orders);
         res.send({data : orders})
 
     } catch (error) {

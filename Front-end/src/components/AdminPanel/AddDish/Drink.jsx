@@ -6,6 +6,8 @@ const Drink = () => {
     drinkName: '', priceForRegular: null, priceForHalf: null, priceForLiter: null
   })
   const [fileName, setFilename] = useState('');
+ const [secureUrl, setSecureUrl] = useState('');
+
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -24,24 +26,39 @@ const Drink = () => {
 
   const addDrink = async (e) => {
     e.preventDefault();
+    
+    const data = new FormData();
+  data.append("file", fileName);
+  data.append("upload_preset", "x4bnkskk");
+  data.append("cloud_name", "sheikhumar");
+  const res = await fetch(
+    `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
+    {
+      method: "POST",
+      body: data
+    }
+  );
+  const img = await res.json();
+  console.log(img);
+  let ImageLink = img.url
+  setSecureUrl(ImageLink);
+
+  
+  console.log(secureUrl);
 
     console.log(drink);
     // console.log(formData);
 
     const { drinkName, priceForRegular, priceForHalf, priceForLiter } = drink;
-    console.log(drinkName, priceForRegular, priceForHalf, priceForLiter,);
-    let formData = new FormData();
-    formData.append('drinkName', drinkName);
-    formData.append('priceForRegular', priceForRegular);
-    formData.append('priceForHalf', priceForHalf);
-    formData.append('priceForLiter', priceForLiter);
-    formData.append('avatar', fileName);
-    // console.log(formData)
+   
+    
     
 
 
     axios
-      .post('http://localhost:8080/adddrink', formData)
+      .post('http://localhost:8080/adddrink' ,{
+        drinkName, priceForRegular, priceForHalf, priceForLiter , secureUrl
+    })
       .then((res) => {
         console.log(res.data);
         window.alert("registration sucessfull");

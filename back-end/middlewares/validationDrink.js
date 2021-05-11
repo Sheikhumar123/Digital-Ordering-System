@@ -1,17 +1,15 @@
-const {Drink} = require("../models/tableSchema")
+const { Drink } = require("../models/tableSchema")
 
 module.exports = async (req, res) => {
-    // req.f
-// const image = req.file 
-console.log("hello");
-console.log(req.body);
-console.log(req.file.filename);
-console.log("hello");
 
-const { drinkName, priceForRegular, priceForHalf, priceForLiter } = req.body
-const drinkImage = req.file.filename
+    console.log(req.body);
 
-    if (!drinkName || !priceForRegular || !priceForHalf || !priceForLiter || !drinkImage) {
+
+
+    const { drinkName, priceForRegular, priceForHalf, priceForLiter, secureUrl } = req.body
+
+
+    if (!drinkName || !priceForRegular || !priceForHalf || !priceForLiter || !secureUrl) {
         return res.status(404).json({ error: "please fill all fields" })
     }
 
@@ -29,7 +27,7 @@ const drinkImage = req.file.filename
 
 
 
-                const drink = new Drink({ drinkName, priceForRegular, priceForHalf, priceForLiter , drinkImage });
+                const drink = new Drink({ drinkName, priceForRegular, priceForHalf, priceForLiter, secureUrl });
 
                 drink.save().then(() => {
                     res.status(201).json({ message: "drink added" })
@@ -42,4 +40,4 @@ const drinkImage = req.file.filename
             console.log(err);
         })
 
-    }
+}

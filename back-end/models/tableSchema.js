@@ -51,7 +51,7 @@ const pizzaSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    dishImage: {
+    secureUrl: {
         type: String,
         required: true
     }
@@ -74,7 +74,7 @@ const drinkSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    drinkImage: {
+    secureUrl: {
         type: String,
         required: true
     }   

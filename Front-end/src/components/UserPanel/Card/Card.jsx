@@ -1,8 +1,15 @@
 import './Card.css';
-import {useState , useContext} from 'react';
+import {useState , useContext } from 'react';
 import cartContext from '../../Context/cartContext';
 
+
+
+
 export default function Card(props) {
+
+    
+
+    
 
     let [qty , setQty] = useState(1);
     let [size , setSize] = useState(props.type==='drink' ? 'r' : 's');
@@ -35,9 +42,11 @@ export default function Card(props) {
         cartItems[1]([...cartItems[0],itemData]);
     }
 
+
+    // const paths = `http://localhost:8080/${props.img}`
     return (
         <div className="card">
-            <img className="img" src={props.img} id={props.type === 'drink' ? 'drink' : ''}  alt="food"/>
+            <img className="img" src={props.img}  id={props.type === 'drink' ? 'drink' : ''}  alt="food"/>
             <h2>{props.name}</h2>
             <p className="ingredients">{props.ingre}</p>
             <p className="price"> <img style={{width:'17px', verticalAlign:'middle'}} src="./pakistan-rupee-currency-symbol.svg" alt="RS"/> <span>{size==='s' || size==='r' ? props.sPrice : size==='m' || size==="h" ? props.mPrice : props.lPrice}</span></p>

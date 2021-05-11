@@ -11,8 +11,15 @@ const path = require('path');
 //     }
 // });
 const filestorage = multer.diskStorage({
+
+  
+  //   destination: "./EcomWithBackEnd/picUploader/",
+  //   filename: function (req, file, cb) {
+  //     cb(null, file.originalname);
+  //   },
+  // });
     destination: function (req, file, cb) {
-      cb(null, './uploads/')
+      cb(null, './uploads')
     },
     filename: function (req, file, cb) {
       cb(null, Date.now() + '--' + file.originalname)

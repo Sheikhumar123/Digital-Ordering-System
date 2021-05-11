@@ -1,25 +1,84 @@
-import React from "react";
+import React , {useEffect , useState} from "react";
 import "./CardContainer.css";
+
+import axios from 'axios'
+
 
 // import components
 import Card from "../Card/Card";
-// import api for dummy data rendering
-import foodList from "../../api/api";
+
 
 export default function AllCards() {
+
+ const [pizzas, setPizzas] = useState([])
+ const [specialPizzas, setSpecialPizzas] = useState([])
+ const [drinks, setDrinks] = useState([])
+
+async function fetchPizza(){
+
+    try {
+        const response = await axios.get('/getpizza');
+       
+        setPizzas(response.data.data)
+
+        
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    async function fetchSpecialPizza(){
+
+      try {
+          const response = await axios.get('/getspecialpizza');
+          
+          setSpecialPizzas(response.data.data)
+  
+          
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+
+      async function fetchDrink(){
+
+        try {
+            const response = await axios.get('/getdrink');
+            
+            setDrinks(response.data.data)
+            
+          } catch (error) {
+            console.error(error);
+          }
+        }
+  
+
+
+    useEffect( () => {
+
+
+       fetchPizza()
+       fetchSpecialPizza()
+       fetchDrink()
+ 
+      }, []);
+
+     
+
+  
   return (
     <>
       <fieldset>
         <legend>Pizza</legend>
-        {foodList.pizza.map((pizza, index) => {
+        {pizzas.map((pizza, index) => {
           return (
             <Card
-              name={pizza.pizzaName}
-              ingre={pizza.ingridients}
-              img={pizza.src}
-              sPrice={pizza.small_price}
-              mPrice={pizza.medium_price}
-              lPrice={pizza.large_price}
+              name={pizza.dishName}
+              ingre={pizza.dishIngri}
+              img={pizza.secureUrl}
+              sPrice={pizza.priceForSmall}
+              mPrice={pizza.priceForMedium}
+              lPrice={pizza.priceForLarge}
               key={index}
             />
           );
@@ -27,29 +86,30 @@ export default function AllCards() {
       </fieldset>
       <fieldset>
         <legend>Special Pizza</legend>
-        {foodList.specialPizza.map((pizza, index) => {
+        {specialPizzas.map((pizza, index) => {
           return (
             <Card
-              name={pizza.pizzaName}
-              ingre={pizza.ingridients}
-              img={pizza.src}
-              sPrice={pizza.small_price}
-              mPrice={pizza.medium_price}
-              lPrice={pizza.large_price}
-              key={index}
+            name={pizza.dishName}
+            ingre={pizza.dishIngri}
+            img={pizza.secureUrl}
+            sPrice={pizza.priceForSmall}
+            mPrice={pizza.priceForMedium}
+            lPrice={pizza.priceForLarge}
+            key={index}
             />
           );
         })}
       </fieldset>
       <fieldset>
         <legend>Drinks</legend>
-        {foodList.drinks.map((drink, index) => {
+        {drinks.map((drink, index) => {
           return (
             <Card
               type="drink"
               name={drink.drinkName}
-              ingre={drink.ingridients}
-              img={drink.src}
+              // ingre={drink.ingridients}
+              img={drink.secureUrl}
+
               sPrice={drink.regular}
               mPrice={drink.halfLiter}
               lPrice={drink.litter}
