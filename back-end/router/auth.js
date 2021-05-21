@@ -70,7 +70,7 @@ router.post('/login', async (req, res) => {
 
         const tableLogin = await Table.findOne({ tableName: tableName });
         console.log(tableLogin);
-
+        
         if (!tableLogin) {
             return res.json({ error: "invalid cridentials" })
         } else {
@@ -78,7 +78,7 @@ router.post('/login', async (req, res) => {
             console.log(tableLogin.password);
             if (tableLogin.password === password) {
                 console.log("matched");
-                return res.status(202).json({ message: "hello"})
+                return res.status(202).json({ data: tableLogin })
 
             } else {
                 console.log("not matched ");

@@ -1,4 +1,4 @@
-import React , {useEffect , useState} from "react";
+import React, { useEffect, useState } from "react";
 import "./CardContainer.css";
 
 import axios from 'axios'
@@ -10,62 +10,62 @@ import Card from "../Card/Card";
 
 export default function AllCards() {
 
- const [pizzas, setPizzas] = useState([])
- const [specialPizzas, setSpecialPizzas] = useState([])
- const [drinks, setDrinks] = useState([])
+  const [pizzas, setPizzas] = useState([])
+  const [specialPizzas, setSpecialPizzas] = useState([])
+  const [drinks, setDrinks] = useState([])
 
-async function fetchPizza(){
+  async function fetchPizza() {
 
     try {
-        const response = await axios.get('/getpizza');
-       
-        setPizzas(response.data.data)
+      const response = await axios.get('/getpizza');
 
-        
-      } catch (error) {
-        console.error(error);
-      }
+      setPizzas(response.data.data)
+
+
+    } catch (error) {
+      console.error(error);
     }
-    async function fetchSpecialPizza(){
+  }
+  async function fetchSpecialPizza() {
 
-      try {
-          const response = await axios.get('/getspecialpizza');
-          
-          setSpecialPizzas(response.data.data)
-  
-          
-        } catch (error) {
-          console.error(error);
-        }
-      }
+    try {
+      const response = await axios.get('/getspecialpizza');
+
+      setSpecialPizzas(response.data.data)
 
 
-      async function fetchDrink(){
-
-        try {
-            const response = await axios.get('/getdrink');
-            
-            setDrinks(response.data.data)
-            
-          } catch (error) {
-            console.error(error);
-          }
-        }
-  
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
 
-    useEffect( () => {
+  async function fetchDrink() {
+
+    try {
+      const response = await axios.get('/getdrink');
+
+      setDrinks(response.data.data)
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
 
-       fetchPizza()
-       fetchSpecialPizza()
-       fetchDrink()
- 
-      }, []);
 
-     
+  useEffect(() => {
 
-  
+
+    fetchPizza()
+    fetchSpecialPizza()
+    fetchDrink()
+
+  }, []);
+
+
+
+
   return (
     <>
       <fieldset>
@@ -89,13 +89,13 @@ async function fetchPizza(){
         {specialPizzas.map((pizza, index) => {
           return (
             <Card
-            name={pizza.dishName}
-            ingre={pizza.dishIngri}
-            img={pizza.secureUrl}
-            sPrice={pizza.priceForSmall}
-            mPrice={pizza.priceForMedium}
-            lPrice={pizza.priceForLarge}
-            key={index}
+              name={pizza.dishName}
+              ingre={pizza.dishIngri}
+              img={pizza.secureUrl}
+              sPrice={pizza.priceForSmall}
+              mPrice={pizza.priceForMedium}
+              lPrice={pizza.priceForLarge}
+              key={index}
             />
           );
         })}
@@ -110,9 +110,9 @@ async function fetchPizza(){
               // ingre={drink.ingridients}
               img={drink.secureUrl}
 
-              sPrice={drink.regular}
-              mPrice={drink.halfLiter}
-              lPrice={drink.litter}
+              sPrice={drink.priceForRegular}
+              mPrice={drink.priceForHalf}
+              lPrice={drink.priceForLiter}
               key={index}
             />
           );

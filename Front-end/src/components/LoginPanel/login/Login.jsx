@@ -1,6 +1,7 @@
 import "./Login.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios'
 
 export default function Login() {
 
@@ -16,7 +17,7 @@ export default function Login() {
     setFormData({ ...formData, [name]: value })
 
   }
-  console.log(formData);
+  // console.log(formData);
   const navigate = useNavigate();
 
 
@@ -25,49 +26,34 @@ export default function Login() {
     e.preventDefault();
 
     const { tableName, password } = formData
-    // console.log(tableName);
+  
 
-    const res = await fetch("/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
+    axios
+      .post('http://localhost:8080/login',{
+        tableName, password 
+    })
+      .then((res) => {
+          console.log(res);
+        if (!res.data.error) {
+          window.alert("signIn successfull");
+          // console.log("registration sucess");
+          navigate('/userpanel');
+          
+        }else{
+        window.alert(res.data.error);
 
-        tableName,
-        password
+        }
+
       })
+      .catch((err) => {
+        console.log(err.response);
+        window.alert("invalid registration");
+        console.log("invalid registration");
+        
 
-    });
-
-
-    const data = await res.data;
-
-    console.log(data);
-
-    // if (data.error) {
-    //   window.alert("invald table");
-    //   console.log(`invalid user ${data.error}`);
-    // } else {
-    //   window.alert("user matched")
-      // console.log(data.message);
-      // navigate('/userpanel' , {state : data.tableName});
+      });
 
 
-
-
-
-      // if(userName === "table1" && userPassword === "123"){
-      //   // here i user navigate to redirect to /userpanel route and pass a state to show logined username in userpanel component
-      //   navigate('/userpanel',{state : userName});
-      // }
-      // else if(userName === "cheif" && userPassword === "456"){
-      //   navigate('/CheifPanel',{state:userName});
-      // }
-      // else if(userName === "admin" && userPassword === "789"){
-      //   navigate('/admin',{state:userName});
-      // }
-    // }
   }
 
     return (
