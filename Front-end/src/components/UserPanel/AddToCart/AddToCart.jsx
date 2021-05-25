@@ -45,7 +45,7 @@ const AddToCart = () => {
         // console.log(checkCart);
         const totalOrder = cartItems[0]
         // console.log(order);
-        const tableNo = 8;
+        const tableNo = 17;
         console.log(total);
 
         axios

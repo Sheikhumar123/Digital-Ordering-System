@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const tableSchema = new mongoose.Schema({
-    tableName: {
+    username: {
         type: String,
         required: true
     },
@@ -12,8 +12,36 @@ const tableSchema = new mongoose.Schema({
     cpassword: {
         type: String,
         required: true
+    },
+    role:{
+        type: String,
+        enum: ["table" , "admin" , "chief"],
+        default : "table"
     }
-});
+}); 
+
+const adminSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+}); 
+
+const cheifSchema = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    },
+}); 
+
 const orderSchema = new mongoose.Schema({
     tableNo: {
         type: Number,
@@ -87,5 +115,7 @@ const Specialpizza = mongoose.model('SpecialPizza', pizzaSchema);
 const Drink = mongoose.model('Drink', drinkSchema);
 const KitchenOrder = mongoose.model('KitchenOrder', orderSchema);
 const ReceptionOrder = mongoose.model('ReceptionenOrder', orderSchema);
+const Admin = mongoose.model('Admin', adminSchema);
+const Cheif = mongoose.model('cheif', cheifSchema);
 
-module.exports = { Table, Pizza , Specialpizza , Drink , KitchenOrder ,ReceptionOrder};
+module.exports = { Table, Pizza , Specialpizza , Drink , KitchenOrder ,ReceptionOrder , Cheif , Admin};

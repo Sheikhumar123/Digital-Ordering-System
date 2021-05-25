@@ -29,6 +29,7 @@
     font-size: 1.1rem;
     padding: 5px 10px;
     border-radius: 5px;
+    margin-right: 10px;
     font-weight: bolder;
     font-family: 'Poppins';
     border: 3px solid #333;
@@ -64,6 +65,25 @@
     /* background-image: linear-gradient( 109.6deg,  #4b1248 11.2%, #712424 91.1% ); */
 }
 
+.cartbox button{
+    outline: none;
+    cursor: pointer;
+    margin: 0px 10px;
+    color: #333333;
+    font-size: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    font-weight: bolder;
+    font-family: 'Poppins';
+    border: none;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+.cartbox button img{
+    width: 35px;
+}
 /* responsive */
 
 @media screen and (max-width:500px) {

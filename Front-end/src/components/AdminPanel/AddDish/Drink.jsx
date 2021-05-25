@@ -6,10 +6,10 @@ const Drink = () => {
     drinkName: '', priceForRegular: null, priceForHalf: null, priceForLiter: null
   })
   const [fileName, setFilename] = useState('');
- const [secureUrl, setSecureUrl] = useState('');
+  const [secureUrl, setSecureUrl] = useState('');
 
 
-  const handleInput = (e) => {
+  const handleInput = async (e) => {
     const name = e.target.name;
     const value = e.target.value;
     let files = e.target.files
@@ -17,61 +17,96 @@ const Drink = () => {
 
     if (files) {
       setFilename(files[0])
+    const data = new FormData();
+
+      data.append("file", fileName);
+      data.append("upload_preset", "x4bnkskk");
+      data.append("cloud_name", "sheikhumar");
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
+        {
+          method: "POST",
+          body: data
+        }
+      );
+      const img = await res.json();
+      console.log(img);
+      let ImageLink = img.url
+      setSecureUrl(ImageLink);
     }
     setDrink({ ...drink, [name]: value })
 
   }
+  // const getURL = async (e) => {
+  //   const data = new FormData();
+  //   data.append("file", fileName);
+  //   data.append("upload_preset", "x4bnkskk");
+  //   data.append("cloud_name", "sheikhumar");
+  //   const res = await fetch(
+  //     `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
+  //     {
+  //       method: "POST",
+  //       body: data
+  //     }
+  //   );
+  //   const img = await res.json();
+  //   console.log(img);
+  //   let ImageLink = img.url
+  //   setSecureUrl(ImageLink);
+  // }
 
 
 
   const addDrink = async (e) => {
     e.preventDefault();
-    
-    const data = new FormData();
-  data.append("file", fileName);
-  data.append("upload_preset", "x4bnkskk");
-  data.append("cloud_name", "sheikhumar");
-  const res = await fetch(
-    `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
-    {
-      method: "POST",
-      body: data
-    }
-  );
-  const img = await res.json();
-  console.log(img);
-  let ImageLink = img.url
-  setSecureUrl(ImageLink);
 
-  
-  console.log(secureUrl);
+    //   const data = new FormData();
+    // data.append("file", fileName);
+    // data.append("upload_preset", "x4bnkskk");
+    // data.append("cloud_name", "sheikhumar");
+    // const res = await fetch(
+    //   `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
+    //   {
+    //     method: "POST",
+    //     body: data
+    //   }
+    // );
+    // const img = await res.json();
+    // console.log(img);
+    // let ImageLink = img.url
+    // setSecureUrl(ImageLink);
+
+
+    console.log(secureUrl);
 
     console.log(drink);
     // console.log(formData);
 
     const { drinkName, priceForRegular, priceForHalf, priceForLiter } = drink;
-   
-    
-    
 
 
-    axios
-      .post('http://localhost:8080/adddrink' ,{
-        drinkName, priceForRegular, priceForHalf, priceForLiter , secureUrl
-    })
-      .then((res) => {
-        console.log(res.data);
-        window.alert("registration sucessfull");
-        console.log("registration sucess");
 
-      })
-      .catch((err) => {
-        console.log(err.response);
-        window.alert("invalid registration");
-        console.log("invalid registration");
-        
+    if(secureUrl){
 
-      });
+      axios
+        .post('http://localhost:8080/adddrink', {
+          drinkName, priceForRegular, priceForHalf, priceForLiter, secureUrl
+        })
+        .then((res) => {
+          console.log(res.data);
+          window.alert("registration sucessfull");
+          console.log("registration sucess");
+  
+        })
+        .catch((err) => {
+          console.log(err.response);
+          window.alert("invalid registration");
+          console.log("invalid registration");
+  
+  
+        });
+    }
+
 
 
   }

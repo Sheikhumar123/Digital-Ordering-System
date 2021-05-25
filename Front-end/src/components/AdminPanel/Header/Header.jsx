@@ -8,7 +8,7 @@ export default function Header() {
         <img src="/pizza.png" alt="img not found" />
         <h1>Reception Panel</h1>
       </div>
-      <button> <i class="fas fa-sign-out-alt"></i> logout</button>
+      <button> <i className="fas fa-sign-out-alt"></i> logout</button>
     </div>
   );
 }

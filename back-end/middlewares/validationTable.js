@@ -2,20 +2,20 @@ const { Table } = require("../models/tableSchema")
 
 module.exports = (req, res) => {
     // console.log(req.body);
-    const { tableName, password, cpassword } = req.body
+    const { username, password, cpassword } = req.body
 
-    if (!tableName || !password || !cpassword) {
+    if (!username || !password || !cpassword) {
         return res.json({ error: "please fill all fields" })
     }
 
-    Table.findOne({ tableName: tableName })
+    Table.findOne({ username: username })
         .then((tableExist) => {
             if (tableExist) {
                 return res.status(422).json({ error: "table already exist" })
             }
 
 
-            const table = new Table({ tableName, password, cpassword });
+            const table = new Table({ username, password, cpassword });
 
             table.save().then(() => {
                 res.status(201).json({ message: "table added" })

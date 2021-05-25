@@ -1,4 +1,4 @@
-const { KitchenOrder } = require('../models/tableSchema') 
+const { KitchenOrder , ReceptionOrder  } = require('../models/tableSchema') 
 
 module.exports = async (req, res) => {
 
@@ -26,19 +26,20 @@ module.exports = async (req, res) => {
 
 
                 const kitchenorder = new KitchenOrder({ tableNo, total, totalOrder });
-                // const receptionorder = new ReceptionOrder({ tableNo, total, totalOrder });
+                const receptionorder = new ReceptionOrder({ tableNo, total, totalOrder });
 
                 kitchenorder.save().then(() => {
                     res.status(201).json({ message: "order added" })
                 }).catch((err) => {
                     res.status(500).json({ error: "failed to registered" })
                 })
-                // receptionorder.save().then(() => {
-                //     res.status(201).json({ message: "order added" })
-                // }).catch((err) => {
-                //     res.status(500).json({ error: "failed to registered" })
-                // })
+                receptionorder.save().then(() => {
+                    res.status(201).json({ message: "order added" })
+                }).catch((err) => {
+                    res.status(500).json({ error: "failed to registered" })
+                })
             }
+
 
         }).catch((err) => {
             console.log(err);

@@ -13,26 +13,32 @@ import AddToCart from "../AddToCart/AddToCart";
 import CategoreyContext from "../../Context/CategoryContex";
 import CheckCartContext from "../../Context/CheckCartContext";
 import cartContext from "../../Context/cartContext";
+import feedbackContext from "../../Context/feedbackContext";
+import ShowFeedback from '../feedback/Feedback';
 
 export default function UserContainer() {
   let data = useState("all");
   let checkCart = useState({ checkCart: false });
   let cartItems = useState([]);
+  let checkfeedBack = useState({ checkFeed: false });
   return (
-    <CategoreyContext.Provider value={data}>
-      <CheckCartContext.Provider value={checkCart}>
-        <cartContext.Provider value={cartItems}>
-          <div className="userContainer">
-            <div className="filter">
-              <Header />
-              <Info />
-              <Category />
-              <CardContainer />
-              <AddToCart />
+    <feedbackContext.Provider value={checkfeedBack}>
+      <CategoreyContext.Provider value={data}>
+        <CheckCartContext.Provider value={checkCart}>
+          <cartContext.Provider value={cartItems}>
+            <div className="userContainer">
+              <div className="filter">
+                <Header />
+                <Info />
+                <Category />
+                <CardContainer />
+                <AddToCart />
+                <ShowFeedback/>
+              </div>
             </div>
-          </div>
-        </cartContext.Provider>
-      </CheckCartContext.Provider>
-    </CategoreyContext.Provider>
+          </cartContext.Provider>
+        </CheckCartContext.Provider>
+      </CategoreyContext.Provider>
+    </feedbackContext.Provider>
   );
 }

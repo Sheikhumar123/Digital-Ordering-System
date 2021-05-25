@@ -6,7 +6,7 @@ import axios from 'axios'
 export default function Login() {
 
   const [formData, setFormData] = useState({
-    tableName: '', password: ''
+    username: '', password: ''
   })
 
 
@@ -25,19 +25,30 @@ export default function Login() {
   const userAuth = async (e) => {
     e.preventDefault();
 
-    const { tableName, password } = formData
+    const { username, password } = formData
   
 
     axios
       .post('http://localhost:8080/login',{
-        tableName, password 
+        username, password 
     })
       .then((res) => {
           console.log(res);
         if (!res.data.error) {
           window.alert("signIn successfull");
+          console.log(res.data.data.username);
           // console.log("registration sucess");
-          navigate('/userpanel');
+          // navigate('/userpanel');
+          if(res.data.data.username === "admin"){
+
+            navigate('/admin');
+          }else if (res.data.data.username === "chief"){
+            navigate('/CheifPanel');
+
+          }else{
+            navigate('/userpanel')
+          }
+
           
         }else{
         window.alert(res.data.error);
@@ -61,7 +72,7 @@ export default function Login() {
         <form method="POST" className="login_form" onSubmit={userAuth}>
           <h1>Welcome</h1>
           <div className="form-control">
-            <input id="name" value={formData.tableName} name="tableName" type="text" required onChange={handleChange} />
+            <input id="name" value={formData.tableName} name="username" type="text" required onChange={handleChange} />
             <label htmlFor="name">Name</label>
           </div>
           <div className="form-control">

@@ -5,7 +5,7 @@ import "./AddTables.css";
 const AddTables = () => {
 
     const [table, setTable] = useState({
-        tableName: '', password: '', cpassword: ""
+        username: '', password: '', cpassword: ""
     })
 
     const handleInput = (e) => {
@@ -21,8 +21,8 @@ const AddTables = () => {
 
         e.preventDefault();
 
-        const { tableName, password, cpassword } = table;
-        console.log(tableName, password, cpassword);
+        const { username, password, cpassword } = table;
+        console.log(username, password, cpassword);
 
     
 
@@ -31,7 +31,7 @@ const AddTables = () => {
     axios
       .post('http://localhost:8080/addtable', 
       {
-          tableName, password, cpassword
+        username, password, cpassword
       })
       .then((res) => {
         console.log(res.data);
@@ -58,7 +58,7 @@ const AddTables = () => {
             <form className="AddTable_form" onSubmit={addTable} enctype="multipart/form-data">
                 <h1>Add New Table</h1>
                 <div className="form-control">
-                    <input id="name" type="text" required value={table.tableName} name="tableName" onChange={handleInput} />
+                    <input id="name" type="text" required value={table.username} name="username" onChange={handleInput} />
                     <label htmlFor="name">Table No  </label>
                 </div>
                 <div className="form-control">
@@ -67,8 +67,8 @@ const AddTables = () => {
                 </div>
                 <div className="form-control">
                     <input id="adminCode" type="password" required value={table.cpassword} name="cpassword" onChange={handleInput} />
-                    <label htmlFor="pass">Admin Code</label>
-                </div>
+                    <label htmlFor="pass">Confirm Password </label>
+                </div>  
                 <div className="form-control" style={{ textAlign: 'center' }}>
                     <button className="learn-more" type='submit'>
                         <span className="circle">
