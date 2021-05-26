@@ -1,19 +1,26 @@
-.cart{
+.feedback{
     top: 50%;
     left: 50%;
-    width: 70%;
+    width: fit-content;
     position: fixed;
     z-index: 1111111;
+    padding: 10px;
     overflow: hidden;
-    padding: 10px 0px;
+    height: fit-content;
     border-radius: 5px;
     font-family: 'Poppins';
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     background-color: #fff;
     box-shadow: 0px 0px 3px gray;
     transition: transform 0.5s ease-in-out;
     transform: translate(-50%,-50%) scale(0);
 }
-.carthead{
+.headercontainer{
+    width: 100%;
+}
+.feedhead{
     display: flex;
     color: black;
     cursor: grabbing;
@@ -47,7 +54,7 @@
 .closeContainer img:hover{
     filter: invert(100%);
 }
-.carthead span{
+.feedhead span{
     min-width: 190px;
     font-size: 1.7rem;
     color: #49321c;
@@ -58,67 +65,35 @@
     font-family: 'Redressed', cursive;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
-.carthead span::before{
+.feedhead span::before{
     left: 0;
     content: '';
     width: 25px;
     height: 25px;
     position: absolute;
-    background: url(./shoppingBag.svg);
+    background: url(./ratings.svg);
 }
-.showCart{
+.showFeedback{
     transform: translate(-50%,-50%) scale(1) !important;
 }
-.hideCart{
+.hideFeedback{
     transform: translate(-50%,-50%) scale(0) !important;
 }
 
-.cart table{
-    width: 95%;
-    color: #555;
-    margin: 10px auto;
+.feedBackForm{
+    width: 100%;
 }
-.cart table tr{
-    margin: 20px;
+.feedBackForm form .form-control{
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 10px;
+    justify-content: space-between;
 }
-.cart table tr.headings:hover{
-    background-color: white;
+.feedBackForm form .form-control span{
+    margin: 0px 5px;
 }
-.cart table tr:last-child:hover{
-    background-color: white;
-}
-.cart table tr:hover{
-    background-color: rgba(243, 243, 243, 0.521);
-}
-.cart table td , .cart table th{
-    padding: 7px;
-    text-align: center;
-    width: calc(100% / 6);
-}
-.cart table th{
-    border-bottom: 1px solid #999;
-}
-.del{
-    width: 85px;
-    height: 40px;
-    color: red;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    font-size: 1.2rem;
-    border-radius: 5%;
-    font-weight: bolder;
-    background-color: rgba(255, 0, 0, 0.05);
-}
-.del:hover{
-    color: white;
-    background-color: rgba(255, 0, 0, 0.5);
-}
-
-.itemContainer:last-child{
-    margin-bottom: 20px;
-}
-.cart table tr td Button.checkout{
+Button.submit{
     color: #493017;
     border: none;
     outline: none;
@@ -133,6 +108,6 @@
     box-shadow: 0px 0px 5px 0px #999 inset;
     background: linear-gradient(gold , goldenrod);
 }
-.cart table tr td Button.checkout:hover{
+Button.submit:hover{
     background: linear-gradient(goldenrod , gold);
 }

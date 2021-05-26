@@ -19,8 +19,8 @@ import ShowFeedback from '../feedback/Feedback';
 export default function UserContainer() {
   let data = useState("all");
   let checkCart = useState({ checkCart: false });
-  let cartItems = useState([]);
   let checkfeedBack = useState({ checkFeed: false });
+  let cartItems = useState([]);
   return (
     <feedbackContext.Provider value={checkfeedBack}>
       <CategoreyContext.Provider value={data}>

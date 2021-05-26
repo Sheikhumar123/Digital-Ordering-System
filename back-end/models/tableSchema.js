@@ -19,6 +19,20 @@ const tableSchema = new mongoose.Schema({
         default : "table"
     }
 }); 
+const feedbackSchema = new mongoose.Schema({
+    quality: {
+        type: Number,
+        required: true
+    },
+    service: {
+        type: Number,
+        required: true
+    },
+    comments: {
+        type: String,
+        required: true
+    },
+}); 
 
 const adminSchema = new mongoose.Schema({
     username: {
@@ -117,5 +131,6 @@ const KitchenOrder = mongoose.model('KitchenOrder', orderSchema);
 const ReceptionOrder = mongoose.model('ReceptionenOrder', orderSchema);
 const Admin = mongoose.model('Admin', adminSchema);
 const Cheif = mongoose.model('cheif', cheifSchema);
+const Feedback = mongoose.model('Feedback', feedbackSchema);
 
-module.exports = { Table, Pizza , Specialpizza , Drink , KitchenOrder ,ReceptionOrder , Cheif , Admin};
+module.exports = { Table, Pizza ,Feedback, Specialpizza , Drink , KitchenOrder ,ReceptionOrder , Cheif , Admin};
