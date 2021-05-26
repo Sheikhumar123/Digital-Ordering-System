@@ -5,40 +5,20 @@ const validationPizza = require('../middlewares/validationPizza.js');
 const validationSpecialPizza = require('../middlewares/validationSpecialPizza.js');
 const validationTable = require('../middlewares/validationTable');
 const validationAddOrder = require('../middlewares/validationAddOrder');
+const validateFeedback = require('../middlewares/validateFeedback');
+const jwt = require("jsonwebtoken")
 // const upload = require('../middlewares/upload.js')
 
 
 
 require('../db/conn');
-const { Table, ReceptionOrder, Pizza, Specialpizza, Drink, KitchenOrder, Admin, Cheif ,Feedback} = require('../models/tableSchema')
+const { Table, ReceptionOrder, Pizza, Specialpizza, Drink, KitchenOrder, Admin, Cheif, Feedback } = require('../models/tableSchema')
 
 router.get('/', (req, res) => {
     res.send('hello sheikh from server router');
 })
 
-router.post("/addfeedback" , (req , res) =>{
-    console.log(req.body);
-    const { quality, service, comments } = req.body
-    // console.log(order);
-
-    if (!quality || !service) {
-        return res.status(404).json({ error: "please rate us in stars" })
-    }
-
-        const feedback = new Feedback({quality, service, comments  });
-
-
-                feedback.save().then(() => {
-                    res.status(201).json({ message: "feedback added" })
-                }).catch((err) => {
-                    res.status(500).json({ error: "failed to add feedback" })
-                })
-            
-
-
-        
-    
-})
+router.post("/addfeedback" , validateFeedback )
 
 // add table router
 router.post('/addtable', validationTable);
@@ -55,30 +35,18 @@ router.post('/adddrink', validationDrink);
 // send order to database  
 router.post('/addorder', validationAddOrder);;
 
+// get feedback to admin
+router.get('/getfeedback' ,async  (req , res) =>{
 
-// router.post('/loginTable', async (req, res) => {
-//     const { tableName, password } = req.body
+    try {
 
-//     if (!tableName || !password ) {
-//         return res.json({ error: "please fill all fields" })
-//     }
+        const feedback = await Feedback.find({});
+        res.send({ data: feedback })
 
-//     const tableLogin = await Table.findOne({ tableName: tableName });
-//     if(!tableLogin){
-//         return res.json({error:"invalid cridentials"})
-//     }else{
+    } catch (error) {
 
-//         console.log(tableLogin.password);
-//         if (tableLogin.password === password) {
-//             console.log("matched");
-
-//         } else {
-//             console.log("not matched ");
-//         return res.json({error:"invalid cridentials"})
-
-//         }
-//     }         
-// })
+    }
+})
 
 // signin tables ruter 
 
@@ -138,7 +106,8 @@ router.post('/login', async (req, res) => {
                 console.log(tableLogin.password);
                 if (tableLogin.password === password) {
                     console.log("matched");
-                    return res.status(202).json({ data: tableLogin })
+                    const token = jwt.sign(tableLogin.username,process.env.TOKEN_SECRET);
+                    return res.status(202).json({ data: {name:tableLogin.username,token:token} })
 
                 } else {
                     console.log("not matched ");

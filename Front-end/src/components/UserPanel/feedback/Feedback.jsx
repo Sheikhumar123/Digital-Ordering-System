@@ -76,7 +76,7 @@ const ShowFeedback = () => {
           <form onSubmit={submitFeedback}>
               <div className="form-control">
                 <span>Quality</span>  
-                <ReactStars count={5} onChange={qualityRatingChanged} size={24} activeColor="#ffd700"/>
+                <ReactStars count={5} onChange={qualityRatingChanged} value="3" size={24} activeColor="#ffd700"/>
               </div>
               <div className="form-control">
                 <span>Service</span>  
