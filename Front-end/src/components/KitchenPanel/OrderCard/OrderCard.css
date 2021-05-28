@@ -4,15 +4,23 @@
     align-items: center;
     justify-content: space-between;
 }
+/* @font-face {
+    font-family:"caranda" ;
+    src: url("https://www.fontspace.com/caranda-font-f30726");
+    font-size: normal;
+    
+} */
 .card-main{
     width: 80%;
     color: teal;
     color: #49321c;
-    padding: 15px; 
+    padding: 12px; 
     margin: 10px auto;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
-    font-family: "Poppins", sans-serif !important;
+    /* font-family: "Poppins", sans-serif !important; */
+    font-family: 'Mate SC', serif;
+    /* font-family: 'Abril Fatface', cursive; */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.123);
 }
 .card-main h2{
@@ -83,6 +91,8 @@
     background-color: rgba(255, 255, 255, 0.849);
     border-right:1px solid rgba(73, 50, 28, 0.467);
     border-bottom:1px solid rgba(73, 50, 28, 0.467);
+    text-transform: uppercase;
+    
 }
 .item-head{
     width: 60%;

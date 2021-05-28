@@ -27,7 +27,6 @@ export default function Login() {
 
     const { username, password } = formData
   
-
     axios
       .post('http://localhost:8080/login',{
         username, password 
@@ -43,7 +42,7 @@ export default function Login() {
 
             navigate('/admin');
           }else if (res.data.data.username === "chief"){
-            navigate('/CheifPanel');
+            navigate('/chefpanel');
 
           }else{
             navigate('/userpanel')
