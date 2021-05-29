@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken")
+
 
 const tableSchema = new mongoose.Schema({
     username: {
@@ -13,12 +15,21 @@ const tableSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    role:{
+    role: {
         type: String,
-        enum: ["table" , "admin" , "chief"],
-        default : "table"
-    }
-}); 
+        enum: ["table", "admin", "chief"],
+        default: "table"
+    },
+    tokens: [
+        {
+            token: {
+                type: String,
+                required: true
+
+            }
+        }
+    ]
+});
 const feedbackSchema = new mongoose.Schema({
     quality: {
         type: Number,
@@ -32,7 +43,7 @@ const feedbackSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
-}); 
+});
 
 const adminSchema = new mongoose.Schema({
     username: {
@@ -43,7 +54,7 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-}); 
+});
 
 const cheifSchema = new mongoose.Schema({
     username: {
@@ -54,7 +65,7 @@ const cheifSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-}); 
+});
 
 const orderSchema = new mongoose.Schema({
     tableNo: {
@@ -65,8 +76,8 @@ const orderSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    totalOrder : [{
-        type : Object,
+    totalOrder: [{
+        type: Object,
         required: true
     }
     ],
@@ -123,8 +134,25 @@ const drinkSchema = new mongoose.Schema({
     secureUrl: {
         type: String,
         required: true
-    }   
+    }
 })
+
+
+// we are generating token
+tableSchema.methods.generateAuthToken = async function () {
+
+    try {
+
+        let token = jwt.sign({ _id: this._id }, process.env.TOKEN_SECRET);
+        this.tokens = this.tokens.concat({token: token});
+        await this.save();
+        return token;
+
+
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 
 const Table = mongoose.model('TABLE', tableSchema);
@@ -137,4 +165,4 @@ const Admin = mongoose.model('Admin', adminSchema);
 const Cheif = mongoose.model('cheif', cheifSchema);
 const Feedback = mongoose.model('Feedback', feedbackSchema);
 
-module.exports = { Table, Pizza ,Feedback, Specialpizza , Drink , KitchenOrder ,ReceptionOrder , Cheif , Admin};
+module.exports = { Table, Pizza, Feedback, Specialpizza, Drink, KitchenOrder, ReceptionOrder, Cheif, Admin };

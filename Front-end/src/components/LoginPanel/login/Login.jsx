@@ -1,6 +1,6 @@
 import "./Login.css";
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState , useEffect } from "react";
+import { useNavigate , } from "react-router-dom";
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
@@ -9,6 +9,22 @@ export default function Login() {
   const [formData, setFormData] = useState({
     username: '', password: ''
   })
+
+  useEffect(() => {
+    // const tName = Cookies.get("name")
+    // const tToken = Cookies.get("token")
+    // console.log(tName);
+    // console.log(tToken);
+    // var base64Url = tToken.split('.')[1];
+    // var decodedvalue = JSON.parse(window.atob(base64Url));
+    // console.log(decodedvalue)
+
+
+    // if (decodedvalue.name === tName) {
+
+      
+    // }
+  }, [])
 
 
   const handleChange = (e) => {
@@ -46,12 +62,12 @@ export default function Login() {
             navigate('/chefpanel');
 
           }else{
-            const token = res.data.data.token;
-            const tableName = res.data.data.name;
-            var inFifteenMinutes = new Date(new Date().getTime() + 1 * 60 * 1000);
+            // const token = res.data.data.token;
+            // const tableName = res.data.data.name;
+            // var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
 
-            Cookies.set('name', tableName, { expires:inFifteenMinutes  });
-            Cookies.set('token', token, { expires:inFifteenMinutes  });
+            // Cookies.set('name', tableName, { expires:inFifteenMinutes  });
+            // Cookies.set('token', token, { expires:inFifteenMinutes  });
             navigate('/userpanel')
           }
 

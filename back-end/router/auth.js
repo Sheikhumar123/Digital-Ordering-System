@@ -105,8 +105,18 @@ router.post('/login', async (req, res) => {
                 console.log(tableLogin.password);
                 if (tableLogin.password === password) {
                     console.log("matched");
-                    const token = jwt.sign(tableLogin.username,process.env.TOKEN_SECRET);
-                    return res.status(202).json({ data: {name:tableLogin.username,token:token} })
+                    const token =  await tableLogin.generateAuthToken()
+                    console.log(token);
+
+                    res.cookie("jwToken" , token ,{
+                        expires: new Date(Date.now() + 5*60*1000),
+                        httpOnly : true
+                    })
+                    return res.status(202).json({ data: tableLogin })
+
+                    // const token = jwt.sign({name : tableLogin.username},process.env.TOKEN_SECRET);
+                    // console.log(token)
+                    // return res.status(202).json({ data: {name:tableLogin.username,token:token} })
 
                 } else {
                     console.log("not matched ");
