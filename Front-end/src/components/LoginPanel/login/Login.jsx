@@ -2,6 +2,7 @@ import "./Login.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 export default function Login() {
 
@@ -35,7 +36,7 @@ export default function Login() {
           console.log(res);
         if (!res.data.error) {
           window.alert("signIn successfull");
-          console.log(res.data.data.username);
+          // console.log(res.data.data.token);
           // console.log("registration sucess");
           // navigate('/userpanel');
           if(res.data.data.username === "admin"){
@@ -45,6 +46,12 @@ export default function Login() {
             navigate('/chefpanel');
 
           }else{
+            const token = res.data.data.token;
+            const tableName = res.data.data.name;
+            var inFifteenMinutes = new Date(new Date().getTime() + 1 * 60 * 1000);
+
+            Cookies.set('name', tableName, { expires:inFifteenMinutes  });
+            Cookies.set('token', token, { expires:inFifteenMinutes  });
             navigate('/userpanel')
           }
 

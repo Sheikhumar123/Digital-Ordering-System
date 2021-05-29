@@ -41,18 +41,22 @@ const AddToCart = () => {
 
     const getData = async (e) => {
         e.preventDefault();
-        //     console.log("helo");
-        // console.log(checkCart);
         const totalOrder = cartItems[0]
-        // console.log(order);
-        const tableNo = 19;
-        console.log(total);
+        const tableNo = 3;
+        const today = new Date(),
+
+        time = `${today.getHours()} : ${ today.getMinutes()}: ${today.getSeconds()}`;
+        console.log(time);
+
+   
+        console.log(totalOrder);
 
         axios
             .post('http://localhost:8080/addorder', {
                 tableNo,
                 total,
-                totalOrder
+                totalOrder,
+                time
             })
             .then((res) => {
                 console.log(res.data);

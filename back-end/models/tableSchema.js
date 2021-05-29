@@ -69,7 +69,11 @@ const orderSchema = new mongoose.Schema({
         type : Object,
         required: true
     }
-    ]
+    ],
+    time: {
+        type: String,
+        required: true
+    },
 });
 
 const pizzaSchema = new mongoose.Schema({

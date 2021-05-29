@@ -7,7 +7,6 @@ const validationTable = require('../middlewares/validationTable');
 const validationAddOrder = require('../middlewares/validationAddOrder');
 const validateFeedback = require('../middlewares/validateFeedback');
 const jwt = require("jsonwebtoken")
-// const upload = require('../middlewares/upload.js')
 
 
 
@@ -116,92 +115,6 @@ router.post('/login', async (req, res) => {
                 }
             }
         }
-        // const tableLogin = await Table.findOne({ username: username });
-        // console.log(tableLogin);  
-
-
-        // switch (username) {
-        //     case "admin":
-        //         const adminLogin = await Admin.findOne({ username: username });
-        //         console.log(adminLogin + "hello");
-        //         if (!adminLogin) {
-        //             return res.json({ error: "invalid cridentials" })
-        //         } else {
-
-        //             console.log(adminLogin.password);
-        //             if (adminLogin.password === password) {
-        //                 console.log("matched");
-        //                 return res.status(202).json({ data: adminLogin })
-
-        //             } else {
-        //                 console.log("not matched ");
-        //                 return res.json({ error: "invalid cridentials" })
-
-        //             }
-        //         }
-
-
-        //         break;
-        //     case "cheif":
-        //         const cheifLogin = await Cheif.findOne({ username: username });
-        //         console.log(cheifLogin);
-        //         if (!cheifLogin) {
-        //             return res.json({ error: "invalid cridentials" })
-        //         } else {
-
-        //             console.log(cheifLogin.password);
-        //             if (cheifLogin.password === password) {
-        //                 console.log("matched");
-        //                 return res.status(202).json({ data: cheifLogin })
-
-        //             } else {
-        //                 console.log("not matched ");
-        //                 return res.json({ error: "invalid cridentials" })
-
-        //             }
-        //         }
-
-        //         break;
-        //     default:
-        //         const tableLogin = await Table.findOne({ username: username });
-        //         console.log(tableLogin + "user");
-        //         if (!tableLogin) {
-        //             return res.json({ error: "invalid cridentials" })
-        //         } else {
-
-        //             console.log(tableLogin.password);
-        //             if (tableLogin.password === password) {
-        //                 console.log("matched");
-        //                 return res.status(202).json({ data: tableLogin })
-
-        //             } else {
-        //                 console.log("not matched ");
-        //                 return res.json({ error: "invalid cridentials" })
-
-        //             }
-        //         }
-
-
-        // }
-
-        // const tableLogin = await Table.findOne({ username: username });
-        // console.log(tableLogin);
-
-        // if (!tableLogin) {
-        //     return res.json({ error: "invalid cridentials" })
-        // } else {
-
-        //     console.log(tableLogin.password);
-        //     if (tableLogin.password === password) {
-        //         console.log("matched");
-        //         return res.status(202).json({ data: tableLogin })
-
-        //     } else {
-        //         console.log("not matched ");
-        //         return res.json({ error: "invalid cridentials" })
-
-        //     }
-        // }
 
     } catch (error) {
         console.log(error);
