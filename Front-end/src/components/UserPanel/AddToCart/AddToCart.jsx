@@ -42,7 +42,7 @@ const AddToCart = () => {
     const getData = async (e) => {
         e.preventDefault();
         const totalOrder = cartItems[0]
-        const tableNo = 6;
+        const tableNo = 8;
         const today = new Date(),
 
         time = `${today.getHours()} : ${ today.getMinutes()}: ${today.getSeconds()}`;
@@ -59,8 +59,8 @@ const AddToCart = () => {
                 time
             })
             .then((res) => {
-                console.log(res.data);
-                window.alert("registration sucessfull");
+                // console.log(res.data);
+                window.alert(res.data.message);
                 console.log("registration sucess");
 
             })
