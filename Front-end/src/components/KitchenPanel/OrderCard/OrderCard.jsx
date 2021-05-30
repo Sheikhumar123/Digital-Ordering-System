@@ -31,12 +31,17 @@ async function fetchOrders() {
      
   } , []);
 
+  const deleteOrder = (e) =>{
+    console.log(e.target.value);
+  }
+
 
 
 
   return (
     <div className="orderContainer">
     {orders.map((item, index) => {
+      // console.log(item.ta);
        let ordernum = orderNmber + index
           return (
             <div className="card-main" key={index}>
@@ -62,7 +67,7 @@ async function fetchOrders() {
             })}
             </table>
             <button> <img src="./cooking.svg" alt="waiter"/> <span>Start</span></button>
-            <button> <img src="./waiter.svg" alt="cooking"/> <span>Ready</span></button>
+            <button onClick={deleteOrder} value={item.tableNo}> <img src="./waiter.svg" alt="cooking"/>   <span>Ready</span></button>
           </div>
           
           );

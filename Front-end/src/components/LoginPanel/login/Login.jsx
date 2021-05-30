@@ -58,7 +58,7 @@ export default function Login() {
           if(res.data.data.username === "admin"){
 
             navigate('/admin');
-          }else if (res.data.data.username === "chief"){
+          }else if (res.data.data.username === "chef"){
             navigate('/chefpanel');
 
           }else{

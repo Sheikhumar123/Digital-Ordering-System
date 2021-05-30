@@ -11,7 +11,7 @@ const Bills = () => {
   
   async function getUser() {
     try {
-      const response = await axios.get('/getkitchenorder');
+      const response = await axios.get('/receptionorder');
       setOrders(response.data.data)
       
     } catch (error) {

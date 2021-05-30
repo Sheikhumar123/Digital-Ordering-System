@@ -37,7 +37,6 @@ module.exports = async (req, res) => {
                             return res.status(421).json({ message: "order not updated" })
 
                         }
-                        // return updatedDocument
                     })
                     .catch(err => console.error(`Failed to find and update document: ${err}`))
 
@@ -59,15 +58,11 @@ module.exports = async (req, res) => {
                                             return res.status(500).json({ error: "failed to registered" })
                                         })
 
-                                        // console.log(`Successfully updated document: ${updatedDocument}.`)
-                                        // return res.status(201).json({ message: "order updated" })
-
                                     } else {
                                         console.log("No document matches the provided query.")
                                         return res.status(421).json({ message: "order not updated" })
 
                                     }
-                                    // return updatedDocument
                                 })
                                 .catch(err => console.error(`Failed to find and update document: ${err}`))
 
@@ -76,27 +71,6 @@ module.exports = async (req, res) => {
 
 
             }
-            // ReceptionOrder.findOne({ tableNo: tableNo })
-            //     .then((billExist) => {
-            //                { tableNo: tableNo },
-            //                 { $push: { totalOrder }, $inc: { total } })
-            //                 .then(updatedDocument => {
-            //                     if (updatedDocument) {
-            //                         console.log(`Successfully updated document: ${updatedDocument}.`)
-            //                         return res.status(201).json({ message: "order updated" })
-
-            //                     } else {
-            //                         console.log("No document matches the provided query.")
-            //                         return res.status(421).json({ message: "order not updated" })
-
-            //                     }
-            //                     // return updatedDocument
-            //                 })
-            //                 .catch(err => console.error(`Failed to find and update document: ${err}`))
-
-            //         }         if (billExist) {
-            //             ReceptionOrder.findOneAndUpdate(
-            // 
             else {
                 const kitchenorder = new KitchenOrder({ tableNo, total, totalOrder, time });
                 const receptionorder = new ReceptionOrder({ tableNo, total, totalOrder, time });
@@ -107,14 +81,13 @@ module.exports = async (req, res) => {
                     return res.status(500).json({ error: "failed to registered" })
                 })
                 receptionorder.save().then(() => {
-                    // return res.status(201).json({ message: "order added" })
+                    
                 }).catch((err) => {
-                    // return res.status(500).json({ error: "failed to registered" })
+                
                 })
             }
 
-            // })
-
+           
 
 
         }).catch((err) => {

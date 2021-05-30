@@ -14,7 +14,6 @@ const AddTables = () => {
 
         setTable({ ...table, [name]: value })
     }
-    console.log(table);
 
 
     const addTable = async (e) => {
@@ -24,30 +23,35 @@ const AddTables = () => {
         const { username, password, cpassword } = table;
         console.log(username, password, cpassword);
 
-    
 
 
 
-    axios
-      .post('http://localhost:8080/addtable', 
-      {
-        username, password, cpassword
-      })
-      .then((res) => {
-        console.log(res.data);
-        window.alert("registration sucessfull");
-        console.log("registration sucess");
 
-      })
-      .catch((err) => {
-        console.log(err.response);
-        window.alert("invalid registration");
-        console.log("invalid registration");
-        
+        axios
+            .post('http://localhost:8080/addtable',
+                {
+                    username, password, cpassword
+                })
+            .then((res) => {
+                
+                console.log(res.data);
+                window.alert(res.data.message);
+                console.log("registration sucess");
 
-      });
-       
-  
+            })
+            .catch((err) => {
+               
+
+
+                console.log(err.response);
+
+                window.alert(err.response.data.error);
+                console.log("invalid registration");
+
+
+            });
+
+
 
     }
 
@@ -68,7 +72,7 @@ const AddTables = () => {
                 <div className="form-control">
                     <input id="adminCode" type="password" required value={table.cpassword} name="cpassword" onChange={handleInput} />
                     <label htmlFor="pass">Confirm Password </label>
-                </div>  
+                </div>
                 <div className="form-control" style={{ textAlign: 'center' }}>
                     <button className="learn-more" type='submit'>
                         <span className="circle">

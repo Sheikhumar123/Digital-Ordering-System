@@ -42,7 +42,7 @@ const AddToCart = () => {
     const getData = async (e) => {
         e.preventDefault();
         const totalOrder = cartItems[0]
-        const tableNo = 8;
+        const tableNo = 9;
         const today = new Date(),
 
         time = `${today.getHours()} : ${ today.getMinutes()}: ${today.getSeconds()}`;

@@ -13,6 +13,11 @@ module.exports = (req, res) => {
             if (tableExist) {
                 return res.status(422).json({ error: "table already exist" })
             }
+            if(password != cpassword){
+                return res.status(422).json({ error: "please enter same password" })
+
+            }
+
 
 
             const table = new Table({ username, password, cpassword });
