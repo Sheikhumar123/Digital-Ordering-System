@@ -41,6 +41,7 @@ const Bills = () => {
             <th>Table no</th>
             <th>Order</th>
             <th>Total Bill</th>
+            <th>Time of odder</th>
             <th>CheckOut</th>
           </tr>
         </thead>
@@ -79,6 +80,7 @@ const Bills = () => {
                     )
                   })
                   }</td>
+                  <td>{order.time}</td>
                 <td>
                   <button> <i class="far fa-file-alt"></i> Generate</button>
                 </td>

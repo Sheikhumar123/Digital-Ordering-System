@@ -42,11 +42,15 @@ const AddToCart = () => {
     const getData = async (e) => {
         e.preventDefault();
         const totalOrder = cartItems[0]
-        const tableNo = 9;
+        const tableNo = 10;
         const today = new Date(),
 
-        time = `${today.getHours()} : ${ today.getMinutes()}: ${today.getSeconds()}`;
+         time = `${today.getFullYear()}:${today.getMonth() + 1}:${today.getDate()} - ${today.getHours()}:${ today.getMinutes()}:${today.getSeconds()}`;
+        //   today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        
         console.log(time);
+        
+
 
    
         console.log(totalOrder);
@@ -61,13 +65,12 @@ const AddToCart = () => {
             .then((res) => {
                 // console.log(res.data);
                 window.alert(res.data.message);
-                console.log("registration sucess");
+                console.log(res.data.message);
 
             })
             .catch((err) => {
-                console.log(err.response);
-                window.alert("invalid registration");
-                console.log("invalid registration");
+                console.log(err.response.data.error);
+                window.alert(err.response.data.error);
 
 
             });

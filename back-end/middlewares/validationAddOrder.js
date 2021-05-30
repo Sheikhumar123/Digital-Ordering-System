@@ -3,11 +3,12 @@ const { KitchenOrder, ReceptionOrder } = require('../models/tableSchema')
 module.exports = async (req, res) => {
 
     const { tableNo, total, totalOrder, time } = req.body;
-    if (!totalOrder) {
-        return res.status(404).json({ error: "please fill all fields" })
+    if (!totalOrder[0]) {
+        return res.status(404).json({ error: "please select dish first" })
     }
     const orderExistInReception = await ReceptionOrder.findOne({ tableNo: tableNo });
     // console.log(orderExistInReception + "hey");
+
 
     KitchenOrder.findOne({ tableNo: tableNo })
         .then((orderExist) => {
