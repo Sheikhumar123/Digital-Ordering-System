@@ -1,6 +1,5 @@
 import "./feedback.css";
 import React, { useContext, useState } from "react";
-import ReactStars from "react-rating-stars-component";
 import feedbackContext from "../../Context/feedbackContext";
 import axios from "axios";
 
