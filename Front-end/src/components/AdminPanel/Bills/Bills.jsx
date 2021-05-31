@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect  } from "react";
 import "./Bills.css";
 import axios from 'axios'
+
+
 
 const Bills = () => {
 
@@ -21,13 +23,12 @@ const Bills = () => {
 
   useEffect( () => {
 
-
     getUser()
     
 
 
 
-    }, []);
+    }, [orders]);
 
   
 

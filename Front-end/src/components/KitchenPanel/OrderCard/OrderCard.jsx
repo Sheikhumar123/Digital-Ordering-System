@@ -4,13 +4,9 @@ import axios from 'axios'
 // import { useEffect } from "react";
 export default function OrderCard() {
   
-  const [orders , setOrders] = useState([])
-  // const [ordernum , setOrdernum] = useState(0)
+  const [orders , setOrders] = useState([]);
   let orderNmber=1;
 
-//  const getOrder = () =>{
-
-  //  console.log(orders);
 async function fetchOrders() {
 
   try {
@@ -29,7 +25,7 @@ async function fetchOrders() {
     fetchOrders()
 
      
-  } , []);
+  } , [orders]);
 
   const deleteOrder = (e) =>{
     console.log(e.target.value);

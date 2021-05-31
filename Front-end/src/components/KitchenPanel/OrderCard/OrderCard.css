@@ -15,7 +15,7 @@
     color: teal;
     color: #49321c;
     padding: 12px; 
-    margin: 10px auto;
+    margin: 5px auto;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
     /* font-family: "Poppins", sans-serif !important; */
@@ -30,11 +30,11 @@
     vertical-align: middle;
 }
 .card-main h2 img{
-    width: 60px;
+    width: 35px;
     vertical-align: middle;
 }
 .card-main h3 img{
-    width: 60px;
+    width: 45px;
     margin-left: 20px;
     vertical-align: middle;
 }
@@ -45,13 +45,13 @@
     display: flex;
 }
 .card-main button{
-    width: 140px;
-    margin: 10px;
-    padding: 10px;
+    width: 120px;
+    margin: 5px;
+    padding: 5px;
     color: white;
     font-size: larger;
     font-weight: bolder;
-    letter-spacing: 1px;
+    /* letter-spacing: 1px; */
     border-radius: 10px;
     transition: 0.5s;
     border: 2px solid #49321c;
@@ -71,7 +71,7 @@
 }
 .orderContainer table{
     width: 100%;
-    margin: 10px;
+    margin: 5px;
     color: white;
     font-size: larger;
 }
@@ -84,7 +84,7 @@
     opacity: 1;
 }
 .orderContainer table tr td{
-    padding: 10px;
+    padding: 5px 10px;
     color: #49321c;
     border-radius: 5px;
     border:1px solid rgba(73, 50, 28, 0.467);
