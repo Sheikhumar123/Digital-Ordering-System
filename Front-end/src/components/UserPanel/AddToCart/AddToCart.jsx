@@ -66,7 +66,9 @@ const AddToCart = () => {
                 // console.log(res.data);
                 window.alert(res.data.message);
                 console.log(res.data.message);
-
+                // Hide cart and set to empty when submited
+                hideCart();
+                cartItems[1]([]);
             })
             .catch((err) => {
                 console.log(err.response.data.error);
