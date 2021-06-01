@@ -20,6 +20,7 @@ const styles = {
 
 
 const ShowFeedback = () => {
+  const [number, setNumber] = useState()
   let classNames = ["feedback"];
 
   // code for quality stars
@@ -80,6 +81,7 @@ const ShowFeedback = () => {
       .post("http://localhost:8080/addfeedback", {
         quality,
         service,
+        number,
         comments,
       })
       .then((res) => {
@@ -88,6 +90,7 @@ const ShowFeedback = () => {
         console.log("registration sucess");
         hideFeedback();
         setComments("");
+        setNumber("");
         setCurrentQualityValue(0);
         setCurrentServiceValue(0);
       })
@@ -162,6 +165,23 @@ const ShowFeedback = () => {
                 );
               })}
             </div>
+          </div>
+          <div className="form-control">
+            <span style={{ width: "20%" }}>Number</span>
+            <input
+            placeholder="Enter your Number"
+              onChange={(e) => setNumber(e.target.value)}
+              value={number}
+              type="number"
+              maxLength="11"
+              style={{
+                width: "40%",
+                padding: "10px",
+                border: "1px solid gray",
+                fontSize: "1rem",
+                margin: "10px",
+              }}
+            />
           </div>
           <div className="form-control">
             <span style={{ width: "100%" }}>Comments</span>

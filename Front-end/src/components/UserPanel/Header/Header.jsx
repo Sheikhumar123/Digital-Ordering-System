@@ -1,14 +1,21 @@
 import './Header.css';
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie'
 
 export default function Header() {
-    // here i use useLocation hooks to get the data coming from the route 
-    let location = useLocation();
+
+    const [name, setname] = useState("")
+   
+    useEffect(() => {
+       setname( Cookies.get("name"))
+        
+    }, [])
+    
+
     return (
         <div className="header">
             <h1>Digital Ordering System</h1>
-            <h3>{location.state}</h3>
+            <h3>{name}</h3>
         </div>
     )
 }

@@ -1,10 +1,11 @@
 .feedback{
     top: 50%;
     left: 50%;
-    width: fit-content;
+    /* width: fit-content; */
+    width: 40%;
     position: fixed;
     z-index: 1111111;
-    padding: 10px;
+    padding: 5px 10px;
     overflow: hidden;
     height: fit-content;
     border-radius: 5px;

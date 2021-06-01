@@ -23,7 +23,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LoginContainer />} />
           <Route path='/userpanel' element={<UserContainer />} />
-          <Route path='/cheifpanel' element={<CheifPanel />} />
+          <Route path='/chefpanel' element={<CheifPanel />} />
 
           <Route path='/admin/*' element={<Admin />}>
             <Route path="/" element={<Bills />} />

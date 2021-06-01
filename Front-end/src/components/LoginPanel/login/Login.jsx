@@ -62,12 +62,11 @@ export default function Login() {
             navigate('/chefpanel');
 
           }else{
-            // const token = res.data.data.token;
-            // const tableName = res.data.data.name;
-            // var inFifteenMinutes = new Date(new Date().getTime() + 15 * 60 * 1000);
-
-            // Cookies.set('name', tableName, { expires:inFifteenMinutes  });
-            // Cookies.set('token', token, { expires:inFifteenMinutes  });
+            const token = res.data.data.token;
+            const tableName = res.data.data.username;
+            var inFifteenMinutes = new Date(new Date().getTime() + 60 * 60 * 1000);
+            Cookies.set('name', tableName, { expires:inFifteenMinutes  });
+            Cookies.set('token', token, { expires:inFifteenMinutes  });
             navigate('/userpanel')
           }
 

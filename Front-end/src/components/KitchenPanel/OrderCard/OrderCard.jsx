@@ -42,7 +42,7 @@ async function fetchOrders() {
           return (
             <div className="card-main" key={index}>
             <h2> <img src="./note.svg" alt="img"/> <span>Order {ordernum}</span></h2>
-            <h3><img src="./dinner.svg" alt="img"/> <span>Table # {item.tableNo}</span></h3>
+            <h3><img src="./dinner.svg" alt="img"/> <span>{item.tableNo}</span></h3>
             <table>
               <tr className='table-head'>
                 <td className="item-head">ITEMS</td>

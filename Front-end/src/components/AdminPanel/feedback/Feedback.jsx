@@ -1,7 +1,6 @@
 import "./feedback.css";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ReactStars from "react-rating-stars-component";
 
 // import start icon
 import { FaStar } from "react-icons/fa";
@@ -44,7 +43,7 @@ export default function Feedback() {
             <div className="feedBack-Form">
               <div className="feedBack-control">
                 <span>Phone:</span>
-                <div className="phone">O309123456</div>
+                <div className="phone">0{feed.number}</div>
               </div>
               <div className="feedBack-control">
                 <span>Quality:</span>

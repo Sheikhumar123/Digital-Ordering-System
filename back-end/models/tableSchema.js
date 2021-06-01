@@ -20,22 +20,21 @@ const tableSchema = new mongoose.Schema({
         enum: ["table", "admin", "chief"],
         default: "table"
     },
-    tokens: [
-        {
-            token: {
-                type: String,
-                required: true
-
-            }
-        }
-    ]
-});
+    token: {
+        type: String,
+        required: true
+    }
+    });
 const feedbackSchema = new mongoose.Schema({
     quality: {
         type: Number,
         required: true
     },
     service: {
+        type: Number,
+        required: true
+    },
+    number: {
         type: Number,
         required: true
     },
@@ -69,7 +68,7 @@ const cheifSchema = new mongoose.Schema({
 
 const orderSchema = new mongoose.Schema({
     tableNo: {
-        type: Number,
+        type: String,
         required: true
     },
     total: {
@@ -86,6 +85,7 @@ const orderSchema = new mongoose.Schema({
         required: true
     },
 });
+
 
 const pizzaSchema = new mongoose.Schema({
     dishName: {
@@ -144,7 +144,7 @@ tableSchema.methods.generateAuthToken = async function () {
     try {
 
         let token = jwt.sign({ _id: this._id }, process.env.TOKEN_SECRET);
-        this.tokens = this.tokens.concat({token: token});
+        this.token =  token;
         await this.save();
         return token;
 

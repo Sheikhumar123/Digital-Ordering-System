@@ -1,11 +1,20 @@
 import './AddToCart.css';
-import React, { useContext } from 'react';
+import React, { useContext , useState , useEffect } from 'react';
 import CheckCartContext from '../../Context/CheckCartContext';
 import cartContext from '../../Context/cartContext';
 import axios from 'axios'
+import Cookies from 'js-cookie'
+
+
+
 
 const AddToCart = () => {
-
+    const [name, setname] = useState("")
+    useEffect(() => {
+        setname( Cookies.get("name"))
+         
+     }, [])
+    
     let classNames = ['cart'];
 
     const checkCart = useContext(CheckCartContext);
@@ -42,7 +51,8 @@ const AddToCart = () => {
     const getData = async (e) => {
         e.preventDefault();
         const totalOrder = cartItems[0]
-        const tableNo = 11;
+        const tableNo = name;
+        // const tableNo = 15;
         const today = new Date(),
 
          time = `${today.getFullYear()}:${today.getMonth() + 1}:${today.getDate()} - ${today.getHours()}:${ today.getMinutes()}:${today.getSeconds()}`;
@@ -71,7 +81,7 @@ const AddToCart = () => {
                 cartItems[1]([]);
             })
             .catch((err) => {
-                console.log(err.response.data.error);
+                console.log(err.response);
                 window.alert(err.response.data.error);
 
 
