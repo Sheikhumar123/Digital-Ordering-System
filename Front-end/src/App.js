@@ -1,5 +1,5 @@
 import './App.css';
-import ChefPanel from './components/KitchenPanel/CheifPanel';
+import CheifPanel from './components/KitchenPanel/CheifPanel';
 import Admin from './components/AdminPanel/Admin.jsx';
 import Bills from "./components/AdminPanel/Bills/Bills.jsx"; 
 import AddTables from './components/AdminPanel/AddTables/AddTables';
@@ -23,7 +23,7 @@ function App() {
         <Routes>
           <Route path='/' element={<LoginContainer />} />
           <Route path='/userpanel' element={<UserContainer />} />
-          <Route path='/chefpanel' element={<ChefPanel />} />
+          <Route path='/cheifpanel' element={<CheifPanel />} />
 
           <Route path='/admin/*' element={<Admin />}>
             <Route path="/" element={<Bills />} />

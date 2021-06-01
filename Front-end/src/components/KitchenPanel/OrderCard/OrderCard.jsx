@@ -28,7 +28,7 @@ async function fetchOrders() {
   } , [orders]);
 
   const deleteOrder = (e) =>{
-    console.log(e.target.value);
+    console.log(e.currentTarget.getAttribute('tid'));
   }
 
 
@@ -50,10 +50,9 @@ async function fetchOrders() {
                 <td className="item-size">SIZE</td>
               </tr>
             {item.totalOrder.map((a,index)=>{
-              console.log(a);
               return( 
             
-              <tr>
+              <tr key={index}>
                 <td><h4>{a.name}</h4></td>
                 <td><h4>{a.itemQty}</h4></td>
                 <td><h4>{a.itemSize}</h4></td>
@@ -63,7 +62,7 @@ async function fetchOrders() {
             })}
             </table>
             <button> <img src="./cooking.svg" alt="waiter"/> <span>Start</span></button>
-            <button onClick={deleteOrder} value={item.tableNo}> <img src="./waiter.svg" alt="cooking"/>   <span>Ready</span></button>
+            <button onClick={(e)=>{deleteOrder(e)}} tid={item.tableNo} value={item.tableNo}> <img src="./waiter.svg" alt="cooking"/>   <span>Ready</span></button>
           </div>
           
           );
