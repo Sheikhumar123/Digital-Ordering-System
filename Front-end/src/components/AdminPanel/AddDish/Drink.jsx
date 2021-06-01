@@ -37,50 +37,19 @@ const Drink = () => {
     setDrink({ ...drink, [name]: value })
 
   }
-  // const getURL = async (e) => {
-  //   const data = new FormData();
-  //   data.append("file", fileName);
-  //   data.append("upload_preset", "x4bnkskk");
-  //   data.append("cloud_name", "sheikhumar");
-  //   const res = await fetch(
-  //     `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
-  //     {
-  //       method: "POST",
-  //       body: data
-  //     }
-  //   );
-  //   const img = await res.json();
-  //   console.log(img);
-  //   let ImageLink = img.url
-  //   setSecureUrl(ImageLink);
-  // }
 
 
 
   const addDrink = async (e) => {
     e.preventDefault();
 
-    //   const data = new FormData();
-    // data.append("file", fileName);
-    // data.append("upload_preset", "x4bnkskk");
-    // data.append("cloud_name", "sheikhumar");
-    // const res = await fetch(
-    //   `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
-    //   {
-    //     method: "POST",
-    //     body: data
-    //   }
-    // );
-    // const img = await res.json();
-    // console.log(img);
-    // let ImageLink = img.url
-    // setSecureUrl(ImageLink);
+    
 
 
     console.log(secureUrl);
 
     console.log(drink);
-    // console.log(formData);
+    
 
     const { drinkName, priceForRegular, priceForHalf, priceForLiter } = drink;
 
