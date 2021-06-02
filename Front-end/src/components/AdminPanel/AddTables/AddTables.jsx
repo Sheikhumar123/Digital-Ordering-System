@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from "axios"
 import "./AddTables.css";
+import { toast } from 'react-toastify';
 
 const AddTables = () => {
 
@@ -35,7 +36,7 @@ const AddTables = () => {
             .then((res) => {
                 
                 console.log(res.data);
-                window.alert(res.data.message);
+                toast.success(res.data.message);
                 console.log("registration sucess");
 
             })
@@ -45,7 +46,7 @@ const AddTables = () => {
 
                 console.log(err.response);
 
-                window.alert(err.response.data.error);
+                toast.error(err.response.data.error);
                 console.log("invalid registration");
 
 

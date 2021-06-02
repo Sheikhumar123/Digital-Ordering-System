@@ -2,15 +2,7 @@ import './Card.css';
 import {useState , useContext } from 'react';
 import cartContext from '../../Context/cartContext';
 
-
-
-
 export default function Card(props) {
-
-    
-
-    
-
     let [qty , setQty] = useState(1);
     let [size , setSize] = useState(props.type==='drink' ? 'r' : 's');
     

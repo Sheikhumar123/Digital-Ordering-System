@@ -101,13 +101,13 @@ p.ingredients{
     font-size: 1.2rem;
 }
 .selected{
-    color: orange !important;
-    color: teal !important;
+    /* color: orange !important;
+    color: teal !important; */
     color: #49321c !important;
-    background-color: white !important;
+    /* background-color: white !important;
     border: 4px solid orange !important;
-    border: 4px solid teal !important;
-    border: 4px solid #49321c !important;
+    border: 4px solid teal !important; */
+    /* border: 4px solid #49321c !important; */
     border: 3px solid #000 !important;
 }
 .selected:hover{

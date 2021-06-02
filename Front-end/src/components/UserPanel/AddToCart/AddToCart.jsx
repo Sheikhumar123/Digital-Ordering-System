@@ -4,6 +4,7 @@ import CheckCartContext from '../../Context/CheckCartContext';
 import cartContext from '../../Context/cartContext';
 import axios from 'axios'
 import Cookies from 'js-cookie'
+import { toast } from 'react-toastify';
 
 
 
@@ -77,7 +78,7 @@ const AddToCart = () => {
             })
             .then((res) => {
                 // console.log(res.data);
-                window.alert(res.data.message);
+                toast.info(res.data.message);
                 console.log(res.data.message);
                 // Hide cart and set to empty when submited
                 hideCart();
@@ -85,7 +86,7 @@ const AddToCart = () => {
             })
             .catch((err) => {
                 console.log(err.response);
-                window.alert(err.response.data.error);
+                toast.error(err.response.data.error);
 
 
             });
