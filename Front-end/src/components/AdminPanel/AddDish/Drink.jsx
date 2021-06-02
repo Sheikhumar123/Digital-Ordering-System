@@ -84,15 +84,21 @@ const Drink = () => {
           toast.success("registration Success");
         
           console.log("registration sucess");
+          setFilename("")
+          setSecureUrl("");
+          setDrink({
+            drinkName: '', priceForRegular: null, priceForHalf: null, priceForLiter: null
+          })
   
         })
         .catch((err) => {
           console.log(err.response);
-           toast.error("invalid registration");
-          console.log("invalid registration");
+          //  toast.error("invalid registration");
+          // console.log("invalid registration");
   
   
         });
+
     }
 
 
