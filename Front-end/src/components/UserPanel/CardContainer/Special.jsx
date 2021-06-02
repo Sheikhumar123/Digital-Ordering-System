@@ -1,25 +1,50 @@
-import React from "react";
+import React, {useEffect , useState} from "react";
 import "./CardContainer.css";
+import axios from 'axios'
+
 
 // import components
 import Card from "../Card/Card";
-// import api for dummy data rendering
-import foodList from "../../api/api";
 
 export default function Special() {
+  const [specialPizzas, setSpecialPizzas] = useState([])
+
+
+  async function fetchSpecialPizza() {
+
+    try {
+      const response = await axios.get('/getspecialpizza');
+
+      setSpecialPizzas(response.data.data)
+
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+
+  useEffect(() => {
+
+
+    
+    fetchSpecialPizza()
+    
+
+  }, []);
   return (
     <>
       <fieldset>
         <legend>Special Pizza</legend>
-        {foodList.specialPizza.map((pizza, index) => {
+        {specialPizzas.map((pizza, index) => {
           return (
             <Card
-              name={pizza.pizzaName}
-              ingre={pizza.ingridients}
-              img={pizza.src}
-              sPrice={pizza.small_price}
-              mPrice={pizza.medium_price}
-              lPrice={pizza.large_price}
+              name={pizza.dishName}
+              ingre={pizza.dishIngri}
+              img={pizza.secureUrl}
+              sPrice={pizza.priceForSmall}
+              mPrice={pizza.priceForMedium}
+              lPrice={pizza.priceForLarge}
               key={index}
             />
           );

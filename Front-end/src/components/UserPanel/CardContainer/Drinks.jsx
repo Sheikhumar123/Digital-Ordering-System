@@ -1,18 +1,34 @@
-import React  from "react";
+import React , {useEffect , useState}  from "react";
 import "./CardContainer.css";
-
-
-
-// import components
+import axios from 'axios'
 import Card from "../Card/Card";
-// import api for dummy data rendering
-import foodList from "../../api/api";
-// import fetchPizzaContext from "../../Context/fetchPizzaContext";
-// import {fetchData} from "../../api/api";
+
+
+
 
 export default function Drinks() {
-  // const res = fetchData()
-  
+  const [drinks, setDrinks] = useState([])
+
+
+  async function fetchDrink() {
+
+    try {
+      const response = await axios.get('/getdrink');
+
+      setDrinks(response.data.data)
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+
+
+    
+    fetchDrink()
+
+  }, []);
   
 
   
@@ -20,16 +36,15 @@ export default function Drinks() {
     <>
       <fieldset>
         <legend>Drinks</legend>
-        {foodList.drinks.map((drink, index) => {
+        {drinks.map((drink, index) => {
           return (
             <Card
               type="drink"
               name={drink.drinkName}
-              ingre={drink.ingridients}
-              img={drink.src}
-              sPrice={drink.regular}
-              mPrice={drink.halfLiter}
-              lPrice={drink.litter}
+              img={drink.secureUrl}
+              sPrice={drink.priceForRegular}
+              mPrice={drink.priceForHalf}
+              lPrice={drink.priceForLiter}
               key={index}
             />
           );
