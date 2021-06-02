@@ -39,6 +39,7 @@ const Bills = () => {
       <table className="adminTable">
         <thead>
           <tr className="admintableheader">
+            <th>Date</th>
             <th>Table no</th>
             <th>Order</th>
             <th>Total Bill</th>
@@ -48,16 +49,14 @@ const Bills = () => {
         </thead>
         <tbody className="adminTbody">
           {orders.map((order, index) => {
-            // console.log(order);
-            //               order.totalOrder.map((menu)=>{
-            // console.log(menu.name);
-            //               })
+           
             let menuss = "";
             let dishes = "";
             let totalprice = 0;
 
             return (
               <tr>
+                <td>{order.date}</td>
                 <td>{order.tableNo}</td>
                 <td>{
                   order.totalOrder.map((menu) => {

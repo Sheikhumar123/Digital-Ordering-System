@@ -2,7 +2,7 @@ const { KitchenOrder, ReceptionOrder } = require('../models/tableSchema')
 
 module.exports = async (req, res) => {
 
-    const { tableNo, total, totalOrder, time } = req.body;
+    const { tableNo, total, totalOrder,date , time } = req.body;
     console.log(tableNo)
     if (!totalOrder[0]) {
         return res.status(404).json({ error: "please select dish first" })
@@ -54,7 +54,7 @@ module.exports = async (req, res) => {
                                 { $push: { totalOrder }, $inc: { total } })
                                 .then(updatedDocument => {
                                     if (updatedDocument) {
-                                        const kitchenorder = new KitchenOrder({ tableNo, total, totalOrder, time });
+                                        const kitchenorder = new KitchenOrder({ tableNo, total, totalOrder, time,date });
                                         kitchenorder.save().then(() => {
                                             return res.status(201).json({ message: "order added" })
                                         }).catch((err) => {
@@ -75,8 +75,8 @@ module.exports = async (req, res) => {
 
             }
             else {
-                const kitchenorder = new KitchenOrder({ tableNo, total, totalOrder, time });
-                const receptionorder = new ReceptionOrder({ tableNo, total, totalOrder, time });
+                const kitchenorder = new KitchenOrder({ tableNo, total, totalOrder, time ,date });
+                const receptionorder = new ReceptionOrder({ tableNo, total, totalOrder, time ,date});
 
                 kitchenorder.save().then(() => {
                     return res.status(201).json({ message: "order added" })

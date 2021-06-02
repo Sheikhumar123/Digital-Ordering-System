@@ -13,40 +13,57 @@ const Drink = () => {
     const name = e.target.name;
     const value = e.target.value;
     let files = e.target.files
+    // console.log(files);
 
 
     if (files) {
       setFilename(files[0])
-    const data = new FormData();
+    // const data = new FormData();
 
-      data.append("file", fileName);
-      data.append("upload_preset", "x4bnkskk");
-      data.append("cloud_name", "sheikhumar");
-      const res = await fetch(
-        `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
-        {
-          method: "POST",
-          body: data
-        }
-      );
-      const img = await res.json();
-      console.log(img);
-      let ImageLink = img.url
-      setSecureUrl(ImageLink);
+    //   data.append("file", fileName);
+    //   data.append("upload_preset", "x4bnkskk");
+    //   data.append("cloud_name", "sheikhumar");
+    //   const res = await fetch(
+    //     `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
+    //     {
+    //       method: "POST",
+    //       body: data
+    //     }
+    //   );
+    //   const img = await res.json();
+    //   console.log(img);
+    //   let ImageLink = img.url
+    //   setSecureUrl(ImageLink);
     }
     setDrink({ ...drink, [name]: value })
 
   }
 
+  console.log(fileName);
 
 
   const addDrink = async (e) => {
     e.preventDefault();
 
     
+    const data = new FormData();
 
+    data.append("file", fileName);
+    data.append("upload_preset", "x4bnkskk");
+    data.append("cloud_name", "sheikhumar");
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
+      {
+        method: "POST",
+        body: data
+      }
+    );
+    const img = await res.json();
+    console.log(img);
+    let ImageLink = img.url
+    setSecureUrl(ImageLink);
 
-    console.log(secureUrl);
+    // console.log(secureUrl);
 
     console.log(drink);
     

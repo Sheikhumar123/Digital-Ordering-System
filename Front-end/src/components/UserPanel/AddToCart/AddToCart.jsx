@@ -55,10 +55,12 @@ const AddToCart = () => {
         // const tableNo = 15;
         const today = new Date(),
 
-         time = `${today.getFullYear()}:${today.getMonth() + 1}:${today.getDate()} - ${today.getHours()}:${ today.getMinutes()}:${today.getSeconds()}`;
-        //   today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+         time = `${today.getHours()}:${ today.getMinutes()}:${today.getSeconds()}`;
+        const date = `${today.getFullYear()}:${today.getMonth() + 1}:${today.getDate()}`
+         //   today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         
         console.log(time);
+        console.log(date);
         
 
 
@@ -70,6 +72,7 @@ const AddToCart = () => {
                 tableNo,
                 total,
                 totalOrder,
+                date,
                 time
             })
             .then((res) => {

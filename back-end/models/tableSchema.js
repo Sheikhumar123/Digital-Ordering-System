@@ -22,7 +22,6 @@ const tableSchema = new mongoose.Schema({
     },
     token: {
         type: String,
-        required: true
     }
     });
 const feedbackSchema = new mongoose.Schema({
@@ -80,6 +79,10 @@ const orderSchema = new mongoose.Schema({
         required: true
     }
     ],
+    date: {
+        type: String,
+        required: true
+    },
     time: {
         type: String,
         required: true
