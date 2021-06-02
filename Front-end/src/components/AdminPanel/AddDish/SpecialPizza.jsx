@@ -1,5 +1,6 @@
 import React , {useState} from "react";
 import axios from "axios"
+import { toast } from "react-toastify";
 
 const SpecialPizza = () => {
 
@@ -62,13 +63,13 @@ const SpecialPizza = () => {
     })
       .then((res) => {
         console.log(res.data);
-        window.alert("registration sucessfull");
+        toast.success("registration sucessfull");
         console.log("registration sucess");
 
       })
       .catch((err) => {
         console.log(err.response);
-        window.alert("invalid registration");
+        toast.error("invalid registration");
         console.log("invalid registration");
         
 

@@ -5,6 +5,7 @@ import axios from "axios";
 
 // import start icon
 import { FaStar } from "react-icons/fa";
+import { toast } from "react-toastify";
 
   const colors = {
     orange: "#FFBA5A",
@@ -86,7 +87,7 @@ const ShowFeedback = () => {
       })
       .then((res) => {
         console.log(res.data);
-        window.alert("thanks for your feedback");
+        toast.success("thanks for your feedback");
         console.log("registration sucess");
         hideFeedback();
         setComments("");
@@ -96,7 +97,7 @@ const ShowFeedback = () => {
       })
       .catch((err) => {
         console.log(err.response);
-        window.alert(err.response.data.error);
+        toast.info(err.response.data.error);
         console.log("invalid registration");
       });
   };

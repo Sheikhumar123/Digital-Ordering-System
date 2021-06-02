@@ -1,4 +1,6 @@
 import './App.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import CheifPanel from './components/KitchenPanel/CheifPanel';
 import Admin from './components/AdminPanel/Admin.jsx';
 import Bills from "./components/AdminPanel/Bills/Bills.jsx"; 
@@ -33,8 +35,12 @@ function App() {
           </Route>
 
         </Routes>
+        
       </div>
+      <ToastContainer />
     </Router>
+    
+
   );
 }
 
