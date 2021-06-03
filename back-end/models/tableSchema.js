@@ -90,6 +90,32 @@ const orderSchema = new mongoose.Schema({
 });
 
 
+const totalOrdersSchema = new mongoose.Schema({
+    tableNo: {
+        type: String,
+        required: true
+    },
+    total: {
+        type: Number,
+        required: true
+    },
+    totalOrder: [{
+        type: Object,
+        required: true
+    }
+    ],
+    date: {
+        type: String,
+        required: true
+    },
+    time: {
+        type: String,
+        required: true
+    },
+});
+
+
+
 const pizzaSchema = new mongoose.Schema({
     dishName: {
         type: String,
@@ -167,5 +193,6 @@ const ReceptionOrder = mongoose.model('ReceptionenOrder', orderSchema);
 const Admin = mongoose.model('Admin', adminSchema);
 const Cheif = mongoose.model('cheif', cheifSchema);
 const Feedback = mongoose.model('Feedback', feedbackSchema);
+const TotalOrder = mongoose.model('TotalOrder', totalOrdersSchema);
 
-module.exports = { Table, Pizza, Feedback, Specialpizza, Drink, KitchenOrder, ReceptionOrder, Cheif, Admin };
+module.exports = { Table, Pizza, Feedback, Specialpizza, Drink, KitchenOrder, ReceptionOrder, Cheif, Admin, TotalOrder };

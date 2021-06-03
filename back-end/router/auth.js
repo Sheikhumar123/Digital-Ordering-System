@@ -7,17 +7,21 @@ const validationTable = require('../middlewares/validationTable');
 const validationAddOrder = require('../middlewares/validationAddOrder');
 const validateFeedback = require('../middlewares/validateFeedback');
 const validateLogin = require('../middlewares/validateLogin');
+const validateAllOrders = require('../middlewares/validateAllOrders.js');
 const jwt = require("jsonwebtoken")
 
 
 
 require('../db/conn');
-const { Table, ReceptionOrder, Pizza, Specialpizza, Drink, KitchenOrder, Admin, Cheif, Feedback } = require('../models/tableSchema')
+const { Table, ReceptionOrder, Pizza, Specialpizza, Drink, KitchenOrder, Admin, Cheif, Feedback ,TotalOrder} = require('../models/tableSchema');
 
 router.get('/', (req, res) => {
     res.send('hello sheikh from server router');
 })
+// get order from reception and deleteit fromreceptionorder and add it to alla orders
+router.post("/deleteOrderfromReception" , validateAllOrders )
 
+// get feedback from userpanel
 router.post("/addfeedback" , validateFeedback )
 
 // add table router
@@ -36,8 +40,57 @@ router.post('/adddrink', validationDrink);
 router.post('/addorder', validationAddOrder);;
 
 // signin router 
-
 router.post('/login', validateLogin)
+
+// get allOrders to adminpanel
+router.get('/getallorders' ,async  (req , res) =>{
+
+    try {
+
+        const allorders = await TotalOrder.find({});
+        res.send({ data: allorders })
+
+    } catch (error) {
+        res.status(402).send({error :"failed to get data"})
+    }
+})
+
+// get todaysOrders to adminpanel
+router.get('/gettodaysorders' ,async  (req , res) =>{
+
+    try {
+        const today = new Date()
+        let date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
+        if(`${today.getMonth() + 1}` < 10){
+            date = `${today.getFullYear()}-0${today.getMonth() + 1}-0${today.getDate()}`
+        }
+
+        const todaysOrders = await TotalOrder.find({date : date});
+       
+        res.send({ data: todaysOrders })
+
+    } catch (error) {
+        res.status(402).send({error :"failed to get data"})
+    }
+})
+
+
+// get selectedDateorders to adminpanel
+router.post('/getselecteddateorder' ,async  (req , res) =>{
+
+    try {
+        const {date} = req.body
+       
+
+        const todaysOrders = await TotalOrder.find({date : date});
+        res.send({ data: todaysOrders })
+
+    } catch (error) {
+        res.status(402).send({error :"failed to get data"})
+    }
+})
+
+
 
 
 // get feedback to admin

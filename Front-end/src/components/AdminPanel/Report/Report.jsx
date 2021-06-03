@@ -1,5 +1,6 @@
 import "./Report.css";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
@@ -10,6 +11,55 @@ const TabStyle = {
 };
 
 const Report = () => {
+
+
+  const [allorders, setAllOrders] = useState([]);
+  const [todaysOrders, settodaysOrders] = useState([]);
+  const [selectedDateOrders, setSelectedDateOrders] = useState([]);
+  const [date, setDate] = useState("");
+
+  async function getAllOredrs() {
+    try {
+      const response = await axios.get("/getallorders");
+      setAllOrders(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function gettodaysorders() {
+    try {
+      const response = await axios.get("/gettodaysorders");
+      settodaysOrders(response.data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getAllOredrs();
+    gettodaysorders();
+  }, [allorders]);
+
+
+  const getDate = (e) => {
+    setDate(e.target.value)
+  }
+  
+  const getDataOfSelectedDate = async (e) => {
+     {
+      try {
+        const response = await axios.post("/getselecteddateorder" ,{ date});
+        setSelectedDateOrders(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+
+  
+
+
   return (
     <div className="reportContainer">
       <Tabs>
@@ -37,18 +87,25 @@ const Report = () => {
               </thead>
               <tbody className="adminTbody">
                 {/* here comes dummy data */}
-                <tr>
-                  <td>2-5-2021</td>
-                  <td>Table 1</td>
-                  <td>MALAI BOTI</td>
-                  <td>575</td>
-                </tr>
-                <tr>
-                  <td>2-5-2021</td>
-                  <td>Table 2</td>
-                  <td>GREEN TIKKA , peri , peri , peri , peri , peri , peri</td>
-                  <td>641</td>
-                </tr>
+                {todaysOrders.map((order, index) => {
+                  let menuss = "";
+                  let dishes = "";
+                  return (
+                    <tr key={order._id}>
+                      <td>{order.date}</td>
+                      <td>{order.tableNo}</td>
+                      <td>
+                        {order.totalOrder.map((menu) => {
+                          dishes = menuss + menu.name + " , ";
+
+                          return dishes;
+                        })}
+                      </td>
+                      <td>{order.total}</td>
+                    </tr>
+                  )
+
+                })}
               </tbody>
             </table>
           </div>
@@ -72,18 +129,25 @@ const Report = () => {
               </thead>
               <tbody className="adminTbody">
                 {/* here comes dummy data */}
-                <tr>
-                  <td>2-5-2021</td>
-                  <td>Table 1</td>
-                  <td>MALAI BOTI</td>
-                  <td>575</td>
-                </tr>
-                <tr>
-                  <td>2-5-2021</td>
-                  <td>Table 2</td>
-                  <td>GREEN TIKKA , peri , peri , peri , peri , peri , peri</td>
-                  <td>641</td>
-                </tr>
+                {allorders.map((order, index) => {
+                  let menuss = "";
+                  let dishes = "";
+                  return (
+                    <tr key={order._id}>
+                      <td>{order.date}</td>
+                      <td>{order.tableNo}</td>
+                      <td>
+                        {order.totalOrder.map((menu) => {
+                          dishes = menuss + menu.name + " , ";
+
+                          return dishes;
+                        })}
+                      </td>
+                      <td>{order.total}</td>
+                    </tr>
+                  )
+
+                })}
               </tbody>
             </table>
           </div>
@@ -91,14 +155,14 @@ const Report = () => {
 
         <TabPanel>
           {/* THIS TAB CONTAIN SPECIFIC DATE ORDERS */}
-          <div className="datepicker" style={{marginTop:'20px'}}>
-              <h3>Selected list:</h3>
-              <div>
-                <input id="date" type="date" />
-                <button className="reportBtn">Get Report</button>
-              </div>
+          <div className="datepicker" style={{ marginTop: '20px' }}>
+            <h3>Selected list:</h3>
+            <div>
+              <input id="date" type="date" onChange={getDate} />
+              <button onClick={getDataOfSelectedDate} className="reportBtn">Get Report</button>
+            </div>
           </div>
-          <div style={{ margin: "0px 0px 20px 0px"}}>
+          <div style={{ margin: "0px 0px 20px 0px" }}>
             <table className="adminTable" cellSpacing="8">
               <thead>
                 <tr className="admintableheader">
@@ -110,18 +174,25 @@ const Report = () => {
               </thead>
               <tbody className="adminTbody">
                 {/* here comes dummy data */}
-                <tr>
-                  <td>2-5-2021</td>
-                  <td>Table 1</td>
-                  <td>MALAI BOTI</td>
-                  <td>575</td>
-                </tr>
-                <tr>
-                  <td>2-5-2021</td>
-                  <td>Table 2</td>
-                  <td>GREEN TIKKA , peri , peri , peri , peri , peri , peri</td>
-                  <td>641</td>
-                </tr>
+                {selectedDateOrders.map((order, index) => {
+                  let menuss = "";
+                  let dishes = "";
+                  return (
+                    <tr key={order._id}>
+                      <td>{order.date}</td>
+                      <td>{order.tableNo}</td>
+                      <td>
+                        {order.totalOrder.map((menu) => {
+                          dishes = menuss + menu.name + " , ";
+
+                          return dishes;
+                        })}
+                      </td>
+                      <td>{order.total}</td>
+                    </tr>
+                  )
+
+                })}
               </tbody>
             </table>
           </div>

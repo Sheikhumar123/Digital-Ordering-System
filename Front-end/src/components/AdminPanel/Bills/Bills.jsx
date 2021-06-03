@@ -5,7 +5,7 @@ import axios from "axios";
 const Bills = () => {
   const [orders, setOrders] = useState([]);
 
-  async function getUser() {
+  async function getOredrs() {
     try {
       const response = await axios.get("/receptionorder");
       setOrders(response.data.data);
@@ -15,8 +15,36 @@ const Bills = () => {
   }
 
   useEffect(() => {
-    getUser();
+    getOredrs();
   }, [orders]);
+
+
+  const deleteOrder = (e) =>{
+    console.log(e.currentTarget.getAttribute('tid'));
+    console.log(e.currentTarget.getAttribute('total'));
+    console.log(e.currentTarget.getAttribute('date'));
+    console.log(e.currentTarget.getAttribute('time'));
+    console.log(e.currentTarget.getAttribute('order'));
+
+    const tableName = e.currentTarget.getAttribute('tid');
+
+
+    axios.post('/deleteOrderfromReception' , {
+      tableName
+    })
+    .then((res) => {
+                
+      console.log("hello");
+      
+
+  })
+  .catch((err) => {
+      console.log(err.response);
+
+  });
+
+
+  }
 
   return (
     <div className="tabeleContainer">
@@ -61,8 +89,13 @@ const Bills = () => {
                 </td>
                 <td>{order.time}</td>
                 <td>
-                  <button>
-                    {" "}
+                  <button onClick={(e)=>{deleteOrder(e)}} 
+                  tid={order.tableNo} 
+                  total={order.total}
+                  date={order.date}
+                  time={order.time}
+                  order={dishes}   >
+                    
                     <i class="far fa-file-alt"></i> Generate
                   </button>
                 </td>

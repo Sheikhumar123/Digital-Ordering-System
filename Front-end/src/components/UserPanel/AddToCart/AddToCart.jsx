@@ -57,8 +57,11 @@ const AddToCart = () => {
         const today = new Date(),
 
          time = `${today.getHours()}:${ today.getMinutes()}:${today.getSeconds()}`;
-        const date = `${today.getFullYear()}:${today.getMonth() + 1}:${today.getDate()}`
+        let date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
          //   today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+         if(`${today.getMonth() + 1}` < 10){
+             date = `${today.getFullYear()}-0${today.getMonth() + 1}-0${today.getDate()}`
+         }
         
         console.log(time);
         console.log(date);
