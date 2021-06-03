@@ -7,6 +7,7 @@ import Bills from "./components/AdminPanel/Bills/Bills.jsx";
 import AddTables from './components/AdminPanel/AddTables/AddTables';
 import AddDish from './components/AdminPanel/AddDish/AddDish';
 import Feedback from './components/AdminPanel/feedback/Feedback';
+import Report from './components/AdminPanel/Report/Report';
 
 // Import Components
 import LoginContainer from './components/LoginPanel/LoginContainer/LoginContiainer';
@@ -32,6 +33,7 @@ function App() {
             <Route path="/addtables" element={<AddTables />} />
             <Route path="/adddishes" element={<AddDish />} />
             <Route path="/feedback"  element={<Feedback/>} />
+            <Route path="/report"  element={<Report/>} />
           </Route>
 
         </Routes>

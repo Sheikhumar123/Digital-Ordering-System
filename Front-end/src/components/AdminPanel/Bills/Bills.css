@@ -21,7 +21,7 @@
 
 /* .adminTable thead tr th, */
 .adminTable tbody tr td {
-    padding: 5px;
+    padding: 3px;
     color: #49321c;
     border-radius: 5px;
     text-align: center;
@@ -34,7 +34,7 @@
 
 .admintableheader th {
     color: #fff;
-    padding: 15px;
+    padding: 10px;
     font-weight: 600;
     overflow: hidden;
     text-align: center;
