@@ -1,4 +1,5 @@
 import "./Report.css";
+import {CSVLink} from "react-csv";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -17,6 +18,16 @@ const Report = () => {
   const [todaysOrders, settodaysOrders] = useState([]);
   const [selectedDateOrders, setSelectedDateOrders] = useState([]);
   const [date, setDate] = useState("");
+  const [data, setData] = useState('');
+
+  // const [csvReport,setCsvReport]=useState({})
+//   const headers=[
+//     {label:"Date",key:'date'},
+//     {label:"Table No",key:'tableNo'},
+//     {label:"",key:'totalOrder'},
+//     {label:"Bill",key:'total'}
+// ]
+
 
   async function getAllOredrs() {
     try {
@@ -25,6 +36,21 @@ const Report = () => {
     } catch (error) {
       console.error(error);
     }
+    setData('')
+    setData(allorders.map((i,index)=>{
+      let dishes=i.totalOrder.map((dish,ind)=>{
+        return(
+          dish.name + ','
+        )
+      })
+      return {
+        Table_No:i.tableNo,
+        Date:i.date,
+        Total_Orders:dishes,
+        Total:i.total
+      }
+    }));
+    
   }
 
   async function gettodaysorders() {
@@ -34,6 +60,21 @@ const Report = () => {
     } catch (error) {
       console.error(error);
     }
+    setData('');
+   
+    setData(todaysOrders.map((i,index)=>{
+      let dishes=i.totalOrder.map((dish,ind)=>{
+        return(
+          dish.name + ','
+        )
+      })
+      return {
+        Table_No:i.tableNo,
+        Date:i.date,
+        Total_Orders:dishes,
+        Total:i.total
+      }
+    }));
   }
 
   useEffect(() => {
@@ -55,6 +96,20 @@ const Report = () => {
         console.error(error);
       }
     }
+    setData('');
+    setData(selectedDateOrders.map((i,index)=>{
+      let dishes=i.totalOrder.map((dish,ind)=>{
+        return(
+          dish.name + ','
+        )
+      })
+      return {
+        Table_No:i.tableNo,
+        Date:i.date,
+        Total_Orders:dishes,
+        Total:i.total
+      }
+    }));
   }
 
   
@@ -74,7 +129,8 @@ const Report = () => {
           <div style={{ margin: "20px 0px" }}>
             <div className="datepicker">
               <h3>Todays list:</h3>
-              <button className="reportBtn">Get Report</button>
+            <CSVLink data={data} filename="TodaysReport.csv" >
+            <button className="reportBtn">Get Report</button></CSVLink>  
             </div>
             <table className="adminTable" cellSpacing="8">
               <thead>
@@ -116,7 +172,9 @@ const Report = () => {
           <div style={{ margin: "20px 0px" }}>
             <div className="datepicker">
               <h3>All list:</h3>
-              <button className="reportBtn">Get Report</button>
+              <CSVLink autoCapitalize data={data} filename="TotalReport.csv" >
+            <button className="reportBtn">Get Report</button></CSVLink>  
+
             </div>
             <table className="adminTable" cellSpacing="8">
               <thead>
@@ -159,7 +217,8 @@ const Report = () => {
             <h3>Selected list:</h3>
             <div>
               <input id="date" type="date" onChange={getDate} />
-              <button onClick={getDataOfSelectedDate} className="reportBtn">Get Report</button>
+            <CSVLink data={data} filename="specificDate.csv" >
+            <button onClick={getDataOfSelectedDate} className="reportBtn">Get Report</button></CSVLink> 
             </div>
           </div>
           <div style={{ margin: "0px 0px 20px 0px" }}>
