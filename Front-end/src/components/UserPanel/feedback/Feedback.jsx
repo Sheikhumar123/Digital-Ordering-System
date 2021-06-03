@@ -174,7 +174,7 @@ const ShowFeedback = () => {
               onChange={(e) => setNumber(e.target.value)}
               value={number}
               type="number"
-              maxLength="11"
+              length="11"
               style={{
                 width: "40%",
                 padding: "10px",
