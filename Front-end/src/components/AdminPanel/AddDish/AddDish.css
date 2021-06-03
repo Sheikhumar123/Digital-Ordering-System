@@ -1,7 +1,7 @@
 .AddDish_box {
     display: flex;
     height: 100vh;
-    margin: -25px 0px;
+    margin: 35px 0px;
     align-items: center;
   }
   .AddDish_form{
