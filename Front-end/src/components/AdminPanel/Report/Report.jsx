@@ -80,6 +80,7 @@ const Report = () => {
   useEffect(() => {
     getAllOredrs();
     gettodaysorders();
+    getDataOfSelectedDate();
   }, [allorders]);
 
 
@@ -88,14 +89,15 @@ const Report = () => {
   }
   
   const getDataOfSelectedDate = async (e) => {
-     {
       try {
         const response = await axios.post("/getselecteddateorder" ,{ date});
         setSelectedDateOrders(response.data.data);
       } catch (error) {
         console.error(error);
       }
-    }
+  }
+
+  const genReport = ()=>{
     setData('');
     setData(selectedDateOrders.map((i,index)=>{
       let dishes=i.totalOrder.map((dish,ind)=>{
@@ -218,7 +220,7 @@ const Report = () => {
             <div>
               <input id="date" type="date" onChange={getDate} />
             <CSVLink data={data} filename="specificDate.csv" >
-            <button onClick={getDataOfSelectedDate} className="reportBtn">Get Report</button></CSVLink> 
+            <button onClick={genReport} className="reportBtn">Get Report</button></CSVLink> 
             </div>
           </div>
           <div style={{ margin: "0px 0px 20px 0px" }}>
