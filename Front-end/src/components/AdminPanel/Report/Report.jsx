@@ -13,21 +13,11 @@ const TabStyle = {
 
 const Report = () => {
 
-
   const [allorders, setAllOrders] = useState([]);
   const [todaysOrders, settodaysOrders] = useState([]);
   const [selectedDateOrders, setSelectedDateOrders] = useState([]);
   const [date, setDate] = useState("");
   const [data, setData] = useState('');
-
-  // const [csvReport,setCsvReport]=useState({})
-//   const headers=[
-//     {label:"Date",key:'date'},
-//     {label:"Table No",key:'tableNo'},
-//     {label:"",key:'totalOrder'},
-//     {label:"Bill",key:'total'}
-// ]
-
 
   async function getAllOredrs() {
     try {
@@ -36,6 +26,10 @@ const Report = () => {
     } catch (error) {
       console.error(error);
     }
+   
+    
+  }
+  const getAllReport=()=>{
     setData('')
     setData(allorders.map((i,index)=>{
       let dishes=i.totalOrder.map((dish,ind)=>{
@@ -50,7 +44,6 @@ const Report = () => {
         Total:i.total
       }
     }));
-    
   }
 
   async function gettodaysorders() {
@@ -60,6 +53,9 @@ const Report = () => {
     } catch (error) {
       console.error(error);
     }
+    
+  }
+  const getTodayReport=()=>{
     setData('');
    
     setData(todaysOrders.map((i,index)=>{
@@ -77,25 +73,20 @@ const Report = () => {
     }));
   }
 
-  useEffect(() => {
-    getAllOredrs();
-    gettodaysorders();
-  }, [allorders]);
-
-
   const getDate = (e) => {
     setDate(e.target.value)
   }
   
   const getDataOfSelectedDate = async (e) => {
-     {
       try {
         const response = await axios.post("/getselecteddateorder" ,{ date});
         setSelectedDateOrders(response.data.data);
       } catch (error) {
         console.error(error);
       }
-    }
+  }
+
+  const getSpecificReport = ()=>{
     setData('');
     setData(selectedDateOrders.map((i,index)=>{
       let dishes=i.totalOrder.map((dish,ind)=>{
@@ -111,6 +102,11 @@ const Report = () => {
       }
     }));
   }
+  useEffect(() => {
+    getAllOredrs();
+    gettodaysorders();
+    getDataOfSelectedDate();
+  }, [allorders]);
 
   
 
@@ -130,7 +126,7 @@ const Report = () => {
             <div className="datepicker">
               <h3>Todays list:</h3>
             <CSVLink data={data} filename="TodaysReport.csv" >
-            <button className="reportBtn">Get Report</button></CSVLink>  
+            <button onClick={getTodayReport} className="reportBtn">Get Report</button></CSVLink>  
             </div>
             <table className="adminTable" cellSpacing="8">
               <thead>
@@ -173,7 +169,7 @@ const Report = () => {
             <div className="datepicker">
               <h3>All list:</h3>
               <CSVLink autoCapitalize data={data} filename="TotalReport.csv" >
-            <button className="reportBtn">Get Report</button></CSVLink>  
+            <button onClick={getAllReport} className="reportBtn">Get Report</button></CSVLink>  
 
             </div>
             <table className="adminTable" cellSpacing="8">
@@ -218,7 +214,7 @@ const Report = () => {
             <div>
               <input id="date" type="date" onChange={getDate} />
             <CSVLink data={data} filename="specificDate.csv" >
-            <button onClick={getDataOfSelectedDate} className="reportBtn">Get Report</button></CSVLink> 
+            <button onClick={getSpecificReport} className="reportBtn">Get Report</button></CSVLink> 
             </div>
           </div>
           <div style={{ margin: "0px 0px 20px 0px" }}>
