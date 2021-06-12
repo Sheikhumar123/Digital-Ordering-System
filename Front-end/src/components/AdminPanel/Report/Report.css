@@ -45,3 +45,11 @@
 .datepicker .reportBtn:active{
     box-shadow: none;
 }
+
+@media screen and (max-width: 768px) {
+    .reportContainer{
+        width: 100% !important;
+        margin: 20px !important;
+        margin-bottom: 70px !important;
+    }
+}
