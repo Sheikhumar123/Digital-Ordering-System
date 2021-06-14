@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import { toast } from 'react-toastify';
+
 
 const TabStyle = {
   fontFamily: "Arial",
@@ -74,7 +76,54 @@ const Report = () => {
   }
 
   const getDate = (e) => {
-    setDate(e.target.value)
+    let aa = e.target.value
+    let year = aa.slice(0 , 4)
+    let month = aa.slice(5 , 7)
+    let day = aa.slice(8 , 10)
+
+
+    // let datee;
+    const today = new Date(),
+    // console.log();
+    // console.log(today);
+        
+        
+
+    time = `${today.getHours()}:${ today.getMinutes()}:${today.getSeconds()}`;
+  
+   if(year > today.getFullYear()){
+     console.log("please enter valid date");
+     toast.error('please enter valid date', {
+      position: "top-left",
+    });
+    e.target.value = ""
+    setDate("")
+
+
+   }else if (month > today.getMonth() + 1) {
+    console.log("please enter valid date"); 
+    toast.error('please enter valid date', {
+      position: "top-left",
+    });
+    setDate("")
+    e.target.value = ""
+
+
+   }else if(day > today.getDate()  ){
+    console.log("please enter valid date"); 
+    toast.error('please enter valid date', {
+      position: "top-left",
+    });
+    setDate("")
+    e.target.value = ""
+
+
+
+   }else{
+     setDate(e.target.value)
+     
+    }
+    
   }
   
   const getDataOfSelectedDate = async (e) => {
