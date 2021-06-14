@@ -65,6 +65,12 @@ margin: 10px;}
     .feedBack-Form{
         width: 45% !important;
     }
+}
 
-
+@media screen and (max-width: 768px) {
+    .feedback-admin{
+        width: 100% !important;
+        margin: 20px !important;
+        margin-bottom: 70px !important;
+    }
 }
