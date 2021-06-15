@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./UserContainer.css";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 // import components
 import "../Header/Header";
@@ -14,13 +16,28 @@ import CategoreyContext from "../../Context/CategoryContex";
 import CheckCartContext from "../../Context/CheckCartContext";
 import cartContext from "../../Context/cartContext";
 import feedbackContext from "../../Context/feedbackContext";
-import ShowFeedback from '../feedback/Feedback';
+import ShowFeedback from "../feedback/Feedback";
 
 export default function UserContainer() {
   let data = useState("all");
   let checkCart = useState({ checkCart: false });
   let checkfeedBack = useState({ checkFeed: false });
   let cartItems = useState([]);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (Cookies.get("name")) {
+      if (Cookies.get("name") === "admin") {
+        navigate("/admin");
+      } else if (Cookies.get("name") === "chef") {
+        navigate("/chefpanel");
+      }
+    }else{
+      navigate('/')
+    }
+  });
+
   return (
     <feedbackContext.Provider value={checkfeedBack}>
       <CategoreyContext.Provider value={data}>
@@ -33,7 +50,7 @@ export default function UserContainer() {
                 <Category />
                 <CardContainer />
                 <AddToCart />
-                <ShowFeedback/>
+                <ShowFeedback />
               </div>
             </div>
           </cartContext.Provider>
