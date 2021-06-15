@@ -20,7 +20,7 @@ const AddDish = () => {
 
         setDishType(value);
 
-        // console.log(pic);
+      
         if (e.target.name === "picture") {
             const pic = e.target.files[0]
             setDish({ ...dish, [name]: pic })
@@ -31,40 +31,7 @@ const AddDish = () => {
 
     }
 
-    // const addDish = async (e) => {
-
-    //     e.preventDefault();
-    //     const { dishType, dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge } = dish;
-    //     // console.log(dishType, dishName, dishIngri, priceForSmall, priceForMedium, priceForLarge);
-    //     const res = await fetch("/adddish", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-
-    //         body: JSON.stringify({
-    //             dishType,
-    //             dishName,
-    //             dishIngri,
-    //             priceForSmall,
-    //             priceForMedium,
-    //             priceForLarge,
-
-    //         })
-    //     });
-
-    //     const data = await res.json();
-    //     console.log(data);
-    //     if (data.error) {
-    //         window.alert("invalid registration");
-    //         console.log("invalid registration");
-
-    //     } else {
-    //         window.alert("registration sucessfull");
-    //         console.log("registration sucess");
-    //     }
-
-    // }
+    
 
     return (
         <div className="AddDish_box">
