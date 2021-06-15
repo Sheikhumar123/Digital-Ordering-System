@@ -59,7 +59,7 @@ const Report = () => {
   }
   const getTodayReport = () => {
     setData('');
-
+console.log(todaysOrders);
     setData(todaysOrders.map((i, index) => {
       let dishes = i.totalOrder.map((dish, ind) => {
         return (
