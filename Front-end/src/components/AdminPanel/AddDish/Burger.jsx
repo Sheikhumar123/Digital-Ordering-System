@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import axios from 'axios';
+import { toast } from 'react-toastify';
+
 
 const Burger = () => {
   
@@ -25,6 +28,7 @@ const Burger = () => {
 
   const addBurger = async (e) => {
     e.preventDefault();
+    console.log(dish);
 
     const data = new FormData();
     data.append("file", fileName);
@@ -50,11 +54,37 @@ const Burger = () => {
       price,
     } = dish;
 
-    console.log(
-      dishName,
-      dishIngri,
-      price,
-    );
+
+    if(secureUrl){
+
+      axios
+        .post('http://localhost:8080/addburger', {
+          dishName, dishIngri, price, secureUrl
+        })
+        .then((res) => {
+          console.log(res.data);
+          toast.success("registration Success");
+        
+          console.log("registration sucess");
+          setFilename("")
+          setSecureUrl("");
+          setDish({
+            drinkName: '', priceForRegular: null, priceForHalf: null, priceForLiter: null
+          })
+  
+        })
+        .catch((err) => {
+          console.log(err.response);
+           toast.error("invalid registration");
+          // console.log("invalid registration");
+  
+  
+        });
+
+    }
+
+
+    
 
   };
   return (
@@ -91,7 +121,7 @@ const Burger = () => {
             id="small"
             type="number"
             style={{ textAlign: "left" }}
-            name="priceForSmall"
+            name="price"
             required
             onChange={handleInput}
           />
@@ -118,7 +148,7 @@ const Burger = () => {
           <span className="circle">
             <span className="icon arrow"></span>
           </span>
-          <span className="button-text">Add Dish</span>
+          <span className="button-text" onClick={addBurger}>Add Dish</span>
         </button>
       </div>
     </form>

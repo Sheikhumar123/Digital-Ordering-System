@@ -8,6 +8,7 @@ const validationAddOrder = require('../middlewares/validationAddOrder');
 const validateFeedback = require('../middlewares/validateFeedback');
 const validateLogin = require('../middlewares/validateLogin');
 const validateAllOrders = require('../middlewares/validateAllOrders.js');
+const validateBurger = require('../middlewares/validateBurger.js');
 const jwt = require("jsonwebtoken")
 
 
@@ -29,6 +30,9 @@ router.post('/addtable', validationTable);
 
 // add pizza to database
 router.post('/addpizza', validationPizza);
+
+// add burger to database
+router.post('/addburger', validateBurger);
 
 // add special pizza to database
 router.post('/addspecialpizza', validationSpecialPizza);
