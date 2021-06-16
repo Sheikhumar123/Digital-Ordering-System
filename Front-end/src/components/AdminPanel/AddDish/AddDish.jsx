@@ -4,12 +4,13 @@ import React, { useState } from 'react'
 // import formComponents
 import Pizza from './Pizza';
 import Drink from './Drink';
+import Burger from './Burger';
 import SpecialPizza from './SpecialPizza';
 
 const AddDish = () => {
 
     const [dish, setDish] = useState({
-        dishType: '', dishName: '', dishIngri: "", priceForSmall: null, priceForMedium: null, priceForLarge: null
+        dishType: '', dishName: '', dishIngri: "", priceForSmall: null, priceForMedium: null, priceForLarge: null 
     })
 
     const [dishType , setDishType] = useState('');
@@ -57,10 +58,18 @@ const AddDish = () => {
                         </span>
                         <span>Special Pizza</span>
                     </label>
+
+                    <label>
+                        <span>
+                            <input type="radio" name="dishType" value="Burger" onClick={handleInput} />
+                        </span>
+                        <span>Burger</span>
+                    </label>
+
                 </div>
                 <div className="formBody">
                     {
-                        dishType === 'Pizza' ? <Pizza/> : dishType === 'Drink' ? <Drink/> : dishType==='SpecialPizza' ? <SpecialPizza/> : <Pizza/>
+                        dishType === 'Pizza' ? <Pizza/> : dishType === 'Drink' ? <Drink/> : dishType==='SpecialPizza' ? <SpecialPizza/> : dishType ==='Burger'? <Burger/> :  <Pizza/>
                     }
                 </div>
             </div>

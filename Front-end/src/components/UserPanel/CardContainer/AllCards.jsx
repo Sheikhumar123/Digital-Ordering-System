@@ -118,6 +118,24 @@ export default function AllCards() {
           );
         })}
       </fieldset>
+      <fieldset>
+        <legend>Burgers</legend>
+        {/* get data from database and then loop on it and render these card automaticly */}
+        <Card
+          type="Burger"
+          name="Burger"
+          ingre="A juicy boneless chicken fillet marinated in traditional spices and Flame Grilled with spicy tangy sauce, lettuce and tomatoes."
+          img="./img/burger.png"
+          price=" 100"
+        />
+        <Card
+          type="Burger"
+          name="Chicken Burger"
+          ingre="A juicy boneless chicken fillet marinated in traditional spices and Flame Grilled with spicy tangy sauce, lettuce and tomatoes."
+          img="./img/burger.png"
+          price=" 150"
+        />
+      </fieldset>
     </>
   );
 }

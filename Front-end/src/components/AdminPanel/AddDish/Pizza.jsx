@@ -143,7 +143,7 @@ const Pizza = () => {
         </div>
       </div>
       <div className="inputContianer">
-        <div className="form-control">
+        <div className="form-control" style={{width:"100%"}}>
           <input id="pic" type="file" filename="avatar" required onChange={handleInput} />
           <label htmlFor="pic" style={{ textAlign: 'center' }}></label>
         </div>

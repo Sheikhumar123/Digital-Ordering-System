@@ -69,6 +69,7 @@ export default function Category() {
           <option value="Pizza">Pizza</option>
           <option value="Special">Special Pizza</option>
           <option value="Drinks">Drinks</option>
+          <option value="Burger">Burger</option>
         </select>
         
         <button onClick={showFeedback}>
