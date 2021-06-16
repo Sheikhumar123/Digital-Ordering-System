@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Bills.css";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Bills = () => {
   const [orders, setOrders] = useState([]);
@@ -39,7 +40,10 @@ const Bills = () => {
 
   })
   .catch((err) => {
-      console.log(err.response);
+    toast.error(err.response.data.error, {
+      position: "top-left",
+    });
+      console.log(err.response.data.error);
 
   });
 
