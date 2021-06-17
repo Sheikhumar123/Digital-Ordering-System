@@ -63,14 +63,14 @@ const Burger = () => {
         })
         .then((res) => {
           console.log(res.data);
-          toast.success("registration Success");
-        
-          console.log("registration sucess");
           setFilename("")
           setSecureUrl("");
           setDish({
             drinkName: '', priceForRegular: null, priceForHalf: null, priceForLiter: null
           })
+          toast.success("registration Success");
+        
+          console.log("registration sucess");
   
         })
         .catch((err) => {

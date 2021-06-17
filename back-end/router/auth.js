@@ -14,7 +14,7 @@ const jwt = require("jsonwebtoken")
 
 
 require('../db/conn');
-const { Table, ReceptionOrder, Pizza, Specialpizza, Drink, KitchenOrder, Admin, Cheif, Feedback ,TotalOrder} = require('../models/tableSchema');
+const { Table, ReceptionOrder, Pizza, Specialpizza, Drink, KitchenOrder, Admin, Cheif, Feedback ,TotalOrder, Burger} = require('../models/tableSchema');
 
 router.get('/', (req, res) => {
     res.send('hello sheikh from server router');
@@ -193,6 +193,22 @@ router.get('/getdrink', async (req, res) => {
     try {
 
         const orders = await Drink.find({});
+        // console.log(orders);
+        res.send({ data: orders })
+
+    } catch (error) {
+
+    }
+
+
+})
+
+router.get('/getburger', async (req, res) => {
+
+
+    try {
+
+        const orders = await Burger.find({});
         // console.log(orders);
         res.send({ data: orders })
 

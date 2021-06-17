@@ -13,6 +13,7 @@ export default function AllCards() {
   const [pizzas, setPizzas] = useState([])
   const [specialPizzas, setSpecialPizzas] = useState([])
   const [drinks, setDrinks] = useState([])
+  const [burgers, setBurgers] = useState([])
 
   async function fetchPizza() {
 
@@ -52,6 +53,18 @@ export default function AllCards() {
     }
   }
 
+  async function fetchBurger() {
+
+    try {
+      const response = await axios.get('/getburger');
+
+      setBurgers(response.data.data)
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
 
 
   useEffect(() => {
@@ -60,6 +73,7 @@ export default function AllCards() {
     fetchPizza()
     fetchSpecialPizza()
     fetchDrink()
+    fetchBurger()
 
   }, []);
 
@@ -121,20 +135,24 @@ export default function AllCards() {
       <fieldset>
         <legend>Burgers</legend>
         {/* get data from database and then loop on it and render these card automaticly */}
-        <Card
-          type="Burger"
-          name="Burger"
-          ingre="A juicy boneless chicken fillet marinated in traditional spices and Flame Grilled with spicy tangy sauce, lettuce and tomatoes."
-          img="./img/burger.png"
-          price=" 100"
-        />
-        <Card
+        {burgers.map((burger, index) => {
+          return (
+            <Card
+              type="Burger"
+              name={burger.dishName}
+              ingre={burger.dishIngri}
+              img={burger.secureUrl}
+              price={burger.price}
+            />
+          );
+        })}
+        {/* <Card
           type="Burger"
           name="Chicken Burger"
           ingre="A juicy boneless chicken fillet marinated in traditional spices and Flame Grilled with spicy tangy sauce, lettuce and tomatoes."
           img="./img/burger.png"
           price=" 150"
-        />
+        /> */}
       </fieldset>
     </>
   );
