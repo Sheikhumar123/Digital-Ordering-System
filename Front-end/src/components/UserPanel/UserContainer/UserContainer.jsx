@@ -17,6 +17,21 @@ import CheckCartContext from "../../Context/CheckCartContext";
 import cartContext from "../../Context/cartContext";
 import feedbackContext from "../../Context/feedbackContext";
 import ShowFeedback from "../feedback/Feedback";
+import { firebase } from "../../../firebase.js"
+import { toast } from 'react-toastify'
+
+// var starCountRef = firebase.database().ref('sms/' + Cookies.get("name"));
+// starCountRef.on('value', (snapshot) => {
+//   const data = snapshot.val();
+//   console.log(data);
+//   if(data){
+//     toast.info(data.message, {
+//               position: "top-left",
+//             });
+//             return
+
+//   }
+// });
 
 export default function UserContainer() {
   let data = useState("all");
@@ -27,16 +42,29 @@ export default function UserContainer() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    var starCountRef = firebase.database().ref('chefToUserPanel/' + Cookies.get("name"));
+    starCountRef.on('value', (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+      if (data) {
+        toast.info(data.message, {
+          position: "top-left",
+        });
+      }
+    });
+  }, [])
+
+  useEffect(() => {
     if (Cookies.get("name")) {
       if (Cookies.get("name") === "admin") {
         navigate("/admin");
       } else if (Cookies.get("name") === "chef") {
         navigate("/chefpanel");
       }
-    }else{
+    } else {
       navigate('/')
     }
-  });
+  }, []);
 
   return (
     <feedbackContext.Provider value={checkfeedBack}>

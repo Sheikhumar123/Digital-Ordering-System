@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./CardContainer.css";
-
 import axios from 'axios'
-
 
 // import components
 import Card from "../Card/Card";
@@ -16,69 +14,48 @@ export default function AllCards() {
   const [burgers, setBurgers] = useState([])
 
   async function fetchPizza() {
-
     try {
       const response = await axios.get('/getpizza');
-
       setPizzas(response.data.data)
-
-
     } catch (error) {
       console.error(error);
     }
   }
-  async function fetchSpecialPizza() {
 
+  async function fetchSpecialPizza() {
     try {
       const response = await axios.get('/getspecialpizza');
-
       setSpecialPizzas(response.data.data)
-
-
     } catch (error) {
       console.error(error);
     }
   }
 
-
   async function fetchDrink() {
-
     try {
       const response = await axios.get('/getdrink');
-
       setDrinks(response.data.data)
-
     } catch (error) {
       console.error(error);
     }
   }
 
   async function fetchBurger() {
-
     try {
       const response = await axios.get('/getburger');
-
       setBurgers(response.data.data)
-
     } catch (error) {
       console.error(error);
     }
   }
 
-
-
   useEffect(() => {
-
-
     fetchPizza()
     fetchSpecialPizza()
     fetchDrink()
     fetchBurger()
 
   }, []);
-
-
-
 
   return (
     <>
@@ -121,9 +98,7 @@ export default function AllCards() {
             <Card
               type="drink"
               name={drink.drinkName}
-              // ingre={drink.ingridients}
               img={drink.secureUrl}
-
               sPrice={drink.priceForRegular}
               mPrice={drink.priceForHalf}
               lPrice={drink.priceForLiter}
@@ -146,13 +121,6 @@ export default function AllCards() {
             />
           );
         })}
-        {/* <Card
-          type="Burger"
-          name="Chicken Burger"
-          ingre="A juicy boneless chicken fillet marinated in traditional spices and Flame Grilled with spicy tangy sauce, lettuce and tomatoes."
-          img="./img/burger.png"
-          price=" 150"
-        /> */}
       </fieldset>
     </>
   );

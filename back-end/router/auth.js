@@ -9,6 +9,7 @@ const validateFeedback = require('../middlewares/validateFeedback');
 const validateLogin = require('../middlewares/validateLogin');
 const validateAllOrders = require('../middlewares/validateAllOrders.js');
 const validateBurger = require('../middlewares/validateBurger.js');
+const deleteOrderFromKitcen = require('../middlewares/deleteOrderFromKitcen');
 const jwt = require("jsonwebtoken")
 
 
@@ -21,6 +22,9 @@ router.get('/', (req, res) => {
 })
 // get order from reception and deleteit fromreceptionorder and add it to alla orders
 router.post("/deleteOrderfromReception" , validateAllOrders )
+
+// get order from reception and deleteit fromreceptionorder and add it to alla orders
+router.post("/deleteOrderfromKitchen" , deleteOrderFromKitcen )
 
 // get feedback from userpanel
 router.post("/addfeedback" , validateFeedback )
@@ -78,6 +82,7 @@ router.get('/gettodaysorders' ,async  (req , res) =>{
         let date = `${year}-${month}-${day}`
 
         const todaysOrders = await TotalOrder.find({date : date});
+       
        
         res.send({ data: todaysOrders })
 

@@ -20,34 +20,21 @@ const Bills = () => {
   }, [orders]);
 
 
-  const deleteOrder = (e) =>{
-    console.log(e.currentTarget.getAttribute('tid'));
-    console.log(e.currentTarget.getAttribute('total'));
-    console.log(e.currentTarget.getAttribute('date'));
-    console.log(e.currentTarget.getAttribute('time'));
-    console.log(e.currentTarget.getAttribute('order'));
+  const deleteOrder = (e) => {
 
     const tableName = e.currentTarget.getAttribute('tid');
-
-
-    axios.post('/deleteOrderfromReception' , {
+    axios.post('/deleteOrderfromReception', {
       tableName
     })
-    .then((res) => {
-                
-      console.log("hello");
-      
-
-  })
-  .catch((err) => {
-    toast.error(err.response.data.error, {
-      position: "top-left",
-    });
-      console.log(err.response.data.error);
-
-  });
-
-
+      .then((res) => {
+        console.log("hello");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.error, {
+          position: "top-left",
+        });
+        console.log(err.response.data.error);
+      });
   }
 
   return (
@@ -93,13 +80,13 @@ const Bills = () => {
                 </td>
                 <td>{order.time}</td>
                 <td>
-                  <button onClick={(e)=>{deleteOrder(e)}} 
-                  tid={order.tableNo} 
-                  total={order.total}
-                  date={order.date}
-                  time={order.time}
-                  order={dishes}   >
-                    
+                  <button onClick={(e) => { deleteOrder(e) }}
+                    tid={order.tableNo}
+                    total={order.total}
+                    date={order.date}
+                    time={order.time}
+                    order={dishes}   >
+
                     <i class="far fa-file-alt"></i> Generate
                   </button>
                 </td>
