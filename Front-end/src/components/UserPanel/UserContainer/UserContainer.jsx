@@ -47,9 +47,28 @@ export default function UserContainer() {
       const data = snapshot.val();
       console.log(data);
       if (data) {
+        // current time
+        const currenTime = new Date();
+
+        // get date for estimated time 
+        const date = new Date().toLocaleDateString()
+        const estimatedtime = new Date(`${date} ${data.time}`)
+  
+        // calculate total time required for order
+        var diff =(estimatedtime.getTime() - currenTime.getTime()) / 1000;
+        diff /= 60;
+        const totaltime =  Math.abs(Math.round(diff));
+
+        console.log(totaltime ,'minutes');
+
         toast.info(data.message, {
           position: "top-left",
         });
+
+        toast.info(`Your Order take ${totaltime} minutes to ready! Wait Please.`, {
+          position: "top-left",
+        });
+
       }
     });
   }, [])

@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import {firebase} from "../../firebase"
-import {toast} from "react-toastify"
+import {toast} from "react-toastify";
 
 const Admin = () => {
   const navigate = useNavigate();
