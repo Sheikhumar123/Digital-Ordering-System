@@ -4,11 +4,8 @@ import axios from 'axios'
 import Card from "../Card/Card";
 
 
-
-
 export default function Drinks() {
   const [drinks, setDrinks] = useState([])
-
 
   async function fetchDrink() {
 
@@ -24,9 +21,7 @@ export default function Drinks() {
 
   useEffect(() => {
 
-
-    
-    fetchDrink()
+    fetchDrink();
 
   }, []);
   

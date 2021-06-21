@@ -1,34 +1,28 @@
-import React , {useEffect , useState}  from "react";
+import React, { useEffect, useState } from "react";
 import "./CardContainer.css";
-import axios from 'axios'
+import axios from "axios";
 import Card from "../Card/Card";
 
-
 export default function Icecream() {
-  const [icecreams, setIcecreams] = useState([])
+  const [icecreams, setIcecreams] = useState([]);
 
   async function fetchIcecream() {
-
     try {
-      const response = await axios.get('/geticecream');
-      setIcecreams(response.data.data)
+      const response = await axios.get("/geticecream");
+      setIcecreams(response.data.data);
     } catch (error) {
       console.error(error);
     }
   }
 
   useEffect(() => {
-
-    fetchIcecream()
-
+    fetchIcecream();
   }, []);
-  
 
-  
   return (
     <>
       <fieldset>
-        <legend>Drinks</legend>
+        <legend>Icecream</legend>
         {icecreams.map((icecream, index) => {
           return (
             <Card

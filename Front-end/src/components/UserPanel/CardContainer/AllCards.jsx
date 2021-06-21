@@ -1,39 +1,33 @@
 import React, { useEffect, useState } from "react";
 import "./CardContainer.css";
-import axios from 'axios'
+import axios from "axios";
 
 // import components
 import Card from "../Card/Card";
 
-
 export default function AllCards() {
-
-  const [pizzas, setPizzas] = useState([])
-  const [specialPizzas, setSpecialPizzas] = useState([])
-  const [drinks, setDrinks] = useState([])
-  const [burgers, setBurgers] = useState([])
-  const [icecreams, setIcecreams] = useState([])
+  const [pizzas, setPizzas] = useState([]);
+  const [specialPizzas, setSpecialPizzas] = useState([]);
+  const [drinks, setDrinks] = useState([]);
+  const [burgers, setBurgers] = useState([]);
+  const [icecreams, setIcecreams] = useState([]);
 
   async function fetchIcecream() {
-
     try {
-      const response = await axios.get('/geticecream');
+      const response = await axios.get("/geticecream");
       console.log(response);
 
-      setIcecreams(response.data.data)
+      setIcecreams(response.data.data);
       console.log(icecreams);
-
     } catch (error) {
       console.error(error);
     }
   }
 
-  
-
   async function fetchPizza() {
     try {
-      const response = await axios.get('/getpizza');
-      setPizzas(response.data.data)
+      const response = await axios.get("/getpizza");
+      setPizzas(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -41,8 +35,8 @@ export default function AllCards() {
 
   async function fetchSpecialPizza() {
     try {
-      const response = await axios.get('/getspecialpizza');
-      setSpecialPizzas(response.data.data)
+      const response = await axios.get("/getspecialpizza");
+      setSpecialPizzas(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -50,8 +44,8 @@ export default function AllCards() {
 
   async function fetchDrink() {
     try {
-      const response = await axios.get('/getdrink');
-      setDrinks(response.data.data)
+      const response = await axios.get("/getdrink");
+      setDrinks(response.data.data);
     } catch (error) {
       console.error(error);
     }
@@ -59,20 +53,19 @@ export default function AllCards() {
 
   async function fetchBurger() {
     try {
-      const response = await axios.get('/getburger');
-      setBurgers(response.data.data)
+      const response = await axios.get("/getburger");
+      setBurgers(response.data.data);
     } catch (error) {
       console.error(error);
     }
   }
 
   useEffect(() => {
-    fetchPizza()
-    fetchSpecialPizza()
-    fetchDrink()
-    fetchBurger()
-    fetchIcecream()
-
+    fetchPizza();
+    fetchSpecialPizza();
+    fetchDrink();
+    fetchBurger();
+    fetchIcecream();
   }, []);
 
   return (
@@ -141,7 +134,7 @@ export default function AllCards() {
         })}
       </fieldset>
       <fieldset>
-      <legend>Drinks</legend>
+        <legend>Icecream</legend>
         {icecreams.map((icecream, index) => {
           return (
             <Card

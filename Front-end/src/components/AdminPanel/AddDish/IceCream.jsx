@@ -51,7 +51,7 @@ const IceCream = () => {
 
         const { dishName, priceForRegular, priceForLarge } = icecream;
 
-console.log(secureUrl);
+        console.log(secureUrl);
 
         if (secureUrl) {
 

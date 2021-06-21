@@ -17,21 +17,8 @@ import CheckCartContext from "../../Context/CheckCartContext";
 import cartContext from "../../Context/cartContext";
 import feedbackContext from "../../Context/feedbackContext";
 import ShowFeedback from "../feedback/Feedback";
-import { firebase } from "../../../firebase.js"
-import { toast } from 'react-toastify'
-
-// var starCountRef = firebase.database().ref('sms/' + Cookies.get("name"));
-// starCountRef.on('value', (snapshot) => {
-//   const data = snapshot.val();
-//   console.log(data);
-//   if(data){
-//     toast.info(data.message, {
-//               position: "top-left",
-//             });
-//             return
-
-//   }
-// });
+import { firebase } from "../../../firebase.js";
+import { toast } from "react-toastify";
 
 export default function UserContainer() {
   let data = useState("all");
@@ -42,36 +29,40 @@ export default function UserContainer() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    var starCountRef = firebase.database().ref('chefToUserPanel/' + Cookies.get("name"));
-    starCountRef.on('value', (snapshot) => {
+    var starCountRef = firebase
+      .database()
+      .ref("chefToUserPanel/" + Cookies.get("name"));
+    starCountRef.on("value", (snapshot) => {
       const data = snapshot.val();
       console.log(data);
       if (data) {
         // current time
         const currenTime = new Date();
 
-        // get date for estimated time 
-        const date = new Date().toLocaleDateString()
-        const estimatedtime = new Date(`${date} ${data.time}`)
-  
-        // calculate total time required for order
-        var diff =(estimatedtime.getTime() - currenTime.getTime()) / 1000;
-        diff /= 60;
-        const totaltime =  Math.abs(Math.round(diff));
+        // get date for estimated time
+        const date = new Date().toLocaleDateString();
+        const estimatedtime = new Date(`${date} ${data.time}`);
 
-        console.log(totaltime ,'minutes');
+        // calculate total time required for order
+        var diff = (estimatedtime.getTime() - currenTime.getTime()) / 1000;
+        diff /= 60;
+        const totaltime = Math.abs(Math.round(diff));
+
+        console.log(totaltime, "minutes");
 
         // toast.info(data.message, {
         //   position: "top-left",
         // });
 
-        toast.info(`${data.message}. Your Order take ${totaltime} minutes to ready! Wait Please.`, {
-          position: "top-left",
-        });
-
+        toast.info(
+          `${data.message}. Your Order take ${totaltime} minutes to ready! Wait Please.`,
+          {
+            position: "top-left",
+          }
+        );
       }
     });
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (Cookies.get("name")) {
@@ -81,7 +72,7 @@ export default function UserContainer() {
         navigate("/chefpanel");
       }
     } else {
-      navigate('/')
+      navigate("/");
     }
   }, []);
 

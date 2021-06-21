@@ -12,7 +12,7 @@ export default function Category() {
 
   let classNames = ['categoryContainer'];
 
-  // code tofix the menu bar
+  // code to fix the menu bar
   useEffect(() => {
     const header = document.getElementById("menu");
     const sticky = header.offsetTop;

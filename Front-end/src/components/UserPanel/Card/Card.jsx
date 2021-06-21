@@ -4,7 +4,9 @@ import cartContext from "../../Context/cartContext";
 
 export default function Card(props) {
   let [qty, setQty] = useState(1);
-  let [size, setSize] = useState(props.type === "drink" || props.type === 'Icecream' ? "r" : "s");
+  let [size, setSize] = useState(
+    props.type === "drink" || props.type === "Icecream" ? "r" : "s"
+  );
 
   const cartItems = useContext(cartContext);
 
@@ -84,6 +86,7 @@ export default function Card(props) {
           <div className="size">
             <h3>Size</h3>
             <div>
+              {/* Starting Button Component */}
               <button
                 onClick={() => {
                   //    set state
@@ -97,29 +100,32 @@ export default function Card(props) {
                   size === "s" ? "selected" : size === "r" ? "selected" : ""
                 }
               >
-                {props.type === "drink" || props.type === 'Icecream' ? "R" : "S"}
+                {props.type === "drink" || props.type === "Icecream"
+                  ? "R"
+                  : "S"}
               </button>
+              {/* Ending Button Component */}
 
-                {
-                  props.type !== 'Icecream' ? 
-                    <button
-                    onClick={() => {
-                      if (props.type === "drink") {
-                        getSize("h");
-                      } else {
-                        getSize("m");
-                      }
-                    }}
-                    className={
-                      size === "m" ? "selected" : size === "h" ? "selected" : ""
+              {/* Display M or H if type !== Iceceram else "" */}
+              {props.type !== "Icecream" ? (
+                <button
+                  onClick={() => {
+                    if (props.type === "drink") {
+                      getSize("h");
+                    } else {
+                      getSize("m");
                     }
-                  >
-                    {" "}
-                    {props.type === "drink" ? "H" : "M"}{" "}
-                  </button>
-                  :
-                  ""
-                }
+                  }}
+                  className={
+                    size === "m" ? "selected" : size === "h" ? "selected" : ""
+                  }
+                >
+                  {" "}
+                  {props.type === "drink" ? "H" : "M"}{" "}
+                </button>
+              ) : (
+                ""
+              )}
 
               <button
                 onClick={() => {

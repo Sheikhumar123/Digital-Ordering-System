@@ -32,15 +32,15 @@ export default function OrderCard() {
   const writeUserData = (e) => {
     e.preventDefault();
     let id = e.currentTarget.getAttribute("tid");
-    firebase
-      .database()
-      .ref("chefToUserPanel/" + id)
-      .set({
+    // Send Notification from chef to user
+    firebase.database().ref("chefToUserPanel/" + id).set({
         message: `order staretd of table no  ${e.currentTarget.getAttribute(
           "tid"
         )}`,
         time: estime,
       });
+
+    //Use Timeout to remove notification from the database 
     setTimeout(() => {
       firebase
         .database()
@@ -50,6 +50,7 @@ export default function OrderCard() {
     setClassname("disablebtn");
   };
 
+  // function to delete the order
   const deleteOrder = (e) => {
     setClassname("");
     const tableName = e.currentTarget.getAttribute("tid");
@@ -82,6 +83,7 @@ export default function OrderCard() {
       });
   };
 
+  // function to fetch orders from database
   async function fetchOrders() {
     try {
       const response = await axios.get("/getkitchenorder");
@@ -92,6 +94,7 @@ export default function OrderCard() {
     }
   }
 
+// call function when component didmount
   useEffect(() => {
     fetchOrders();
   }, [orders]);

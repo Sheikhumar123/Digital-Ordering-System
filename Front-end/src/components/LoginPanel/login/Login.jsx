@@ -47,10 +47,6 @@ export default function Login() {
       .then((res) => {
         console.log(res);
         if (!res.data.error) {
-          // window.alert("signIn successfull");
-          // console.log(res.data.data.token);
-          // console.log("registration sucess");
-          // navigate('/userpanel');
           toast.success("Sucessfull", {
             position: "top-left",
             autoClose: 5000,
