@@ -18,23 +18,10 @@ const Drink = () => {
 
 
     if (files) {
-      setFilename(files[0])
-    // const data = new FormData();
-
-    //   data.append("file", fileName);
-    //   data.append("upload_preset", "x4bnkskk");
-    //   data.append("cloud_name", "sheikhumar");
-    //   const res = await fetch(
-    //     `https://api.cloudinary.com/v1_1/sheikhumar/image/upload`,
-    //     {
-    //       method: "POST",
-    //       body: data
-    //     }
-    //   );
-    //   const img = await res.json();
-    //   console.log(img);
-    //   let ImageLink = img.url
-    //   setSecureUrl(ImageLink);
+      if (files[0].type == "image/png") {
+        console.log("it is png");
+        setFilename(files[0]);
+      }
     }
     setDrink({ ...drink, [name]: value })
 
@@ -64,13 +51,10 @@ const Drink = () => {
     let ImageLink = img.url
     setSecureUrl(ImageLink);
 
-    // console.log(secureUrl);
 
     console.log(drink);
     
-
     const { drinkName, priceForRegular, priceForHalf, priceForLiter } = drink;
-
 
 
     if(secureUrl){
@@ -82,31 +66,19 @@ const Drink = () => {
         .then((res) => {
           console.log(res.data);
           toast.success("registration Success");
-        
+      
           console.log("registration sucess");
           setFilename("")
           setSecureUrl("");
           setDrink({
             drinkName: '', priceForRegular: null, priceForHalf: null, priceForLiter: null
           })
-  
         })
         .catch((err) => {
           console.log(err.response);
-          //  toast.error("invalid registration");
-          // console.log("invalid registration");
-  
-  
         });
-
     }
-
-
-
   }
-
-
-
 
   return (
     <form method='POST' onSubmit={addDrink} className="formBody drinks" enctype="multipart/form-data">
@@ -134,7 +106,7 @@ const Drink = () => {
       </div>
       <div className="inputContianer">
         <div className="form-control" style={{width:"100%"}}>
-          <input id="pic" type="file" filename="avatar" required onChange={handleInput} />
+          <input id="pic" type="file" accept='image/png' filename="avatar" required onChange={handleInput} />
           <label htmlFor="pic" style={{ textAlign: 'center' }}></label>
         </div>
       </div>

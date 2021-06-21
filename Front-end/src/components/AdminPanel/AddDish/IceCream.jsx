@@ -8,6 +8,7 @@ const IceCream = () => {
     })
     const [fileName, setFilename] = useState('');
     const [secureUrl, setSecureUrl] = useState('');
+    console.log(fileName);
 
 
     const handleInput = async (e) => {
@@ -17,8 +18,10 @@ const IceCream = () => {
 
 
         if (files) {
-            setFilename(files[0])
-            
+            if (files[0].type == "image/png") {
+                console.log("it is png");
+                setFilename(files[0]);
+              }
         }
         setIcecream({...icecream,[name]:value})
 
@@ -102,7 +105,7 @@ console.log(secureUrl);
             </div>
             <div className="inputContianer">
                 <div className="form-control" style={{ width: "100%" }}>
-                    <input id="pic" type="file" filename="avatar" required onChange={handleInput} />
+                    <input id="pic" accept="image/png" type="file" filename="avatar" required onChange={handleInput} />
                     <label htmlFor="pic" style={{ textAlign: 'center' }}></label>
                 </div>
             </div>

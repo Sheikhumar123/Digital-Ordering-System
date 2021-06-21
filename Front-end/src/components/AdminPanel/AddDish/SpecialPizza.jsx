@@ -19,12 +19,13 @@ const SpecialPizza = () => {
 
 
     if (files) {
-      setFilename(files[0])
+      if (files[0].type == "image/png") {
+        console.log("it is png");
+        setFilename(files[0]);
+      }
     }
     setDish({ ...dish, [name]: value })
-
   }
-  // console.log(dish);
 
   const addSpecialPizza = async (e) => {
 
@@ -54,9 +55,6 @@ const SpecialPizza = () => {
     console.log(dishName,dishIngri, priceForSmall, priceForMedium, priceForLarge ,secureUrl);
     
   
-
-
-
     axios
       .post('http://localhost:8080/addspecialpizza', {
         dishName,dishIngri, priceForSmall, priceForMedium, priceForLarge , secureUrl
@@ -74,11 +72,6 @@ const SpecialPizza = () => {
         
 
       });
-
-
-
-    
-
   }
   return (
     <form method='POST'onSubmit={addSpecialPizza} className="formBody">
@@ -113,7 +106,7 @@ const SpecialPizza = () => {
       </div>
       <div className="inputContianer">
         <div className="form-control" style={{width:"100%"}}>
-          <input id="pic" type="file" filename="avatar" required onChange={handleInput} />
+          <input id="pic" type="file" accept="image/png" filename="avatar" required onChange={handleInput} />
           <label htmlFor="pic" style={{ textAlign: 'center' }}></label>
         </div>
       </div>

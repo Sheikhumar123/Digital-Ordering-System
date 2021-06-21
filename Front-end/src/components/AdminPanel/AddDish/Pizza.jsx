@@ -18,8 +18,10 @@ const Pizza = () => {
 
 
     if (files) {
-      setFilename(files[0])
-     
+      if (files[0].type == "image/png") {
+        console.log("it is png");
+        setFilename(files[0]);
+      }
     }
     setDish({ ...dish, [name]: value })
 
@@ -44,23 +46,10 @@ const Pizza = () => {
     console.log(img);
     let ImageLink = img.url
     setSecureUrl(ImageLink);
-
-    
     console.log(secureUrl);
 
   const { dishName,dishIngri, priceForSmall, priceForMedium, priceForLarge } = dish;
     console.log(dishName,dishIngri, priceForSmall, priceForMedium, priceForLarge);
-    // let formData = new FormData();
-    // formData.append('dishName', dishName);
-    // formData.append('dishIngri', dishIngri);
-    // formData.append('priceForSmall', priceForSmall);
-    // formData.append('priceForMedium', priceForMedium);
-    // formData.append('priceForLarge', priceForLarge );
-    // formData.append('url', secureUrl);
-    // console.log(formData)
-  
-
-
 
     axios
       .post('http://localhost:8080/addpizza', {
@@ -79,37 +68,6 @@ const Pizza = () => {
         
 
       });
-
-
-
-
-        // const res = await fetch("/addpizza", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     },
-
-        //     body: JSON.stringify({
-        //         dishName,
-        //         dishIngri,
-        //         priceForSmall,
-        //         priceForMedium,
-        //         priceForLarge,
-
-        //     })
-        // });
-
-        // const data = await res.json();
-        // console.log(data);
-        // if (data.error) {
-        //     window.alert("invalid registration");
-        //     console.log("invalid registration");
-
-        // } else {
-        //     window.alert("registration sucessfull");
-        //     console.log("registration sucess");
-        // }
-
   }
   return (
     <form method='POST' onSubmit={addPizza} className="formBody">
@@ -144,7 +102,7 @@ const Pizza = () => {
       </div>
       <div className="inputContianer">
         <div className="form-control" style={{width:"100%"}}>
-          <input id="pic" type="file" filename="avatar" required onChange={handleInput} />
+          <input id="pic" type="file" accept='image/png' filename="avatar" required onChange={handleInput} />
           <label htmlFor="pic" style={{ textAlign: 'center' }}></label>
         </div>
       </div>

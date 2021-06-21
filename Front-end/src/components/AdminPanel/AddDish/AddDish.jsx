@@ -70,7 +70,7 @@ const AddDish = () => {
                         <span>
                             <input type="radio" name="dishType" value="IceCream" onClick={handleInput} />
                         </span>
-                        <span>Icecrea</span>
+                        <span>Icecream</span>
                     </label>
 
                 </div>

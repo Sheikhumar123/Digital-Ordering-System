@@ -20,14 +20,19 @@ const Burger = () => {
     const value = e.target.value;
     let files = e.target.files;
 
+
     if (files) {
-      setFilename(files[0]);
+      if (files[0].type == "image/png") {
+        console.log("it is png");
+        setFilename(files[0]);
+      }
     }
     setDish({ ...dish, [name]: value });
   };
 
   const addBurger = async (e) => {
     e.preventDefault();
+    
     console.log(dish);
 
     const data = new FormData();
@@ -138,6 +143,7 @@ const Burger = () => {
             filename="avatar"
             required
             onChange={handleInput}
+            accept="image/png"
           />
           <label htmlFor="pic" style={{ textAlign: "center" }}></label>
         </div>
