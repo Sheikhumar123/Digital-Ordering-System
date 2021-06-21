@@ -61,11 +61,11 @@ export default function UserContainer() {
 
         console.log(totaltime ,'minutes');
 
-        toast.info(data.message, {
-          position: "top-left",
-        });
+        // toast.info(data.message, {
+        //   position: "top-left",
+        // });
 
-        toast.info(`Your Order take ${totaltime} minutes to ready! Wait Please.`, {
+        toast.info(`${data.message}. Your Order take ${totaltime} minutes to ready! Wait Please.`, {
           position: "top-left",
         });
 

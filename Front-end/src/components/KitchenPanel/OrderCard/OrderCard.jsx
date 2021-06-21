@@ -145,7 +145,7 @@ export default function OrderCard() {
                   onChange={(e) => hundeleTime(e)}
                 />
               </label>
-              <button className={myclassname}>
+              <button disabled={myclassname !== '' ? true : false} className={myclassname}>
                 <img src="./cooking.svg" alt="waiter" /> <span>Start</span>
               </button>
             </form>
