@@ -4,7 +4,7 @@ import cartContext from "../../Context/cartContext";
 
 export default function Card(props) {
   let [qty, setQty] = useState(1);
-  let [size, setSize] = useState(props.type === "drink" ? "r" : "s");
+  let [size, setSize] = useState(props.type === "drink" || props.type === 'Icecream' ? "r" : "s");
 
   const cartItems = useContext(cartContext);
 
@@ -87,7 +87,7 @@ export default function Card(props) {
               <button
                 onClick={() => {
                   //    set state
-                  if (props.type === "drink") {
+                  if (props.type === "drink" || props.type === "Icecream") {
                     getSize("r");
                   } else {
                     getSize("s");
@@ -97,25 +97,29 @@ export default function Card(props) {
                   size === "s" ? "selected" : size === "r" ? "selected" : ""
                 }
               >
-                {" "}
-                {props.type === "drink" ? "R" : "S"}{" "}
+                {props.type === "drink" || props.type === 'Icecream' ? "R" : "S"}
               </button>
 
-              <button
-                onClick={() => {
-                  if (props.type === "drink") {
-                    getSize("h");
-                  } else {
-                    getSize("m");
-                  }
-                }}
-                className={
-                  size === "m" ? "selected" : size === "h" ? "selected" : ""
+                {
+                  props.type !== 'Icecream' ? 
+                    <button
+                    onClick={() => {
+                      if (props.type === "drink") {
+                        getSize("h");
+                      } else {
+                        getSize("m");
+                      }
+                    }}
+                    className={
+                      size === "m" ? "selected" : size === "h" ? "selected" : ""
+                    }
+                  >
+                    {" "}
+                    {props.type === "drink" ? "H" : "M"}{" "}
+                  </button>
+                  :
+                  ""
                 }
-              >
-                {" "}
-                {props.type === "drink" ? "H" : "M"}{" "}
-              </button>
 
               <button
                 onClick={() => {

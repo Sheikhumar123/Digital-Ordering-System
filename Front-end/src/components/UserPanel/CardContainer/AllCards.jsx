@@ -122,6 +122,17 @@ export default function AllCards() {
           );
         })}
       </fieldset>
+      <fieldset>
+        <legend>Icecream</legend>
+        {/* get data from database and then loop on it and render these card automaticly */}
+            <Card
+              type="Icecream"
+              name="Starwbery"
+              img="./img/icecream.png"
+              sPrice="150"
+              lPrice="250"
+            />
+      </fieldset>
     </>
   );
 }
