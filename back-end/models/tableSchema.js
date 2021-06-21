@@ -184,6 +184,25 @@ const burgerSchema = new mongoose.Schema({
         required: true
     }
 })
+const icecreamSchema=new mongoose.Schema({
+    dishName: {
+        type: String,
+        required: true
+    },
+    priceForRegular: {
+        type: Number,
+        required: true
+    },
+    priceForLarge: {
+        type: Number,
+        required: true
+    },
+    secureUrl: {
+        type: String,
+        required: true
+    }
+
+})
 
 
 // we are generating token
@@ -214,6 +233,8 @@ const Cheif = mongoose.model('cheif', cheifSchema);
 const Feedback = mongoose.model('Feedback', feedbackSchema);
 const TotalOrder = mongoose.model('TotalOrder', totalOrdersSchema);
 const Burger = mongoose.model('Burger', burgerSchema);
+const Icecream = mongoose.model('Icecream', icecreamSchema);
 
 
-module.exports = { Table, Pizza, Feedback, Specialpizza,Burger, Drink, KitchenOrder, ReceptionOrder, Cheif, Admin, TotalOrder };
+
+module.exports = { Table, Pizza, Feedback, Specialpizza,Burger, Drink, KitchenOrder, ReceptionOrder, Cheif, Admin, TotalOrder,Icecream };

@@ -4,19 +4,14 @@ import axios from 'axios'
 import Card from "../Card/Card";
 
 
-
-
 export default function Icecream() {
   const [icecreams, setIcecreams] = useState([])
-
 
   async function fetchIcecream() {
 
     try {
       const response = await axios.get('/geticecream');
-
       setIcecreams(response.data.data)
-
     } catch (error) {
       console.error(error);
     }
@@ -34,17 +29,17 @@ export default function Icecream() {
     <>
       <fieldset>
         <legend>Drinks</legend>
-        {/* {drinks.map((drink, index) => { */}
-          {/* return ( */}
+        {icecreams.map((icecream, index) => {
+          return (
             <Card
               type="Icecream"
-              name="Starwbery"
-              img="./img/icecream.png"
-              sPrice="150"
-              lPrice="250"
+              name={icecream.dishName}
+              img={icecream.secureUrl}
+              sPrice={icecream.priceForRegular}
+              lPrice={icecream.priceForLarge}
             />
-          {/* ); */}
-        {/* })} */}
+          );
+        })}
       </fieldset>
     </>
   );

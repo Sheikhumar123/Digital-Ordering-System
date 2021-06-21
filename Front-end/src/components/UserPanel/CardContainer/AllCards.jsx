@@ -12,6 +12,23 @@ export default function AllCards() {
   const [specialPizzas, setSpecialPizzas] = useState([])
   const [drinks, setDrinks] = useState([])
   const [burgers, setBurgers] = useState([])
+  const [icecreams, setIcecreams] = useState([])
+
+  async function fetchIcecream() {
+
+    try {
+      const response = await axios.get('/geticecream');
+      console.log(response);
+
+      setIcecreams(response.data.data)
+      console.log(icecreams);
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  
 
   async function fetchPizza() {
     try {
@@ -54,6 +71,7 @@ export default function AllCards() {
     fetchSpecialPizza()
     fetchDrink()
     fetchBurger()
+    fetchIcecream()
 
   }, []);
 
@@ -123,15 +141,18 @@ export default function AllCards() {
         })}
       </fieldset>
       <fieldset>
-        <legend>Icecream</legend>
-        {/* get data from database and then loop on it and render these card automaticly */}
+      <legend>Drinks</legend>
+        {icecreams.map((icecream, index) => {
+          return (
             <Card
               type="Icecream"
-              name="Starwbery"
-              img="./img/icecream.png"
-              sPrice="150"
-              lPrice="250"
+              name={icecream.dishName}
+              img={icecream.secureUrl}
+              sPrice={icecream.priceForRegular}
+              lPrice={icecream.priceForLarge}
             />
+          );
+        })}
       </fieldset>
     </>
   );

@@ -6,6 +6,7 @@ import Pizza from './Pizza';
 import Drink from './Drink';
 import Burger from './Burger';
 import SpecialPizza from './SpecialPizza';
+import IceCream from './IceCream';
 
 const AddDish = () => {
 
@@ -36,7 +37,7 @@ const AddDish = () => {
 
     return (
         <div className="AddDish_box">
-            <div className="AddDish_form" >
+            <div style={{width:"600px"}} className="AddDish_form" >
                 <h1>Add New Dish</h1>
                 <div className="radio">
                     <label>
@@ -65,11 +66,17 @@ const AddDish = () => {
                         </span>
                         <span>Burger</span>
                     </label>
+                    <label>
+                        <span>
+                            <input type="radio" name="dishType" value="IceCream" onClick={handleInput} />
+                        </span>
+                        <span>Icecrea</span>
+                    </label>
 
                 </div>
                 <div className="formBody">
                     {
-                        dishType === 'Pizza' ? <Pizza/> : dishType === 'Drink' ? <Drink/> : dishType==='SpecialPizza' ? <SpecialPizza/> : dishType ==='Burger'? <Burger/> :  <Pizza/>
+                        dishType === 'Pizza' ? <Pizza/> : dishType === 'Drink' ? <Drink/> : dishType==='SpecialPizza' ? <SpecialPizza/> : dishType ==='Burger'? <Burger/> :dishType === 'IceCream' ? <IceCream/> :  <Pizza/>
                     }
                 </div>
             </div>
