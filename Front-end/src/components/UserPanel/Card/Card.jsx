@@ -3,7 +3,9 @@ import { useState, useContext } from "react";
 import cartContext from "../../Context/cartContext";
 
 export default function Card(props) {
+  // state for getting Quntity of food by default is 1
   let [qty, setQty] = useState(1);
+  // State for getting Size of Food by default 's' is drink or icecream then 'r' 
   let [size, setSize] = useState(
     props.type === "drink" || props.type === "Icecream" ? "r" : "s"
   );
@@ -25,12 +27,13 @@ export default function Card(props) {
     setSize(sizeValue);
   };
 
-  // add to cart function
+  // Make item Object to add food in cart
   let itemData = {
     name: props.name,
     itemSize: props.type !== "Burger" ? size : "r",
     itemQty: qty,
     itemPrice:
+    // set price according to food type
       props.type !== "Burger"
         ? size === "s" || size === "r"
           ? props.sPrice
@@ -40,11 +43,11 @@ export default function Card(props) {
         : props.price,
   };
 
+  // function that set the food item into cart context for render in cart
   const addToCart = (e) => {
     cartItems[1]([...cartItems[0], itemData]);
   };
 
-  // const paths = `http://localhost:8080/${props.img}`
   return (
     <div className="card">
       <img

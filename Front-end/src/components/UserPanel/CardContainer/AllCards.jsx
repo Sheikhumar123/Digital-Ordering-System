@@ -12,11 +12,12 @@ export default function AllCards() {
   const [burgers, setBurgers] = useState([]);
   const [icecreams, setIcecreams] = useState([]);
 
+  // function to fetch icecream from database
   async function fetchIcecream() {
     try {
       const response = await axios.get("/geticecream");
       console.log(response);
-
+      // set data to state
       setIcecreams(response.data.data);
       console.log(icecreams);
     } catch (error) {
@@ -24,6 +25,7 @@ export default function AllCards() {
     }
   }
 
+  // function to fetch PIzza from database
   async function fetchPizza() {
     try {
       const response = await axios.get("/getpizza");
@@ -33,6 +35,7 @@ export default function AllCards() {
     }
   }
 
+  // function to fetch Special from database
   async function fetchSpecialPizza() {
     try {
       const response = await axios.get("/getspecialpizza");
@@ -42,6 +45,7 @@ export default function AllCards() {
     }
   }
 
+  // function to fetch Drink from database
   async function fetchDrink() {
     try {
       const response = await axios.get("/getdrink");
@@ -51,6 +55,7 @@ export default function AllCards() {
     }
   }
 
+  // function to fetch Burger from database
   async function fetchBurger() {
     try {
       const response = await axios.get("/getburger");

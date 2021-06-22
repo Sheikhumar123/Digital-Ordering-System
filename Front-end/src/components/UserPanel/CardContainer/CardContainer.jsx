@@ -13,7 +13,7 @@ export default function CardContainer() {
   
 // Type selected from Dropdown
   const type = useContext(categoryContext);
-// Add componet in cards variable according to the type
+// Add component in cards variable according to the type
   const cards = type[0] === 'all' ? <AllCard/> : type[0]==='Pizza' ? <Pizzas/> : type[0]==='Special' ? <Special/> : type[0]==='Burger' ? <Burger/> : type[0]==='Icecream' ? <Icecream/> : <Drinks/>; 
 
   return(

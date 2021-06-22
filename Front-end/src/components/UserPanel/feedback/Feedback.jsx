@@ -7,11 +7,13 @@ import axios from "axios";
 import { FaStar } from "react-icons/fa";
 import { toast } from "react-toastify";
 
+// these colors are used in stars
   const colors = {
     orange: "#FFBA5A",
     grey: "#a9a9a9",
   };
   
+// These style for stars
 const styles = {
   stars: {
     display: "flex",
@@ -21,22 +23,29 @@ const styles = {
 
 
 const ShowFeedback = () => {
+  // state to get user number
   const [number, setNumber] = useState()
+
+  // class for feedback form to show and hide
   let classNames = ["feedback"];
 
   // code for quality stars
   const [quality, setCurrentQualityValue] = useState(0);
   const [qualityhoverValue, setHoverQualityValue] = useState(undefined);
+  // This Array is used to display 5 star if we increase size the stars increas
   const stars = Array(5).fill(0);
 
+  // function to set how many stars selected
   const handleQualityClick = (value) => {
     setCurrentQualityValue(value);
   };
 
+  // function to display how many stars are on hover
   const handleQualityMouseOver = (newHoverValue) => {
     setHoverQualityValue(newHoverValue);
   };
 
+  // Function to make stars gray when mouse leave
   const handleQualityMouseLeave = () => {
     setHoverQualityValue(undefined);
   };
@@ -70,9 +79,9 @@ const ShowFeedback = () => {
     classNames.push("hideFeedback");
   }
 
+  // function to hide feedback
   const hideFeedback = () => {
     checkFeedback[1]({ checkFeed: false });
-    // console.log(qty,service,comments)
   };
 
   const submitFeedback = (e) => {

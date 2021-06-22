@@ -10,19 +10,19 @@ import { firebase } from "../../../firebase"
 
 export default function Category() {
 
+  // this class is used to make category bar stiky when we set it to 'categoryContaiener Stiky'
   let classNames = ['categoryContainer'];
 
   // code to fix the menu bar
   useEffect(() => {
     const header = document.getElementById("menu");
     const sticky = header.offsetTop;
+    // This function make nav Stiky when scroll
     const scrollCallBack = window.addEventListener("scroll", () => {
       if (window.pageYOffset > sticky) {
         header.classList.add("sticky");
-
       } else {
         header.classList.remove("sticky");
-
       }
     });
     return () => {

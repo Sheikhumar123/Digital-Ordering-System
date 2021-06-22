@@ -12,7 +12,6 @@ const AddToCart = () => {
    
     useEffect(() => {
         setname( Cookies.get("name"))
-         
      }, [])
     
     let classNames = ['cart'];
@@ -52,19 +51,20 @@ const AddToCart = () => {
         e.preventDefault();
         const totalOrder = cartItems[0]
         const tableNo = name;
-        // const tableNo = 15;
         const today = new Date(),
-      
-
          time = `${today.getHours()}:${ today.getMinutes()}:${today.getSeconds()}`;
-        let date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
-         //   today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        
+        //  change date format to yy-mm-dd
+         let date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
+         
+        // if month or day has only one digit so add 0 is start like 09
          if(`${today.getMonth() + 1}` < 10 && `${today.getDate()}` < 10 ){
              date = `${today.getFullYear()}-0${today.getMonth() + 1}-0${today.getDate()}`
          }
+
+        // if month or day has only one digit so add 0 is start like 09
          if(`${today.getMonth() + 1}` < 10 && `${today.getDate()}` > 9 ){
             date = `${today.getFullYear()}-0${today.getMonth() + 1}-${today.getDate()}`
-
          }
         
         console.log(time);
