@@ -16,8 +16,10 @@
 }
 .card .img{
     width: 200px;
+    height: 200px;
     margin-top: -70px;
-    margin-left: 40px;
+    margin-left: 20px;
+    object-fit: scale-down;
     filter: drop-shadow(2px 4px 8px #ccc);
     animation: animateBurger 2s linear 0s infinite;
 }

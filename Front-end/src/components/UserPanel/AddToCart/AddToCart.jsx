@@ -7,8 +7,6 @@ import Cookies from 'js-cookie'
 import { toast } from 'react-toastify';
 
 
-
-
 const AddToCart = () => {
     const [name, setname] = useState("")
    
@@ -57,9 +55,6 @@ const AddToCart = () => {
         // const tableNo = 15;
         const today = new Date(),
       
-        
-
-        
 
          time = `${today.getHours()}:${ today.getMinutes()}:${today.getSeconds()}`;
         let date = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`
@@ -74,10 +69,6 @@ const AddToCart = () => {
         
         console.log(time);
         console.log(date);
-        
-
-
-   
         console.log(totalOrder);
 
         axios
@@ -99,12 +90,9 @@ const AddToCart = () => {
             .catch((err) => {
                 console.log(err.response);
                 toast.error(err.response.data.error);
-
-
             });
-
-
     }
+    
     return (
         <div className={classNames.join(' ')}>
 

@@ -1,6 +1,7 @@
 .cardContainer{
     width: 100%;
     padding: 30px;
+    padding-bottom: 50px;
     background-color: white;
 }
 .cardContainer fieldset{
@@ -8,7 +9,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin-bottom: 20px;
+    padding-bottom: 30px;
     justify-content: center;
     border-bottom: 1px solid rgba(128, 128, 128, 0.445);
 }

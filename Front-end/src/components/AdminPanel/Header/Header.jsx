@@ -4,6 +4,7 @@ import {FaPowerOff} from 'react-icons/fa';
 import {IoMdArrowDropdown} from 'react-icons/io';
 import {useNavigate} from 'react-router-dom';
 import admin from './man.svg';
+import Cookies from 'js-cookie'
 
 
 export default function Header() {
@@ -15,6 +16,8 @@ export default function Header() {
     // funtion to logout user and redirect to the home page
     const logoutUser = ()=>{
       navigate("/");
+      Cookies.remove('name');
+      Cookies.remove('token');
     }
 
   return (

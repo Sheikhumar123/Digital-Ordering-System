@@ -8,21 +8,27 @@ const validationAddOrder = require('../middlewares/validationAddOrder');
 const validateFeedback = require('../middlewares/validateFeedback');
 const validateLogin = require('../middlewares/validateLogin');
 const validateAllOrders = require('../middlewares/validateAllOrders.js');
+const validateBurger = require('../middlewares/validateBurger.js');
+const deleteOrderFromKitcen = require('../middlewares/deleteOrderFromKitcen');
 const jwt = require("jsonwebtoken")
 
 
 
 require('../db/conn');
-const { Table, ReceptionOrder, Pizza, Specialpizza, Drink, KitchenOrder, Admin, Cheif, Feedback ,TotalOrder} = require('../models/tableSchema');
+const { Table, ReceptionOrder, Pizza, Specialpizza, Drink, KitchenOrder, Admin, Cheif, Feedback, TotalOrder, Burger, Icecream } = require('../models/tableSchema');
+const validateIcecream = require('../middlewares/validateIcecream.js');
 
 router.get('/', (req, res) => {
     res.send('hello sheikh from server router');
 })
 // get order from reception and deleteit fromreceptionorder and add it to alla orders
-router.post("/deleteOrderfromReception" , validateAllOrders )
+router.post("/deleteOrderfromReception", validateAllOrders)
+
+// get order from reception and deleteit fromreceptionorder and add it to alla orders
+router.post("/deleteOrderfromKitchen", deleteOrderFromKitcen)
 
 // get feedback from userpanel
-router.post("/addfeedback" , validateFeedback )
+router.post("/addfeedback", validateFeedback)
 
 // add table router
 router.post('/addtable', validationTable);
@@ -30,8 +36,14 @@ router.post('/addtable', validationTable);
 // add pizza to database
 router.post('/addpizza', validationPizza);
 
+// add burger to database
+router.post('/addburger', validateBurger);
+
 // add special pizza to database
 router.post('/addspecialpizza', validationSpecialPizza);
+
+// add  icecream to database
+router.post('/addicecream', validateIcecream);
 
 // add  drinks to database
 router.post('/adddrink', validationDrink);
@@ -42,8 +54,20 @@ router.post('/addorder', validationAddOrder);;
 // signin router 
 router.post('/login', validateLogin)
 
+// get iceream to menu
+router.get('/geticecream', async (req, res) => {
+    try {
+        const allicecream = await Icecream.find({});
+        res.send({ data: allicecream })
+    } catch (error) {
+        res.status(402).send({ error: "failed to get data" })
+    }
+})
+
+
+
 // get allOrders to adminpanel
-router.get('/getallorders' ,async  (req , res) =>{
+router.get('/getallorders', async (req, res) => {
 
     try {
 
@@ -51,12 +75,12 @@ router.get('/getallorders' ,async  (req , res) =>{
         res.send({ data: allorders })
 
     } catch (error) {
-        res.status(402).send({error :"failed to get data"})
+        res.status(402).send({ error: "failed to get data" })
     }
 })
 
 // get todaysOrders to adminpanel
-router.get('/gettodaysorders' ,async  (req , res) =>{
+router.get('/gettodaysorders', async (req, res) => {
 
     try {
         const today = new Date()
@@ -65,36 +89,37 @@ router.get('/gettodaysorders' ,async  (req , res) =>{
         let day = today.getDate()
 
         if (month < 10) {
-            month = `0${today.getMonth() + 1}`     
+            month = `0${today.getMonth() + 1}`
         }
         if (day < 10) {
-            day = `0${today.getDate()}`     
+            day = `0${today.getDate()}`
         }
 
         let date = `${year}-${month}-${day}`
 
-        const todaysOrders = await TotalOrder.find({date : date});
-       
+        const todaysOrders = await TotalOrder.find({ date: date });
+
+
         res.send({ data: todaysOrders })
 
     } catch (error) {
-        res.status(402).send({error :"failed to get data"})
+        res.status(402).send({ error: "failed to get data" })
     }
 })
 
 
 // get selectedDateorders to adminpanel
-router.post('/getselecteddateorder' ,async  (req , res) =>{
+router.post('/getselecteddateorder', async (req, res) => {
 
     try {
-        const {date} = req.body
-       
+        const { date } = req.body
 
-        const todaysOrders = await TotalOrder.find({date : date});
+
+        const todaysOrders = await TotalOrder.find({ date: date });
         res.send({ data: todaysOrders })
 
     } catch (error) {
-        res.status(402).send({error :"failed to get data"})
+        res.status(402).send({ error: "failed to get data" })
     }
 })
 
@@ -102,7 +127,7 @@ router.post('/getselecteddateorder' ,async  (req , res) =>{
 
 
 // get feedback to admin
-router.get('/getfeedback' ,async  (req , res) =>{
+router.get('/getfeedback', async (req, res) => {
 
     try {
 
@@ -189,6 +214,22 @@ router.get('/getdrink', async (req, res) => {
     try {
 
         const orders = await Drink.find({});
+        // console.log(orders);
+        res.send({ data: orders })
+
+    } catch (error) {
+
+    }
+
+
+})
+
+router.get('/getburger', async (req, res) => {
+
+
+    try {
+
+        const orders = await Burger.find({});
         // console.log(orders);
         res.send({ data: orders })
 

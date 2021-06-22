@@ -57,6 +57,14 @@
     border: 2px solid #49321c;
     background-color: #49321c;
 }
+.card-main button.disablebtn{
+    opacity: 0.5;
+}
+.card-main button.disablebtn:hover{
+    cursor: default;
+    color: white;
+    background-color: #49321c;
+}
 .card-main button:hover{
     color: #49321c;
     cursor: pointer;

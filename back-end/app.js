@@ -11,20 +11,11 @@ app.use(cors())
 app.use(express.json({limit: "1mb"}));
 app.use(cookieParser())
 
-
 // link the router files
 app.use(require('./router/auth'));
 
-
-
-
-
-
-
-
 env.config()
 const PORT= process.env.PORT;
-
 
 
 app.listen(PORT , ()=>{

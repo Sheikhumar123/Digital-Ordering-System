@@ -26,12 +26,10 @@ export default function Special() {
 
   useEffect(() => {
 
-
-    
     fetchSpecialPizza()
-    
 
   }, []);
+  
   return (
     <>
       <fieldset>
