@@ -1,8 +1,8 @@
 .reportContainer{
-    width: 80%;
+    width: 82%;
     padding: 15px;
     margin-top:2%;
-    margin-left: 15%;
+    margin-left: 12%;
     border-radius: 10px;
     background-color: white;
     box-shadow: 0px 0px 20px 5px rgba(0, 0, 0, 0.137);
@@ -44,6 +44,45 @@
 }
 .datepicker .reportBtn:active{
     box-shadow: none;
+}
+.reportTable {
+    width: 100%;
+    color: white;
+    background-color: transparent !important;
+    font-family:"Poppins", sans-serif !important ;
+}
+
+.reportTable tbody tr {
+    transition: all .2s ease-in;
+}
+
+/* .reportTable thead tr th, */
+.reportTable tbody tr td {
+    padding: 3px;
+    color: #49321c;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bolder;
+    border:1px solid rgba(73, 50, 28, 0.467);
+    background-color: rgba(255, 255, 255, 0.849);
+    border-right:1px solid rgba(73, 50, 28, 0.467);
+    border-bottom:1px solid rgba(73, 50, 28, 0.467);
+}
+
+.reportTable tbody tr:hover {
+    opacity: 0.7;
+    cursor: pointer;
+    background-color: rgba(73, 50, 28, 0.534);
+}
+
+.reportTableHeader th{
+    color: #fff;
+    padding: 10px;
+    font-weight: 600;
+    overflow: hidden;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #49321c;
 }
 
 @media screen and (max-width: 768px) {

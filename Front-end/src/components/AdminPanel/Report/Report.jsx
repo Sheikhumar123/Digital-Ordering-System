@@ -162,13 +162,13 @@ const Report = () => {
                 </button>
               </CSVLink>
             </div>
-            <table className="adminTable" cellSpacing="8">
+            <table className="reportTable" cellSpacing="8">
               <thead>
-                <tr className="admintableheader">
-                  <th>Date</th>
-                  <th>Table no</th>
-                  <th>Order</th>
-                  <th>Total Bill</th>
+                <tr className="reportTableHeader">
+                  <th style={{width:'calc(100% / 4)'}}>Date</th>
+                  <th style={{width:'calc(100% / 4)'}}>Table no</th>
+                  <th style={{width:'calc(100% / 4)'}}>Order</th>
+                  <th style={{width:'calc(100% / 4)'}}>Total Bill</th>
                 </tr>
               </thead>
               <tbody className="adminTbody">
@@ -211,13 +211,13 @@ const Report = () => {
               </CSVLink>
             </div>
 
-            <table className="adminTable" cellSpacing="8">
+            <table className="reportTable" cellSpacing="8">
               <thead>
-                <tr className="admintableheader">
-                  <th>Date</th>
-                  <th>Table no</th>
-                  <th>Order</th>
-                  <th>Total Bill</th>
+                <tr className="reportTableHeader">
+                  <th style={{width:'calc(100% / 4)'}}>Date</th>
+                  <th style={{width:'calc(100% / 4)'}}>Table no</th>
+                  <th style={{width:'calc(100% / 4)'}}>Order</th>
+                  <th style={{width:'calc(100% / 4)'}}>Total Bill</th>
                 </tr>
               </thead>
               <tbody className="adminTbody">
@@ -263,13 +263,13 @@ const Report = () => {
             </div>
           </div>
           <div style={{ margin: "0px 0px 20px 0px" }}>
-            <table className="adminTable" cellSpacing="8">
+            <table className="reportTable" cellSpacing="8">
               <thead>
-                <tr className="admintableheader">
-                  <th>Date</th>
-                  <th>Table no</th>
-                  <th>Order</th>
-                  <th>Total Bill</th>
+                <tr className="reportTableHeader">
+                  <th style={{width:'calc(100% / 4)'}}>Date</th>
+                  <th style={{width:'calc(100% / 4)'}}>Table no</th>
+                  <th style={{width:'calc(100% / 4)'}}>Order</th>
+                  <th style={{width:'calc(100% / 4)'}}>Total Bill</th>
                 </tr>
               </thead>
               <tbody className="adminTbody">

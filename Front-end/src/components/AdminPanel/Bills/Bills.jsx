@@ -46,7 +46,7 @@ const Bills = () => {
             <th>Table no</th>
             <th>Order</th>
             <th>Total Bill</th>
-            <th>Time of odder</th>
+            <th>Time of order</th>
             <th>CheckOut</th>
           </tr>
         </thead>

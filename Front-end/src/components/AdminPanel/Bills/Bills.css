@@ -39,14 +39,16 @@
     overflow: hidden;
     text-align: center;
     border-radius: 10px;
+    min-width: calc(100% / 6);
     /* border: 3px solid white; */
     background-color: #49321c;
 }
 .adminTable tbody tr td button{
+    width: 100%;
     outline: none;
     cursor: pointer;
     font-weight: 700;
-    padding: 5px 15px;
+    padding: 5px 5px;
     font-size: inherit;
     border-radius: 5px;
     font-family: inherit;
@@ -71,5 +73,14 @@
     .tabeleContainer{
         width: 100% !important; 
         margin: 20px !important;
+    }
+}
+@media screen and (max-width:768px) {
+    .adminTable tr{
+        font-size: small;
+    }
+    .admintableheader th{
+        width: calc(100% / 6);
+        font-size: smaller;
     }
 }
