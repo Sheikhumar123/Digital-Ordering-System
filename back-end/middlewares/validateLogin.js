@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
   try {
     const { username, password } = req.body;
     if (!username || !password) {
-      return res.status(400).json({ error: "please fill the data" });
+      return res.status(400).json({ error: "please fill all the fileds" });
     }
 
     if (username === "admin") {

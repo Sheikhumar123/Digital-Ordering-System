@@ -83,6 +83,41 @@ export default function OrderCard() {
       });
   };
 
+  
+  // function to cancel the order
+  const cancelOrder = (e) => {
+    setClassname("");
+    const tableName = e.currentTarget.getAttribute("tid");
+    axios
+      .post("/deleteOrderfromKitchenandreception", {
+        tableName,
+      })
+      .then((res) => {
+        console.log(res.data.message);
+        
+        if (res.data.message) {
+          firebase
+            .database()
+            .ref("chefToUserForDelete/" + tableName)
+            .set({
+              message: `${tableName} Your order is cancled`,
+            });
+          setTimeout(() => {
+            firebase.database().ref("chefToUserForDelete/" + tableName).remove();
+          }, 100);
+        }
+        toast.success(res.data.message, {
+          position: "top-left",
+        });
+      })
+      .catch((err) => {
+        toast.error(err, {
+          position: "top-left",
+        });
+        console.log(err);
+      });
+  };
+
   // function to fetch orders from database
   async function fetchOrders() {
     try {
@@ -160,6 +195,15 @@ export default function OrderCard() {
               value={item.tableNo}
             >
               <img src="./waiter.svg" alt="cooking" /> <span>Ready</span>
+            </button>
+            <button style={{width:"150px" , padding: "11px"}  }
+              onClick={(e) => {
+                cancelOrder(e);
+              }}
+              tid={item.tableNo}
+              value={item.tableNo}
+            >
+               <span>Order Cancel</span>
             </button>
           </div>
         );

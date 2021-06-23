@@ -7,8 +7,11 @@ import feedbackContext from '../../Context/feedbackContext';
 import menu from './menu (1).svg';
 import Cookies from "js-cookie";
 import { firebase } from "../../../firebase"
+import Countdown from 'react-countdown';
+
 
 export default function Category() {
+  const [time, setTime] = useState()
 
   // this class is used to make category bar stiky when we set it to 'categoryContaiener Stiky'
   let classNames = ['categoryContainer'];
@@ -84,9 +87,55 @@ export default function Category() {
     }, 100);
   }
 
+  useEffect(() => {
+    var starCountRef = firebase
+      .database()
+      .ref("chefToUserPanel/" + Cookies.get("name"));
+    starCountRef.on("value", (snapshot) => {
+      const data = snapshot.val();
+      // console.log(data);
+      if (data) {
+        // current time
+        const currenTime = new Date();
+
+        // get date for estimated time
+        const date = new Date().toLocaleDateString();
+        const estimatedtime = new Date(`${date} ${data.time}`);
+
+        // calculate total time required for order
+        var diff = (estimatedtime.getTime() - currenTime.getTime()) / 1000;
+        diff /= 60;
+        const totaltime = Math.abs(Math.round(diff));
+
+        console.log(totaltime, "minutes");
+        console.log(totaltime*60*1000);
+        if (totaltime) {
+          
+          setTime(totaltime*60*1000)
+        }
+
+        // toast.info(data.message, {
+        //   position: "top-left",
+        // });
+
+        
+      }
+    });
+  }, []);
+
   return (
     <div className={classNames.join(' ')} id="menu">
-      <h2> <img src={menu} alt="menu" />Menu</h2>
+
+      <div style={{display:"flex"}}>
+        <h2> <img src={menu} alt="menu" />Menu</h2>
+        {
+          time ?
+          <Countdown date={Date.now() + time} className="count" />
+          :
+          ""
+        }
+      </div>
+
       <div className="cartbox" style={{ display: "flex" }}>
         <select onChange={getCategory} value={category}>
           <option value="all">All Foods</option>

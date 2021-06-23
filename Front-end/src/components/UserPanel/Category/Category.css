@@ -10,6 +10,13 @@
     justify-content: space-between;
     filter: drop-shadow(1px 1px 1px gray);
 }
+.count{
+    /* padding-Top:50px !important; */
+    margin-Top: 16px !important;
+    display: flex !important;    
+    align-Items: center !important; 
+    margin-left: 20px !important;
+}
 .categoryContainer h2 img{
     width: 40px;
 }

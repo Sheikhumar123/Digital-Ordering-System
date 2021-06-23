@@ -10,6 +10,7 @@ const validateLogin = require('../middlewares/validateLogin');
 const validateAllOrders = require('../middlewares/validateAllOrders.js');
 const validateBurger = require('../middlewares/validateBurger.js');
 const deleteOrderFromKitcen = require('../middlewares/deleteOrderFromKitcen');
+const deleteOrderfromKitchenandreception = require('../middlewares/deleteOrderfromKitchenandreception')
 const jwt = require("jsonwebtoken")
 
 
@@ -26,6 +27,9 @@ router.post("/deleteOrderfromReception", validateAllOrders)
 
 // get order from reception and deleteit fromreceptionorder and add it to alla orders
 router.post("/deleteOrderfromKitchen", deleteOrderFromKitcen)
+
+// get order from reception and deleteit fromreceptionorder and add it to alla orders
+router.post("/deleteOrderfromKitchenandreception", deleteOrderfromKitchenandreception)
 
 // get feedback from userpanel
 router.post("/addfeedback", validateFeedback)
